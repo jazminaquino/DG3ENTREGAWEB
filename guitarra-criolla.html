@@ -1,0 +1,2836 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trastes | Guitarra Criolla</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* ── Animación de Botones Deslizantes ── */
+    .btn-slide-orange {
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      border: 2px solid #C84B0A;
+      color: #C84B0A;
+      background: transparent;
+      transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s ease;
+    }
+    .btn-slide-orange::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #C84B0A;
+      z-index: -1;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .btn-slide-orange:hover {
+      color: #FFFFFF !important;
+      border-color: #C84B0A;
+      transform: scale(1.02);
+    }
+    .btn-slide-orange:hover::before {
+      transform: scaleX(1);
+    }
+
+    .btn-slide-white {
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      border: 2px solid #FFFFFF;
+      color: #FFFFFF;
+      background: transparent;
+      transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s ease;
+    }
+    .btn-slide-white::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #C84B0A;
+      z-index: -1;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .btn-slide-white:hover {
+      color: #FFFFFF !important;
+      border-color: #C84B0A;
+      transform: scale(1.02);
+    }
+    .btn-slide-white:hover::before {
+      transform: scaleX(1);
+    }
+
+    .btn-slide-filled-orange {
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      border: 2px solid #C84B0A;
+      color: #FFFFFF;
+      background: #C84B0A;
+      transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s ease;
+    }
+    .btn-slide-filled-orange::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #F5F2EB;
+      z-index: -1;
+      transform: scaleX(0);
+      transform-origin: right center;
+      transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .btn-slide-filled-orange:hover {
+      color: #C84B0A !important;
+      border-color: #C84B0A;
+      transform: scale(1.02);
+    }
+    .btn-slide-filled-orange:hover::before {
+      transform: scaleX(1);
+    }
+
+    .hero-bg-container {
+      width: 100%;
+      background-image: url('herodetalle.png');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      height: 100vh;
+    }
+
+
+    @media (min-width: 768px) {
+      #mobile-menu-toggle {
+        display: none !important;
+      }
+    }
+
+    :root {
+      color-scheme: light;
+    }
+
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: #2D1610;
+      background: #F5F2EB;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .font-display {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 3vw, 48px);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: #FFFFFF;
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-title-regular {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-style: normal;
+      color: #FFFFFF;
+      display: inline;
+    }
+
+    .hero-title-strong {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-style: italic;
+      color: #C84B0A;
+      display: inline;
+    }
+
+    .hero-copy-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      text-align: center;
+      width: 100%;
+      padding: 60px 12px 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .btn-hero {
+      background: #C84B0A;
+      color: #fff;
+      padding: 14px 28px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .btn-hero:hover {
+      transform: translateY(-1px);
+      background: #d6590e;
+    }
+
+    @media (min-width: 640px) {
+      .hero-title {
+        font-size: 3.4rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .hero-title {
+        font-size: 4.8rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero-title {
+        font-size: 5.6rem;
+      }
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 3.4rem !important;
+      font-weight: 400;
+      line-height: 1.15;
+      color: #2D1610;
+    }
+
+    @media (max-width: 768px) {
+      .section-title {
+        font-size: 2.2rem !important;
+      }
+    }
+
+    /* ── Accordion Cards Section (Experiencia) ── */
+    .step-card-container {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      width: 100%;
+      height: 440px;
+      align-items: stretch;
+    }
+    
+    .step-card {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      border-radius: 0 36px 0 36px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(45, 22, 16, 0.04);
+      border: 1px solid rgba(45, 22, 16, 0.08);
+      cursor: pointer;
+      transition: flex 600ms cubic-bezier(0.25, 0.8, 0.25, 1), 
+                  box-shadow 300ms ease, 
+                  border-color 300ms ease;
+    }
+
+    .step-card.active-card {
+      flex: 3.2;
+      border-color: rgba(45, 22, 16, 0.15);
+      box-shadow: 0 16px 40px rgba(45, 22, 16, 0.12);
+      cursor: default;
+    }
+    
+    .step-card-bg-light {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(199, 197, 125, 0.38); /* Soft olive green background for inactive cards */
+      opacity: 1;
+      transition: opacity 500ms ease;
+      z-index: 1;
+    }
+    
+    .step-card.active-card .step-card-bg-light {
+      opacity: 0;
+    }
+    
+    .step-card-bg-image {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 500ms ease;
+      z-index: 2;
+    }
+    
+    .step-card.active-card .step-card-bg-image {
+      opacity: 1;
+    }
+    
+    .step-card-bg-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(45, 22, 16, 0.15) 0%, rgba(45, 22, 16, 0.5) 50%, rgba(45, 22, 16, 0.92) 100%);
+      z-index: 3;
+    }
+    
+    .step-card-content {
+      position: relative;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      width: 100%;
+    }
+    
+    .step-card-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: rgba(45, 22, 16, 0.35);
+      transition: color 500ms ease;
+      line-height: 1;
+    }
+    
+    .step-card.active-card .step-card-num {
+      color: #C7C57D; /* Brand soft olive */
+    }
+    
+    .step-card-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #2D1610;
+      margin: 0;
+      line-height: 1.25;
+      transition: color 500ms ease, font-size 500ms ease;
+    }
+    
+    .step-card.active-card .step-card-title {
+      color: #FFFFFF;
+      font-size: 26px;
+    }
+    
+    .step-card-expanded {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 500ms ease, opacity 500ms ease, margin-top 500ms ease;
+      margin-top: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .step-card.active-card .step-card-expanded {
+      max-height: 200px;
+      opacity: 1;
+      margin-top: 12px;
+    }
+    
+    .step-card-inactive {
+      display: none;
+    }
+    
+    .step-plus-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(45, 22, 16, 0.15);
+      background: #FFFFFF;
+      color: #2D1610;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 300ms ease;
+      box-shadow: 0 2px 8px rgba(45, 22, 16, 0.04);
+    }
+    
+    .step-card:hover .step-plus-circle {
+      background: #C84B0A;
+      color: #FFFFFF;
+      border-color: #C84B0A;
+      transform: scale(1.08);
+      box-shadow: 0 4px 12px rgba(200, 75, 10, 0.2);
+    }
+
+    .step-card-bottom-wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      width: 100%;
+      margin-top: auto;
+    }
+    
+    @media (max-width: 768px) {
+      .step-card-container {
+        flex-direction: column !important;
+        height: auto !important;
+        gap: 16px !important;
+      }
+      
+      .step-card {
+        height: 80px !important;
+        min-height: 80px !important;
+        flex: none !important;
+        padding: 16px 20px !important;
+        transition: height 500ms cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+      }
+      
+      .step-card.active-card {
+        height: 310px !important;
+        min-height: 310px !important;
+        flex: none !important;
+        padding: 24px 20px !important;
+      }
+      
+      /* Inactive mobile layout row */
+      .step-card:not(.active-card) .step-card-content {
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        height: 100% !important;
+        gap: 16px !important;
+      }
+      
+      .step-card:not(.active-card) .step-card-bottom-wrap {
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        margin-top: 0 !important;
+        gap: 0 !important;
+        width: auto !important;
+      }
+
+      .step-card:not(.active-card) .step-card-title {
+        font-size: 13.5px !important;
+        line-height: 1.25 !important;
+        color: #2D1610 !important;
+        font-weight: 600 !important;
+        white-space: nowrap !important;
+      }
+
+      .step-card:not(.active-card) .step-card-num {
+        font-size: 26px !important;
+        color: rgba(45, 22, 16, 0.35) !important;
+      }
+      
+      .step-card-inactive {
+        display: none !important;
+      }
+      
+      /* Active mobile layout reverts to column */
+      .step-card.active-card .step-card-content {
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        align-items: flex-start !important;
+        height: 100% !important;
+      }
+      
+      .step-card.active-card .step-card-bottom-wrap {
+        flex-direction: column !important;
+        justify-content: flex-end !important;
+        margin-top: auto !important;
+        width: 100% !important;
+      }
+
+      .step-card.active-card .step-card-title {
+        font-size: 22px !important;
+        color: #FFFFFF !important;
+        font-weight: 700 !important;
+      }
+
+      .step-card.active-card .step-card-num {
+        font-size: 24px !important;
+        color: #C7C57D !important;
+      }
+
+      .step-card.active-card .step-card-expanded {
+        display: flex !important;
+        max-height: 200px !important;
+        opacity: 1 !important;
+        margin-top: 12px !important;
+        gap: 12px !important;
+      }
+
+      .step-card.active-card .step-card-expanded p {
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+        color: rgba(245, 242, 235, 0.9) !important;
+      }
+
+      .step-card.active-card .step-card-expanded .flex {
+        gap: 6px !important;
+        flex-wrap: wrap !important;
+      }
+
+      .step-card.active-card .step-card-expanded span {
+        font-size: 9px !important;
+        padding: 3px 8px !important;
+      }
+    }
+
+    /* Mobile: compress */
+    @media (max-width: 1023px) {
+      .htimeline-step .hstep-title { font-size: 13px; }
+      #htimeline-image-wrapper { height: 260px; border-radius: 0 36px 0 36px; }
+    }
+
+    .wood-control {
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .wood-control.active {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+
+    /* ── Tools Section Redesign Styles ── */
+    .tools-section {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .tool-list {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+
+    .tool-item {
+      position: relative;
+      padding: 16px 24px;
+      margin: 0;
+      cursor: pointer;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(45, 22, 16, 0.12);
+      background: transparent;
+      transition: background-color 300ms ease-in-out;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Olive green horizontal franja */
+    .tool-item::before {
+      content: '';
+      position: absolute;
+      inset: 4px 0;
+      background: #C7C57D;
+      opacity: 0;
+      z-index: 1;
+      transition: opacity 300ms ease-in-out;
+      pointer-events: none;
+    }
+
+    .tool-item.active::before {
+      opacity: 1;
+    }
+
+    .tool-item .tool-content {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      transition: transform 300ms ease-in-out;
+    }
+
+    .tool-item .tool-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 32px;
+      color: #2D1610;
+      font-weight: 400;
+      margin: 0 0 4px 0;
+      line-height: 1.1;
+      transition: color 300ms ease-in-out;
+    }
+
+    .tool-item .tool-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 14.5px;
+      color: #4E4139;
+      margin: 0;
+      line-height: 1.6;
+      transition: color 300ms ease-in-out;
+    }
+
+    /* Active texts turn bordo */
+    .tool-item.active .tool-name,
+    .tool-item.active .tool-desc {
+      color: #4B1715 !important;
+    }
+
+    /* Tool Image Wrapper (Desktop) */
+    .tool-item .tool-img-wrapper {
+      position: absolute;
+      right: 120px;
+      top: 50%;
+      transform: translateY(-30%) scale(0.95);
+      width: 240px;
+      height: 150px;
+      border-radius: 0 60px 0 60px;
+      overflow: hidden;
+      box-shadow: 0 12px 36px rgba(45, 22, 16, 0.08);
+      z-index: 10;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+    }
+
+    .tool-item.active .tool-img-wrapper {
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+
+    .tool-item .tool-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Responsive styling for tools list */
+    @media (max-width: 1023px) {
+      .tool-item .tool-img-wrapper {
+        right: 40px;
+        width: 200px;
+        height: 130px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .tool-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 24px 16px;
+        gap: 16px;
+      }
+      .tool-item .tool-img-wrapper {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none !important;
+        width: 100%;
+        height: 180px;
+        border-radius: 0 60px 0 60px;
+        max-height: 0;
+        margin-top: 0;
+        opacity: 0;
+        display: block;
+        transition: max-height 300ms ease-in-out, opacity 300ms ease-in-out, margin-top 300ms ease-in-out;
+      }
+      .tool-item.active .tool-img-wrapper {
+        opacity: 1;
+        max-height: 220px;
+        margin-top: 12px;
+      }
+    }
+
+    /* ── FAQ Redesign ── */
+    .faq-section {
+      background: #9B9D63;
+    }
+
+    /* Category tabs */
+    .faq-tab {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      border-radius: 12px;
+      border: 1.5px solid transparent;
+      background: transparent;
+      cursor: pointer;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(45,22,16,0.55);
+      transition: all 280ms ease;
+      width: 100%;
+    }
+
+    .faq-tab:hover {
+      color: #2D1610;
+      background: rgba(255,255,255,0.18);
+    }
+
+    .faq-tab.active {
+      color: #2D1610;
+      background: rgba(255,255,255,0.30);
+      border-color: rgba(255,255,255,0.50);
+    }
+
+    .faq-tab-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(45,22,16,0.25);
+      flex-shrink: 0;
+      transition: background 280ms ease;
+    }
+
+    .faq-tab.active .faq-tab-dot {
+      background: #2D1610;
+    }
+
+    /* FAQ accordion - line style */
+    .faq-item {
+      border-bottom: 1px solid rgba(45,22,16,0.18);
+      padding: 0;
+    }
+
+    .faq-item-btn {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 22px 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #2D1610;
+      line-height: 1.35;
+      transition: color 220ms ease;
+    }
+
+    .faq-item-btn:hover {
+      color: #441714;
+    }
+
+    .faq-icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(45,22,16,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 300ms ease, border-color 300ms ease, background 300ms ease;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+      border-color: #441714;
+      background: #441714;
+    }
+
+    .faq-icon svg {
+      width: 12px;
+      height: 12px;
+      stroke: #2D1610;
+      transition: stroke 300ms ease;
+    }
+
+    .faq-item.active .faq-icon svg {
+      stroke: #FFFFFF;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 380ms ease, opacity 380ms ease, padding 380ms ease;
+      opacity: 0;
+      padding-bottom: 0;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 300px;
+      opacity: 1;
+      padding-bottom: 20px;
+    }
+
+    .faq-answer p {
+      font-family: 'Inter', sans-serif;
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: rgba(45,22,16,0.80);
+      margin: 0;
+    }
+
+    /* Hidden category group */
+    .faq-group {
+      display: none;
+    }
+    .faq-group.faq-active-group {
+      display: block;
+    }
+
+    .work-carousel {
+      scroll-snap-type: x mandatory;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .work-card {
+      scroll-snap-align: center;
+      flex: 0 0 72%;
+      max-width: 72%;
+      min-width: 72%;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    .work-card.sidebar {
+      flex: 0 0 18%;
+      max-width: 18%;
+      min-width: 18%;
+      opacity: 0.7;
+      transform: scale(0.92);
+    }
+
+    .work-card.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .footer-links a:hover,
+    .nav-link:hover,
+    .secondary-link:hover {
+      opacity: 0.8;
+    }
+
+    @media (max-width: 1024px) {
+      .work-card,
+      .work-card.sidebar {
+        flex: 0 0 80%;
+        max-width: 80%;
+        min-width: 80%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      /* ── Margin general de 25px a los lados ── */
+      .px-6, .px-4, .px-8, .px-5, .md\:px-\[100px\] {
+        padding-left: 25px !important;
+        padding-right: 25px !important;
+      }
+      
+      #experiencia,
+      #seccion2,
+      #seccion3,
+      #maderas,
+      #faq,
+      #profesores,
+      footer > div:first-of-type {
+        padding-left: 25px !important;
+        padding-right: 25px !important;
+      }
+
+      /* ── Botones que ocupan todo el ancho de la pantalla ── */
+      .btn-slide-white:not(.hidden),
+      .btn-slide-orange:not(.hidden),
+      .btn-slide-orange-outline:not(.hidden),
+      .contacto-submit-btn:not(.hidden),
+      .pixel-button:not(.hidden),
+      .hero-copy-block a:not(.hidden) {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        box-sizing: border-box !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+
+      .hero-bg-container {
+        background-image: url('heromobiledetalle.png') !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        padding-bottom: 40px !important;
+      }
+      .hero-btn-secondary {
+        border-color: #FFFFFF !important;
+        color: #FFFFFF !important;
+      }
+      .hero-btn-secondary::before {
+        background-color: #FFFFFF !important;
+      }
+      .hero-btn-secondary:hover {
+        color: #C84B0A !important;
+        border-color: #FFFFFF !important;
+      }
+      .hero-copy-block {
+        align-items: center !important;
+        text-align: center !important;
+        padding: 60px 0 20px 0 !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        transform: translateY(-20px) !important;
+      }
+      .hero-copy-block h1 {
+        text-align: center !important;
+        font-size: 2.35rem !important;
+        line-height: 1.25 !important;
+      }
+      .hero-copy-block p {
+        text-align: center !important;
+        font-size: 14px !important;
+        margin: 0px 0 16px 0 !important;
+      }
+      .hero-copy-block div[style*="display: flex"] {
+        justify-content: center !important;
+        width: 100% !important;
+        flex-wrap: wrap !important;
+        gap: 12px !important;
+      }
+
+
+      .hero-title {
+        font-size: 2.5rem !important;
+        line-height: 1.15 !important;
+        white-space: normal !important;
+        text-align: center !important;
+      }
+      .section-title {
+        font-size: 1.85rem !important;
+        line-height: 1.2 !important;
+      }
+
+      /* ── Timeline Section Mobile ── */
+      #experiencia {
+        padding: 48px 25px !important;
+      }
+      #experiencia div[style*="display:grid"] {
+        grid-template-columns: 1fr !important;
+        gap: 36px !important;
+      }
+      #experiencia div[style*="display:flex"] {
+        align-self: center !important;
+        width: 100% !important;
+        max-width: 320px !important;
+      }
+      #experiencia #stage-image {
+        height: 260px !important;
+      }
+
+      /* ── Seccion 2 Mobile ── */
+      #seccion2 {
+        padding: 80px 25px !important; /* Made taller on mobile */
+      }
+      #seccion2 div.grid {
+        grid-template-columns: 1fr !important;
+        min-height: 480px !important;
+        justify-content: center !important;
+      }
+      #seccion2 div[style*="display:flex"] {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        align-items: center !important;
+        text-align: center !important;
+      }
+      #seccion2 h2.section-title {
+        font-size: 1.85rem !important;
+        text-align: center !important;
+      }
+      #seccion2 p {
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+
+      /* ── Seccion 3 (Tools) Mobile ── */
+      #seccion3 {
+        padding: 48px 25px !important;
+      }
+      #seccion3 .section-title {
+        font-size: 1.85rem !important;
+        margin-bottom: 28px !important;
+      }
+
+      /* ── Maderas Section Mobile ── */
+      #maderas {
+        padding: 48px 25px !important;
+      }
+      #maderas > div > div[style*="display:grid"],
+      #maderas > div > .grid {
+        grid-template-columns: 1fr !important;
+        gap: 36px !important;
+        justify-items: center !important;
+        align-items: center !important;
+      }
+      #maderas #wood-guitar {
+        max-height: 280px !important;
+        margin: 0 auto !important;
+      }
+      #maderas div[style*="flex-direction:column"],
+      #maderas .flex-col {
+        align-items: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        padding-bottom: 0 !important;
+      }
+      #maderas div[style*="flex-direction:row"],
+      #maderas .flex-row {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px 16px !important;
+        justify-items: center !important;
+        align-items: center !important;
+        width: 100% !important;
+        max-width: 340px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+      #maderas .wood-control {
+        flex-direction: row !important;
+        width: auto !important;
+        justify-content: flex-start !important;
+        min-width: 130px !important;
+        gap: 8px !important;
+      }
+      #maderas .wood-thumb {
+        width: 44px !important;
+        height: 44px !important;
+      }
+      #maderas .wood-control span {
+        font-size: 11px !important;
+      }
+
+      /* ── FAQ Section Mobile ── */
+      #faq {
+        padding: 48px 25px !important;
+      }
+      #faq div[style*="display:grid"] {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+      }
+      #faq div[style*="position:sticky"] {
+        position: relative !important;
+        top: auto !important;
+      }
+      #faq .section-title {
+        font-size: 1.85rem !important;
+      }
+      #faq .faq-tab {
+        font-size: 12px !important;
+        padding: 10px 14px !important;
+      }
+
+      /* ── Profesores Section Mobile ── */
+      #profesores {
+        padding: 48px 25px !important;
+      }
+      #profesores div[style*="display:grid"] {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+      }
+      #profesores div[style*="display:grid"] > div {
+        max-width: 320px !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+      }
+      /* ── Footer ── */
+      footer {
+        padding: 56px 0 24px 0 !important;
+        background: #4B1715 !important;
+      }
+      footer > div:first-of-type {
+        padding: 0 25px !important;
+        box-sizing: border-box !important;
+        gap: 40px !important;
+      }
+      footer .footer-top-row {
+        flex-direction: column-reverse !important;
+        gap: 40px !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+        width: 100% !important;
+      }
+      footer .footer-newsletter {
+        width: 100% !important;
+        max-width: 100% !important;
+        text-align: left !important;
+        align-items: flex-start !important;
+      }
+      footer .footer-newsletter-form {
+        width: 100% !important;
+        gap: 20px !important;
+      }
+      footer .footer-newsletter-title {
+        font-size: 22px !important;
+        line-height: 1.35 !important;
+        text-align: left !important;
+      }
+      footer .footer-newsletter-row {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 16px !important;
+        width: 100% !important;
+      }
+      footer .footer-email-container {
+        width: 100% !important;
+        flex: none !important;
+        gap: 8px !important;
+      }
+      footer .footer-email-label {
+        font-size: 13px !important;
+        color: rgba(255, 255, 255, 0.7) !important;
+        text-align: left !important;
+      }
+      footer .footer-email-input {
+        border: none !important;
+        border-bottom: 1.5px solid rgba(255, 255, 255, 0.35) !important;
+        border-radius: 0 !important;
+        padding: 0 0 6px 0 !important;
+        background: transparent !important;
+        color: #FFFFFF !important;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 15px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        height: auto !important;
+        outline: none !important;
+        transition: border-color 0.3s !important;
+      }
+      footer .footer-email-input:focus {
+        border-color: #C84B0A !important;
+        background: transparent !important;
+      }
+      footer .footer-newsletter-submit {
+        width: 100% !important;
+        height: 48px !important;
+        border-radius: 999px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        margin-top: 0 !important;
+      }
+      footer .footer-newsletter-desc {
+        font-size: 13px !important;
+        line-height: 1.6 !important;
+        color: rgba(255, 255, 255, 0.7) !important;
+        max-width: 100% !important;
+        text-align: left !important;
+      }
+      footer .footer-links-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 40px !important;
+        align-items: flex-start !important;
+      }
+      footer .footer-nav-col,
+      footer .footer-socials-col {
+        width: 100% !important;
+        gap: 16px !important;
+        align-items: flex-start !important;
+      }
+      footer .footer-nav-col a,
+      footer .footer-socials-col a {
+        font-size: 13px !important;
+        padding: 6px 0 !important;
+        display: inline-flex !important;
+        width: 100% !important;
+        text-align: left !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+      }
+      footer .footer-bottom-row {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 56px !important;
+        width: 100% !important;
+        margin-top: 0 !important;
+      }
+      footer .footer-frase {
+        text-align: left !important;
+        width: 100% !important;
+        font-size: 24px !important;
+        line-height: 1.3 !important;
+      }
+      footer .footer-logo-wrapper {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        margin-bottom: 24px !important;
+      }
+      footer .footer-logo-wrapper img {
+        width: 280px !important;
+        max-width: 100% !important;
+        margin-bottom: 0 !important;
+      }
+      footer div.flex-col.md\:flex-row.justify-between.items-center.text-white\/60 {
+        flex-direction: column !important;
+        gap: 16px !important;
+        text-align: center !important;
+      }
+    }
+
+    /* ── Nav Link Underline Hover/Active ── */
+    header nav a {
+      position: relative;
+      text-decoration: none;
+      transition: color 250ms ease;
+    }
+    header nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background-color: #C84B0A;
+      transition: width 250ms ease;
+    }
+    header nav a:hover::after {
+      width: 100%;
+    }
+
+    /* ── Menú Móvil Fullscreen ── */
+    .mobile-menu {
+      display: none !important;
+      position: fixed !important;
+      left: 0 !important;
+      top: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+      border: none !important;
+      background-color: #F6F2EC !important; /* Cream color */
+      z-index: 9999 !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      align-items: stretch !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+    }
+    .mobile-menu.open {
+      display: flex !important;
+    }
+
+    /* Inner wrapper for the menu content */
+    .mobile-menu-inner {
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: flex-start !important;
+      width: 100% !important;
+      height: 100% !important;
+      padding: 80px 25px 60px !important;
+      box-sizing: border-box !important;
+      position: relative !important;
+    }
+
+    /* X close button — top right */
+    .mobile-menu-close {
+      position: absolute !important;
+      top: 36px !important;
+      right: 25px !important;
+      font-family: 'Playfair Display', Georgia, serif !important;
+      font-size: 32px !important;
+      font-weight: 400 !important;
+      color: #2D1610 !important;
+      background: transparent !important;
+      border: none !important;
+      cursor: pointer !important;
+      outline: none !important;
+      padding: 8px !important;
+      line-height: 1 !important;
+      letter-spacing: -0.02em !important;
+    }
+
+    /* Nav list */
+    .mobile-menu-list {
+      list-style: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 0 !important;
+      width: 100% !important;
+    }
+
+    /* Each link row */
+    .mobile-menu-link {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      font-family: 'Playfair Display', Georgia, serif !important;
+      font-size: 28px !important;
+      font-weight: 400 !important;
+      color: #2D1610 !important;
+      text-decoration: none !important;
+      padding: 20px 0 !important;
+      border-bottom: 1px solid rgba(45,22,16,0.12) !important;
+      transition: color 0.2s ease !important;
+      width: 100% !important;
+      letter-spacing: -0.01em !important;
+      line-height: 1.1 !important;
+    }
+
+    /* Arrow */
+    .mobile-menu-link .arrow {
+      width: 16px !important;
+      height: 16px !important;
+      flex-shrink: 0 !important;
+      margin-left: 12px !important;
+      transition: transform 0.2s ease, color 0.2s ease !important;
+    }
+
+    /* Active click states */
+    .mobile-menu-link:active,
+    .mobile-menu-link.orange-link:active {
+      color: #C84B0A !important;
+    }
+    .mobile-menu-link:active .arrow,
+    .mobile-menu-link.orange-link:active .arrow {
+      color: #C84B0A !important;
+    }
+
+    body.menu-open {
+      overflow: hidden !important;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="hero-bg-container">
+      <div class="relative mx-auto max-w-[1440px] px-5 md:px-[100px] h-full flex flex-col pt-3 box-border">
+        <header
+          class="mx-auto flex max-w-[1400px] w-full flex-row items-center justify-between rounded-full bg-white/70 px-6 py-2 h-[54px] md:h-[60px] text-sm font-semibold text-[#2D1610] shadow-[0_10px_30px_rgba(45,22,16,0.06)] border border-[#2D1610]/15 backdrop-blur-md md:px-8 md:py-0 relative z-50">
+          <a href="index.html" class="flex items-center">
+            <img src="trastesnegro.png" alt="Trastes" class="h-8 md:h-10 w-auto object-contain" />
+          </a>
+          <nav class="hidden md:flex flex-wrap justify-center gap-8 font-sans text-[14px] tracking-normal text-[#2D1610]">
+            <a href="index.html#curso" class="transition hover:text-[#E65F1E]">Curso</a>
+            <a href="index.html#sobre-nosotros" class="transition hover:text-[#E65F1E]">Sobre nosotros</a>
+            <a href="index.html#manifiesto" class="transition hover:text-[#E65F1E]">Manifiesto</a>
+            <a href="index.html#contacto" class="transition hover:text-[#E65F1E]">Contacto</a>
+            <a href="uikit.html" class="transition hover:text-[#E65F1E]">UI KIT</a>
+          </nav>
+          <a href="index.html#contacto"
+            class="hidden md:inline-flex btn-slide-orange h-[46px] items-center justify-center gap-3 rounded-full px-7 text-[12px] font-bold uppercase tracking-wider">
+            <span class="relative z-10">HABLEMOS</span>
+            <svg class="relative z-10 h-[14px] w-[14px]" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+
+          <!-- Botón Hamburguesa para Mobile -->
+          <button id="mobile-menu-toggle" class="flex md:hidden flex-col justify-between w-6 h-4 bg-transparent border-none cursor-pointer focus:outline-none z-50" aria-label="Toggle Menu">
+            <span class="w-full h-[2px] bg-[#2D1610] rounded transition-all duration-300"></span>
+            <span class="w-full h-[2px] bg-[#2D1610] rounded transition-all duration-300"></span>
+            <span class="w-full h-[2px] bg-[#2D1610] rounded transition-all duration-300"></span>
+          </button>
+
+          <!-- Menú Mobile Fullscreen -->
+          <nav id="mobile-menu" class="mobile-menu" aria-hidden="true" aria-label="Mobile navigation">
+            <div class="mobile-menu-inner">
+              <button id="mobile-menu-close" aria-label="Cerrar menú" class="mobile-menu-close">X</button>
+              <ul class="mobile-menu-list">
+                <li>
+                  <a href="index.html#curso" class="mobile-menu-link">
+                    <span>Curso</span>
+                    <svg class="arrow" viewBox="0 0 27 27" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875"/>
+                    </svg>
+                  </a>
+                </li>
+                <li>
+                  <a href="index.html#sobre-nosotros" class="mobile-menu-link">
+                    <span>Sobre nosotros</span>
+                    <svg class="arrow" viewBox="0 0 27 27" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875"/>
+                    </svg>
+                  </a>
+                </li>
+                <li>
+                  <a href="index.html#manifiesto" class="mobile-menu-link">
+                    <span>Manifiesto</span>
+                    <svg class="arrow" viewBox="0 0 27 27" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875"/>
+                    </svg>
+                  </a>
+                </li>
+                <li>
+                  <a href="index.html#contacto" class="mobile-menu-link">
+                    <span>Contacto</span>
+                    <svg class="arrow" viewBox="0 0 27 27" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875"/>
+                    </svg>
+                  </a>
+                </li>
+                <li>
+                  <a href="uikit.html" class="mobile-menu-link orange-link">
+                    <span>UI KIT</span>
+                    <svg class="arrow" viewBox="0 0 27 27" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875"/>
+                    </svg>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div class="hero-copy-block" style="align-items: flex-start; text-align: left; max-width: 650px; margin-top: auto; margin-bottom: auto; padding: 40px 0; transform: translateY(-40px);">
+          <h1 class="hero-title" style="text-align: left; color: #2D1610; font-size: clamp(2.2rem, 4.5vw, 4.8rem); max-width: 100%; margin: 0; font-weight: 400; line-height: 1.15; letter-spacing: -0.02em;">
+            Crea una guitarra<br>
+            con <span style="font-weight: 600; font-style: italic; color: #C84B0A;">tu identidad.</span>
+          </h1>
+          <p style="font-family: 'Inter', sans-serif; font-size: 15px; color: #4E4139; max-width: 460px; line-height: 1.6; margin: 8px 0 16px 0;">
+            Desde la elección de la madera hasta la calibración final, creá una guitarra con personalidad propia.
+          </p>
+          <div style="display: flex; flex-direction: row; gap: 16px; align-items: center;">
+            <a href="#tu-firma" class="inline-flex btn-slide-filled-orange h-[46px] items-center justify-center gap-3 rounded-full px-7 text-[12px] font-bold uppercase tracking-wider">
+              <span class="relative z-10">QUIERO EMPEZAR</span>
+              <svg class="relative z-10 h-[14px] w-[14px]" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <a href="#curso" class="inline-flex btn-slide-orange hero-btn-secondary h-[46px] items-center justify-center gap-3 rounded-full px-7 text-[12px] font-bold uppercase tracking-wider">
+              <span class="relative z-10">VER CONTENIDO</span>
+              <svg class="relative z-10 h-[14px] w-[14px]" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Sección Informativa del Curso -->
+    <section class="w-full bg-[#F5F2EB] py-12 border-b border-[#2D1610]/10 relative z-20">
+      <div class="mx-auto max-w-[1440px] px-6 md:px-[100px]">
+        <div class="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-6 md:gap-8">
+          
+          <!-- Modalidad -->
+          <div style="background:rgba(199,197,125,0.38); backdrop-filter:blur(12px);" class="border border-[#2D1610]/15 shadow-[0_10px_30px_rgba(45,22,16,0.06)] rounded-tl-[16px] rounded-br-[16px] py-4 px-6 flex flex-col justify-center gap-1.5 w-full sm:w-auto min-w-[200px]">
+            <div class="font-sans text-[10px] font-semibold text-[#2D1610]/60 uppercase tracking-[0.12em] leading-none">Modalidad</div>
+            <div class="font-display text-[16px] md:text-[18px] text-[#2D1610] font-normal whitespace-nowrap leading-tight">Clases presenciales</div>
+          </div>
+
+          <!-- Clases -->
+          <div style="background:rgba(199,197,125,0.38); backdrop-filter:blur(12px);" class="border border-[#2D1610]/15 shadow-[0_10px_30px_rgba(45,22,16,0.06)] rounded-tl-[16px] rounded-br-[16px] py-4 px-6 flex flex-col justify-center gap-1.5 w-full sm:w-auto min-w-[200px]">
+            <div class="font-sans text-[10px] font-semibold text-[#2D1610]/60 uppercase tracking-[0.12em] leading-none">Clases</div>
+            <div class="font-display text-[16px] md:text-[18px] text-[#2D1610] font-normal whitespace-nowrap leading-tight">8 encuentros</div>
+          </div>
+
+          <!-- Horario -->
+          <div style="background:rgba(199,197,125,0.38); backdrop-filter:blur(12px);" class="border border-[#2D1610]/15 shadow-[0_10px_30px_rgba(45,22,16,0.06)] rounded-tl-[16px] rounded-br-[16px] py-4 px-6 flex flex-col justify-center gap-1.5 w-full sm:w-auto min-w-[200px]">
+            <div class="font-sans text-[10px] font-semibold text-[#2D1610]/60 uppercase tracking-[0.12em] leading-none">Horario</div>
+            <div class="font-display text-[16px] md:text-[18px] text-[#2D1610] font-normal whitespace-nowrap leading-tight">Sáb 10–13hs</div>
+          </div>
+
+          <!-- Cupos -->
+          <div style="background:rgba(199,197,125,0.38); backdrop-filter:blur(12px);" class="border border-[#2D1610]/15 shadow-[0_10px_30px_rgba(45,22,16,0.06)] rounded-tl-[16px] rounded-br-[16px] py-4 px-6 flex flex-col justify-center gap-1.5 w-full sm:w-auto min-w-[200px]">
+            <div class="font-sans text-[10px] font-semibold text-[#2D1610]/60 uppercase tracking-[0.12em] leading-none">Cupos</div>
+            <div class="font-display text-[16px] md:text-[18px] text-[#2D1610] font-normal whitespace-nowrap leading-tight">Máx. 8 personas</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="experiencia" class="px-6 md:px-[100px] py-24">
+      <div class="max-w-[1240px] mx-auto">
+        <!-- Title above the columns -->
+        <div class="mb-12">
+          <h2 class="section-title text-4xl md:text-[3.4rem] leading-tight font-display" style="margin:0;">
+            Una experiencia que se<br>construye <span style="font-style:italic; font-weight:600; color:#C84B0A;">paso a paso.</span>
+          </h2>
+        </div>
+        
+        <!-- Accordion Cards Container -->
+        <div class="step-card-container" id="stepCardContainer">
+          
+          <!-- Card 1 -->
+          <div class="step-card active-card" data-index="0" onclick="setActiveStepCard(0)">
+            <div class="step-card-bg-light"></div>
+            <div class="step-card-bg-image" style="background-image: url('diseño.png');"></div>
+            <div class="step-card-content">
+              <span class="step-card-num">01</span>
+              <div class="step-card-bottom-wrap">
+                <h3 class="step-card-title">Diseño y preparación</h3>
+                <div class="step-card-expanded">
+                  <p class="font-sans text-[13.5px] leading-relaxed text-[#F5F2EB]/90">
+                    Definí las proporciones del instrumento, realizá los primeros planos y marcá cada pieza antes de comenzar la construcción.
+                  </p>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="bg-white/15 backdrop-blur-sm text-[#F5F2EB] text-[10px] font-semibold px-3 py-1 rounded-full border border-white/10 uppercase tracking-wider">Paso 01</span>
+                    <span class="bg-[#C84B0A]/80 text-white text-[10px] font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Planificación</span>
+                  </div>
+                </div>
+                <div class="step-card-inactive">
+                  <span class="text-[11px] font-semibold text-[#2D1610]/60 uppercase tracking-widest hidden sm:inline">Ver más</span>
+                  <div class="step-plus-circle">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="12" y1="5" x2="12" y2="19"></line>
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="step-card" data-index="1" onclick="setActiveStepCard(1)">
+            <div class="step-card-bg-light"></div>
+            <div class="step-card-bg-image" style="background-image: url('seleccion.png');"></div>
+            <div class="step-card-content">
+              <span class="step-card-num">02</span>
+              <div class="step-card-bottom-wrap">
+                <h3 class="step-card-title">Selección de materiales</h3>
+                <div class="step-card-expanded">
+                  <p class="font-sans text-[13.5px] leading-relaxed text-[#F5F2EB]/90">
+                    Elegimos maderas y componentes con respeto por la tonalidad y la durabilidad del instrumento.
+                  </p>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="bg-white/15 backdrop-blur-sm text-[#F5F2EB] text-[10px] font-semibold px-3 py-1 rounded-full border border-white/10 uppercase tracking-wider">Paso 02</span>
+                    <span class="bg-[#C84B0A]/80 text-white text-[10px] font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Maderas</span>
+                  </div>
+                </div>
+                <div class="step-card-inactive">
+                  <span class="text-[11px] font-semibold text-[#2D1610]/60 uppercase tracking-widest hidden sm:inline">Ver más</span>
+                  <div class="step-plus-circle">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="12" y1="5" x2="12" y2="19"></line>
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="step-card" data-index="2" onclick="setActiveStepCard(2)">
+            <div class="step-card-bg-light"></div>
+            <div class="step-card-bg-image" style="background-image: url('armado.png');"></div>
+            <div class="step-card-content">
+              <span class="step-card-num">03</span>
+              <div class="step-card-bottom-wrap">
+                <h3 class="step-card-title">Construcción</h3>
+                <div class="step-card-expanded">
+                  <p class="font-sans text-[13.5px] leading-relaxed text-[#F5F2EB]/90">
+                    Armamos el cuerpo, la tapa y el conjunto con técnica artesanal y atención a cada unión.
+                  </p>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="bg-white/15 backdrop-blur-sm text-[#F5F2EB] text-[10px] font-semibold px-3 py-1 rounded-full border border-white/10 uppercase tracking-wider">Paso 03</span>
+                    <span class="bg-[#C84B0A]/80 text-white text-[10px] font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Montaje</span>
+                  </div>
+                </div>
+                <div class="step-card-inactive">
+                  <span class="text-[11px] font-semibold text-[#2D1610]/60 uppercase tracking-widest hidden sm:inline">Ver más</span>
+                  <div class="step-plus-circle">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="12" y1="5" x2="12" y2="19"></line>
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="step-card" data-index="3" onclick="setActiveStepCard(3)">
+            <div class="step-card-bg-light"></div>
+            <div class="step-card-bg-image" style="background-image: url('calibracion.png');"></div>
+            <div class="step-card-content">
+              <span class="step-card-num">04</span>
+              <div class="step-card-bottom-wrap">
+                <h3 class="step-card-title">Calibración y acabados</h3>
+                <div class="step-card-expanded">
+                  <p class="font-sans text-[13.5px] leading-relaxed text-[#F5F2EB]/90">
+                    Ajustamos la acción, la entonación y pulimos cada superficie para lograr equilibrio y belleza.
+                  </p>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="bg-white/15 backdrop-blur-sm text-[#F5F2EB] text-[10px] font-semibold px-3 py-1 rounded-full border border-white/10 uppercase tracking-wider">Paso 04</span>
+                    <span class="bg-[#C84B0A]/80 text-white text-[10px] font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Detalle</span>
+                  </div>
+                </div>
+                <div class="step-card-inactive">
+                  <span class="text-[11px] font-semibold text-[#2D1610]/60 uppercase tracking-widest hidden sm:inline">Ver más</span>
+                  <div class="step-plus-circle">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="12" y1="5" x2="12" y2="19"></line>
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="step-card" data-index="4" onclick="setActiveStepCard(4)">
+            <div class="step-card-bg-light"></div>
+            <div class="step-card-bg-image" style="background-image: url('primeracorde.png');"></div>
+            <div class="step-card-content">
+              <span class="step-card-num">05</span>
+              <div class="step-card-bottom-wrap">
+                <h3 class="step-card-title">El primer acorde</h3>
+                <div class="step-card-expanded">
+                  <p class="font-sans text-[13.5px] leading-relaxed text-[#F5F2EB]/90">
+                    Viví el momento de tocar el primer acorde con un instrumento construido bajo tu mirada.
+                  </p>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="bg-white/15 backdrop-blur-sm text-[#F5F2EB] text-[10px] font-semibold px-3 py-1 rounded-full border border-white/10 uppercase tracking-wider">Paso 05</span>
+                    <span class="bg-[#C84B0A]/80 text-white text-[10px] font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Música</span>
+                  </div>
+                </div>
+                <div class="step-card-inactive">
+                  <span class="text-[11px] font-semibold text-[#2D1610]/60 uppercase tracking-widest hidden sm:inline">Ver más</span>
+                  <div class="step-plus-circle">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="12" y1="5" x2="12" y2="19"></line>
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="seccion2" style="background-image: url('bannertexto.png'); background-size: cover; background-position: center; color: #FFFFFF; position: relative; overflow: hidden;" class="px-6 md:px-[100px] py-14 md:py-8">
+      <div class="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-8 items-center" style="max-width:1200px; margin:0 auto; min-height:390px;">
+        <!-- Left side (Text content) -->
+        <div style="display:flex; flex-direction:column; justify-content:center; box-sizing:border-box;" class="py-8 md:py-16 md:pr-10">
+          <h2 class="section-title" style="color:#FFFFFF; font-size:2.5rem !important; line-height:1.2; margin:0 0 20px 0;">
+            Tu guitarra empieza con<br>el <em style="font-style:italic; font-weight:600; color:#FFFFFF;">primer corte.</em>
+          </h2>
+          <p style="font-family:'Inter',sans-serif; font-size:14.5px; line-height:1.65; color:#F5F2EB; margin:0; max-width:480px; opacity:0.85;">
+            Reservá tu lugar en el curso y empezá a construír una historia que suene a vos. Nosotros te brindamos la educación de calidad y los materiales.
+          </p>
+        </div>
+        <!-- Right side (Guitar pieces image) -->
+        <div class="flex items-center justify-center w-full py-6 md:py-0">
+          <img src="piezasguitarra.png" alt="Piezas de guitarra" class="w-full max-w-[400px] md:max-w-none md:scale-105 transform origin-center h-auto object-contain" />
+        </div>
+      </div>
+    </section>
+
+    <section id="seccion3" class="py-14 px-6 md:px-[100px] bg-[#F5F2EB] tools-section">
+      <div class="max-w-[1000px] mx-auto text-left">
+        <h2 class="section-title text-4xl md:text-[3.4rem] leading-tight font-display mb-10">¿Con qué vas <br class="md:hidden" /> a <em style="font-weight:600; font-style:italic; color:#C84B0A;">trabajar?</em></h2>
+        
+        <div class="tool-list">
+          
+          <!-- Formón -->
+          <div class="tool-item" data-tool-index="0">
+            <div class="tool-content">
+              <h3 class="tool-name">Formón</h3>
+              <p class="tool-desc">Permite tallar, rebajar y dar forma a la madera con precisión.</p>
+            </div>
+            <div class="tool-img-wrapper">
+              <img src="formon.png" alt="Formón" />
+            </div>
+          </div>
+
+          <!-- Cepillo Manual -->
+          <div class="tool-item" data-tool-index="1">
+            <div class="tool-content">
+              <h3 class="tool-name">Cepillo Manual</h3>
+              <p class="tool-desc">Alisa la superficie de la madera y ajusta su espesor antes del ensamblado.</p>
+            </div>
+            <div class="tool-img-wrapper">
+              <img src="cepillo manual.png" alt="Cepillo Manual" />
+            </div>
+          </div>
+
+          <!-- Serrucho Japonés -->
+          <div class="tool-item" data-tool-index="2">
+            <div class="tool-content">
+              <h3 class="tool-name">Serrucho Japonés</h3>
+              <p class="tool-desc">Realiza cortes finos y precisos, ideales para trabajos delicados de luthería.</p>
+            </div>
+            <div class="tool-img-wrapper">
+              <img src="serrucho.png" alt="Serrucho Japonés" />
+            </div>
+          </div>
+
+          <!-- Lima de trastes -->
+          <div class="tool-item" data-tool-index="3">
+            <div class="tool-content">
+              <h3 class="tool-name">Lima de trastes</h3>
+              <p class="tool-desc">Perfila y suaviza los trastes para lograr una ejecución cómoda y precisa.</p>
+            </div>
+            <div class="tool-img-wrapper">
+              <img src="lima.png" alt="Lima de trastes" />
+            </div>
+          </div>
+
+          <!-- Sargentos -->
+          <div class="tool-item" data-tool-index="4">
+            <div class="tool-content">
+              <h3 class="tool-name">Sargentos</h3>
+              <p class="tool-desc">Mantienen las piezas firmemente sujetas durante el encolado y el secado.</p>
+            </div>
+            <div class="tool-img-wrapper">
+              <img src="sargentos.png" alt="Sargentos" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="maderas" class="pt-24 px-6 md:px-[100px]" style="background:#F5F2EB; padding-bottom:126px;">
+      <div class="max-w-[1240px] mx-auto">
+
+        <!-- Título centrado -->
+        <div style="text-align:center; margin-bottom:48px;">
+          <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:clamp(2.2rem,4vw,3.4rem); line-height:1.15; color:#2D1610; margin:0;">
+            Probá <em style="font-weight:600; font-style:italic; color:#C84B0A;">nuestras maderas</em>
+          </h2>
+          <p style="font-family:'Inter',sans-serif; font-size:14px; line-height:1.65; color:#4E4139; margin:20px auto 0; max-width:580px;">Cada especie aporta una personalidad diferente al instrumento. Su densidad, veta y resonancia influyen directamente en el carácter del sonido.</p>
+        </div>
+
+        <!-- Layout: guitarra izquierda, selectores derecha -->
+        <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 md:gap-[60px] items-center">
+
+          <!-- Guitarra -->
+          <div class="flex items-center justify-center md:items-end md:justify-start">
+            <img id="wood-guitar" src="cambiomadera.png" alt="Guitarra" style="max-height:440px; width:auto; object-fit:contain; transition:opacity 0.35s ease; display:block; transform:scaleX(-1);" />
+          </div>
+
+          <!-- Selectores de madera -->
+          <div class="flex flex-col items-center md:items-start gap-6 md:gap-[32px] pb-4 md:pb-[16px] w-full">
+
+            <p style="font-family:'Inter',sans-serif; font-size:18px; font-weight:400; color:#2D1610; margin:0; line-height:1.2;">Selección de madera</p>
+
+            <div class="flex flex-row flex-wrap justify-center md:justify-start gap-4 md:gap-[28px] items-center w-full">
+
+              <!-- Palisandro -->
+              <div class="wood-control flex flex-row items-center gap-2 md:gap-3 cursor-pointer" data-wood="palisandro" data-img="cambiomadera.png">
+                <div class="wood-thumb w-11 h-11 md:w-16 md:h-16 rounded-full overflow-hidden border-[2.5px] border-transparent transition-all duration-250 shrink-0">
+                  <img src="madera1.png" alt="Palisandro" style="width:100%; height:100%; object-fit:cover; display:block;" />
+                </div>
+                <span style="font-family:'Inter',sans-serif; color:#2D1610; opacity:0.65; transition:opacity 250ms ease; white-space:nowrap;" class="text-[11px] md:text-[12px]">Palisandro</span>
+              </div>
+
+              <!-- Algarrobo -->
+              <div class="wood-control flex flex-row items-center gap-2 md:gap-3 cursor-pointer" data-wood="algarrobo" data-img="cambiomadera.png">
+                <div class="wood-thumb w-11 h-11 md:w-16 md:h-16 rounded-full overflow-hidden border-[2.5px] border-transparent transition-all duration-250 shrink-0">
+                  <img src="madera2.png" alt="Algarrobo" style="width:100%; height:100%; object-fit:cover; display:block;" />
+                </div>
+                <span style="font-family:'Inter',sans-serif; color:#2D1610; opacity:0.65; transition:opacity 250ms ease; white-space:nowrap;" class="text-[11px] md:text-[12px]">Algarrobo</span>
+              </div>
+
+              <!-- Ciprés -->
+              <div class="wood-control flex flex-row items-center gap-2 md:gap-3 cursor-pointer" data-wood="cipres" data-img="cambiomadera.png">
+                <div class="wood-thumb w-11 h-11 md:w-16 md:h-16 rounded-full overflow-hidden border-[2.5px] border-transparent transition-all duration-250 shrink-0">
+                  <img src="madera3.png" alt="Ciprés" style="width:100%; height:100%; object-fit:cover; display:block;" />
+                </div>
+                <span style="font-family:'Inter',sans-serif; color:#2D1610; opacity:0.65; transition:opacity 250ms ease; white-space:nowrap;" class="text-[11px] md:text-[12px]">Ciprés</span>
+              </div>
+
+              <!-- Ábeto -->
+              <div class="wood-control active flex flex-row items-center gap-2 md:gap-3 cursor-pointer" data-wood="abeto" data-img="cambiomadera.png">
+                <div class="wood-thumb w-11 h-11 md:w-16 md:h-16 rounded-full overflow-hidden border-[2.5px] border-[#C7C57D] scale(1.08) transition-all duration-250 shrink-0" style="border:2.5px solid #C7C57D; transform:scale(1.08);">
+                  <img src="madera4.png" alt="Ábeto" style="width:100%; height:100%; object-fit:cover; display:block;" />
+                </div>
+                <span style="font-family:'Inter',sans-serif; color:#2D1610; opacity:1; font-weight:600; transition:opacity 250ms ease; white-space:nowrap;" class="text-[11px] md:text-[12px]">Ábeto</span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Galería Alumnos: Coverflow Infinito ── -->
+    <section id="seccion5" style="width:100%; box-sizing:border-box; background:#441714; overflow:hidden; position:relative;" class="pt-[64px] pb-[76px] md:pt-[52px] md:pb-[64px]">
+
+      <style>
+        /* ── Header ── */
+        .cf3-header {
+          padding: 0 80px;
+          margin-bottom: 32px;
+          max-width: 860px;
+          text-align: center;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        @media (max-width: 768px) { .cf3-header { padding: 0 28px; margin-bottom: 36px; } }
+
+        .cf3-title {
+          font-family: 'Playfair Display', Georgia, serif;
+          font-size: 3rem;
+          font-weight: 400;
+          line-height: 1.15;
+          color: #FFFFFF;
+          margin: 0;
+        }
+        @media (max-width: 768px) { .cf3-title { font-size: 2rem; } }
+
+        /* ── Stage ── */
+        .cf3-stage {
+          position: relative;
+          width: 100%;
+          overflow: hidden;
+          height: 400px;
+          cursor: grab;
+        }
+        .cf3-stage.is-dragging { cursor: grabbing; }
+        @media (max-width: 1024px) { .cf3-stage { height: 320px; } }
+        @media (max-width: 640px)  { .cf3-stage { height: 290px; } }
+
+        /* ── Cards (all absolutely positioned) ── */
+        .cf3-card {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          width: 150px;
+          height: 200px;
+          border-radius: 0 16px 0 16px;
+          overflow: hidden;
+          will-change: transform, opacity;
+        }
+        @media (max-width: 640px) {
+          .cf3-card { width: 110px; height: 145px; }
+        }
+        @media (max-width: 768px) {
+          .cf3-card:not(.cf3-active) {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+          }
+        }
+
+        .cf3-card img {
+          width: 100%; height: 100%;
+          object-fit: cover; display: block;
+          pointer-events: none;
+          border-radius: inherit;
+        }
+
+        /* Dark overlay (sidebar) */
+        .cf3-card::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: rgba(0,0,0,0.28);
+          border-radius: inherit;
+          transition: opacity 500ms cubic-bezier(0.4,0,0.2,1);
+          pointer-events: none;
+        }
+        /* Active: no overlay */
+        .cf3-card.cf3-active::after { opacity: 0; }
+
+        /* Shadow only on active */
+        .cf3-card.cf3-active {
+          box-shadow: 0 10px 30px rgba(0,0,0,0.22), 0 3px 8px rgba(0,0,0,0.12);
+        }
+
+        /* ── Caption ── */
+        .cf3-caption {
+          text-align: center;
+          margin-top: 28px;
+          min-height: 30px;
+        }
+        .cf3-caption-text {
+          font-family: 'Inter', sans-serif;
+          font-size: 15px;
+          font-weight: 400;
+          color: rgba(255,255,255,0.82);
+          margin: 0;
+        }
+        .cf3-caption-name {
+          font-weight: 600;
+          color: #C7C57D;
+          transition: opacity 260ms ease;
+        }
+
+        /* ── Arrows + Dots ── */
+        .cf3-nav {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 16px;
+          margin-top: 32px;
+        }
+        .cf3-arrow {
+          width: 48px; height: 48px;
+          border-radius: 50%;
+          border: 1.5px solid rgba(255,255,255,0.22);
+          background: rgba(255,255,255,0.08);
+          display: flex; align-items: center; justify-content: center;
+          cursor: pointer;
+          transition: background 220ms ease, border-color 220ms ease, transform 180ms ease;
+          backdrop-filter: blur(4px);
+          flex-shrink: 0;
+        }
+        .cf3-arrow:hover {
+          background: rgba(255,255,255,0.20);
+          border-color: rgba(255,255,255,0.50);
+          transform: scale(1.08);
+        }
+        .cf3-arrow svg { width: 20px; height: 20px; color: #fff; }
+
+        .cf3-dots {
+          display: flex; align-items: center; gap: 8px;
+        }
+        .cf3-dot {
+          width: 5px; height: 5px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.22);
+          border: none; padding: 0; cursor: pointer;
+          transition: background 280ms ease, transform 280ms ease;
+        }
+        .cf3-dot.cf3-dot-active {
+          background: #C7C57D;
+          transform: scale(1.55);
+        }
+
+        /* ── Side Arrows ── */
+        .cf3-arrow-side {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 20;
+          width: 48px; height: 48px;
+          border-radius: 50%;
+          border: 1.5px solid rgba(255,255,255,0.22);
+          background: rgba(255,255,255,0.08);
+          display: flex; align-items: center; justify-content: center;
+          cursor: pointer;
+          transition: background 220ms ease, border-color 220ms ease, transform 220ms ease;
+          backdrop-filter: blur(4px);
+        }
+        .cf3-arrow-side:hover {
+          background: rgba(255,255,255,0.20);
+          border-color: rgba(255,255,255,0.50);
+          transform: translateY(-50%) scale(1.08);
+        }
+        .cf3-arrow-side svg { width: 20px; height: 20px; color: #fff; }
+        .cf3-arrow-side-prev { left: 24px; }
+        .cf3-arrow-side-next { right: 24px; }
+        @media (max-width: 640px) {
+          .cf3-arrow-side-prev { left: 8px; }
+          .cf3-arrow-side-next { right: 8px; }
+        }
+      </style>
+
+      <!-- Header -->
+      <div class="cf3-header">
+        <h2 class="cf3-title">
+          Ellos son nuestro<br>
+          <em style="font-style:italic; font-weight:700; font-family:'Playfair Display',serif; color:#BEBC7E;">mejor resultado.</em>
+        </h2>
+      </div>
+
+      <!-- Gallery Stage -->
+      <div class="cf3-stage" id="cf3Stage">
+
+        <div class="cf3-card" data-i="0">
+          <img src="car1.jpg" alt="Trabajo alumno 1" draggable="false" />
+        </div>
+        <div class="cf3-card" data-i="1">
+          <img src="car2.jpg" alt="Trabajo alumno 2" draggable="false" />
+        </div>
+        <div class="cf3-card" data-i="2">
+          <img src="car3.jpg" alt="Trabajo alumno 3" draggable="false" />
+        </div>
+        <div class="cf3-card" data-i="3">
+          <img src="car4.jpg" alt="Trabajo alumno 4" draggable="false" />
+        </div>
+        <div class="cf3-card" data-i="4">
+          <img src="car5.jpg" alt="Trabajo alumno 5" draggable="false" />
+        </div>
+        <div class="cf3-card" data-i="5">
+          <img src="car6.jpg" alt="Trabajo alumno 6" draggable="false" />
+        </div>
+        <div class="cf3-card" data-i="6">
+          <img src="car7.jpg" alt="Trabajo alumno 7" draggable="false" />
+        </div>
+
+        <!-- Side Arrows -->
+        <button class="cf3-arrow-side cf3-arrow-side-prev" id="cf3Prev" aria-label="Anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+        <button class="cf3-arrow-side cf3-arrow-side-next" id="cf3Next" aria-label="Siguiente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
+
+      </div>
+
+      <!-- Caption -->
+      <div class="cf3-caption">
+        <p class="cf3-caption-text">
+          Realizado por <span class="cf3-caption-name" id="cf3Name"></span>
+        </p>
+      </div>
+
+      <div class="cf3-nav">
+        <div class="cf3-dots" id="cf3Dots"></div>
+      </div>
+
+      <script>
+      (function () {
+        'use strict';
+
+        /* ── Data ── */
+        const STUDENTS = [
+          'Valentina Ríos',
+          'Diego Fernández',
+          'Micaela Martínez',
+          'Tomás Aguirre',
+          'Luciana Pereyra',
+          'Martín Sosa',
+          'Carolina Vidal',
+        ];
+        const TOTAL        = STUDENTS.length;
+        const ACTIVE_SCALE = 1.75;
+        const AUTO_DELAY   = 3800; /* ms between slides */
+
+        /* ── Elements ── */
+        const stage   = document.getElementById('cf3Stage');
+        const cards   = Array.from(stage.querySelectorAll('.cf3-card'));
+        const nameEl  = document.getElementById('cf3Name');
+        const dotsEl  = document.getElementById('cf3Dots');
+        const prevBtn = document.getElementById('cf3Prev');
+        const nextBtn = document.getElementById('cf3Next');
+
+        /* ── State ── */
+        let active    = 0;
+        let autoTimer = null;
+
+        /* ── Responsive unit (px between card centers) ── */
+        function unit() {
+          const sw = stage.offsetWidth;
+          if (sw < 500) return 145;
+          if (sw < 860) return 200;
+          return 245;
+        }
+
+        /* ── Build dots ── */
+        STUDENTS.forEach(function (_, i) {
+          var b = document.createElement('button');
+          b.className = 'cf3-dot';
+          b.setAttribute('aria-label', 'Ir a imagen ' + (i + 1));
+          b.addEventListener('click', function () { userGoTo(i); });
+          dotsEl.appendChild(b);
+        });
+
+        function allDots() { return Array.from(dotsEl.querySelectorAll('.cf3-dot')); }
+
+        /* ── Core layout (instant = no CSS transition) ── */
+        function layout(instant) {
+          var U = unit();
+          cards.forEach(function (card, i) {
+            var raw  = ((i - active) % TOTAL + TOTAL) % TOTAL;
+            var dist = raw > Math.floor(TOTAL / 2) ? raw - TOTAL : raw;
+            var absD = Math.abs(dist);
+
+            var isCentre = dist === 0;
+            var isHidden = absD >= 3;   /* hide ±3 so wrap is seamless */
+
+            /* Hidden & instant cards get no transition */
+            var noTrans = instant || isHidden;
+            card.style.transition = noTrans
+              ? 'none'
+              : 'transform 500ms cubic-bezier(0.4,0,0.2,1), opacity 500ms cubic-bezier(0.4,0,0.2,1)';
+
+            var scale = isCentre ? ACTIVE_SCALE : 1;
+            var xPx   = dist * U;
+
+            card.style.transform    = 'translate(calc(-50% + ' + xPx + 'px), -50%) scale(' + scale + ')';
+            card.style.opacity      = isHidden ? '0' : isCentre ? '1' : absD === 1 ? '0.88' : '0.6';
+            card.style.zIndex       = isCentre ? '10' : absD === 1 ? '5' : absD === 2 ? '3' : '1';
+            card.style.pointerEvents = (isCentre || isHidden) ? 'none' : 'auto';
+            card.classList.toggle('cf3-active', isCentre);
+          });
+        }
+
+        /* ── Caption fade ── */
+        function updateCaption(instant) {
+          if (instant) {
+            nameEl.textContent = STUDENTS[active];
+            nameEl.style.opacity = '1';
+            return;
+          }
+          nameEl.style.opacity = '0';
+          setTimeout(function () {
+            nameEl.textContent = STUDENTS[active];
+            nameEl.style.opacity = '1';
+          }, 190);
+        }
+
+        /* ── Dots ── */
+        function updateDots() {
+          allDots().forEach(function (d, i) {
+            d.classList.toggle('cf3-dot-active', i === active);
+          });
+        }
+
+
+        /* ── Navigate ── */
+        function goTo(idx, instant) {
+          active = ((idx % TOTAL) + TOTAL) % TOTAL;
+          layout(instant || false);
+          updateCaption(instant || false);
+          updateDots();
+        }
+
+        function next() { goTo(active + 1); }
+        function prev() { goTo(active - 1); }
+
+        /* User-triggered: reset auto timer */
+        function userGoTo(idx) {
+          stopAuto();
+          goTo(idx);
+          startAuto();
+        }
+
+        /* ── Auto-play ── */
+        function startAuto() {
+          clearInterval(autoTimer);
+          autoTimer = setInterval(function () {
+            next();
+          }, AUTO_DELAY);
+        }
+
+        function stopAuto() {
+          clearInterval(autoTimer);
+        }
+
+        /* Pause on hover */
+        stage.addEventListener('mouseenter', stopAuto);
+        stage.addEventListener('mouseleave', startAuto);
+
+        /* ── Arrow buttons ── */
+        prevBtn.addEventListener('click', function () { stopAuto(); prev(); startAuto(); });
+        nextBtn.addEventListener('click', function () { stopAuto(); next(); startAuto(); });
+
+        /* ── Click sidebar cards ── */
+        cards.forEach(function (card, i) {
+          card.addEventListener('click', function () {
+            if (dragging) return;
+            var raw  = ((i - active) % TOTAL + TOTAL) % TOTAL;
+            var dist = raw > 2 ? raw - TOTAL : raw;
+            if (dist === 1)  { stopAuto(); next(); startAuto(); }
+            if (dist === -1) { stopAuto(); prev(); startAuto(); }
+          });
+        });
+
+        /* ── Keyboard ── */
+        document.addEventListener('keydown', function (e) {
+          var r = stage.getBoundingClientRect();
+          if (r.top > window.innerHeight || r.bottom < 0) return;
+          if (e.key === 'ArrowLeft')  { stopAuto(); prev(); startAuto(); }
+          if (e.key === 'ArrowRight') { stopAuto(); next(); startAuto(); }
+        });
+
+        /* ── Drag / Swipe ── */
+        var startX = 0, dx = 0, dragging = false, pDown = false;
+
+        function pStart(x) {
+          pDown = true; dragging = false; startX = x; dx = 0;
+          stage.classList.add('is-dragging');
+        }
+        function pMove(x) {
+          if (!pDown) return;
+          dx = x - startX;
+          if (Math.abs(dx) > 8) dragging = true;
+        }
+        function pEnd() {
+          if (!pDown) return;
+          pDown = false;
+          stage.classList.remove('is-dragging');
+          if (Math.abs(dx) >= 55) {
+            stopAuto();
+            if (dx < 0) next(); else prev();
+            startAuto();
+          }
+          setTimeout(function () { dragging = false; }, 60);
+          startX = 0; dx = 0;
+        }
+
+        stage.addEventListener('mousedown',  function (e) { pStart(e.clientX); });
+        window.addEventListener('mousemove', function (e) { pMove(e.clientX); });
+        window.addEventListener('mouseup',   pEnd);
+        stage.addEventListener('touchstart', function (e) { pStart(e.touches[0].clientX); }, { passive: true });
+        stage.addEventListener('touchmove',  function (e) { pMove(e.touches[0].clientX);  }, { passive: true });
+        stage.addEventListener('touchend',   pEnd);
+
+        /* ── Resize ── */
+        var resizeT;
+        window.addEventListener('resize', function () {
+          clearTimeout(resizeT);
+          resizeT = setTimeout(function () { layout(true); }, 120);
+        });
+
+        /* ── Init ── */
+        layout(true);         /* instant: no entrance animation */
+        updateCaption(true);
+        updateDots();
+        startAuto();
+
+      }());
+      </script>
+    </section>
+
+
+    <section id="faq" class="py-24 bg-[#9B9D63] px-6 md:px-[100px] text-[#2D1610] faq-section">
+      <div class="max-w-[1240px] mx-auto">
+        <div style="display:grid; grid-template-columns:1fr 50%; gap:72px; align-items:start; justify-items:end;">
+
+          <!-- Left: title + category tabs -->
+          <div style="position:sticky; top:100px; justify-self:start;">
+            <h2 class="section-title" style="margin:0 0 12px 0; line-height:1.15; font-size:2rem !important; white-space:nowrap;">Preguntas Frecuentes</h2>
+            <p style="font-family:'Inter',sans-serif; font-size:14px; line-height:1.65; color:rgba(45,22,16,0.70); margin:0 0 36px 0;">Explorá las respuestas<br>sobre el recorrido y el taller.</p>
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <button class="faq-tab active" data-category="general">
+                <span class="faq-tab-dot"></span> General
+              </button>
+              <button class="faq-tab" data-category="materiales">
+                <span class="faq-tab-dot"></span> Materiales
+              </button>
+              <button class="faq-tab" data-category="inscripcion">
+                <span class="faq-tab-dot"></span> Inscripción
+              </button>
+            </div>
+          </div>
+
+          <!-- Right: FAQ accordion groups -->
+          <div style="width:100%; max-width:100%;">
+
+            <!-- Group: General -->
+            <div class="faq-group faq-active-group" id="faq-general">
+              <div class="faq-item">
+                <button class="faq-item-btn">
+                  <span>¿Qué incluye el taller de construcción?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+                </button>
+                <div class="faq-answer"><p>Incluye todas las etapas del proceso de lutería: selección de madera, construcción del cuerpo, ensamblado, calibración final y el momento de tocar el primer acorde con tu instrumento terminado.</p></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-item-btn">
+                  <span>¿Es necesario tener experiencia previa?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+                </button>
+                <div class="faq-answer"><p>No. El taller está diseñado para acompañar desde el inicio. Cada participante avanza a su ritmo con apoyo profesional constante, sin importar si nunca trabajaste la madera antes.</p></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-item-btn">
+                  <span>¿Cuánto tiempo dura el curso?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+                </button>
+                <div class="faq-answer"><p>La duración estimada es de 4 a 6 meses, con encuentros semanales en el taller. El ritmo puede adaptarse según el avance de cada participante.</p></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-item-btn">
+                  <span>¿Me llevo la guitarra al terminar?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+                </button>
+                <div class="faq-answer"><p>Sí. Al finalizar el proceso, el instrumento construido es tuyo. Es el resultado de tu trabajo, guiado por nuestros luthiers a lo largo de todo el recorrido.</p></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-item-btn">
+                  <span>¿Hay cupos limitados?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+                </button>
+                <div class="faq-answer"><p>Sí, los grupos son pequeños para garantizar atención personalizada. Recomendamos reservar con anticipación para asegurar tu lugar en la próxima edición.</p></div>
+              </div>
+            </div>
+
+            <!-- Group: Materiales -->
+            <div class="faq-group" id="faq-materiales">
+              <div class="faq-item">
+                <button class="faq-item-btn">
+                  <span>¿Qué tipo de madera se usa en el curso?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+                </button>
+                <div class="faq-answer"><p>Trabajamos con maderas seleccionadas como palisandro, cedro, abeto y algarrobo. Cada especie aporta características tonáles únicas al instrumento.</p></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-item-btn">
+                  <span>¿Puedo elegir la madera para mi guitarra?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+                </button>
+                <div class="faq-answer"><p>Sí. Durante el curso se hace una sesión de selección de materiales donde el alumno elige la especie que más se adapta a su sonido y estética deseada.</p></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-item-btn">
+                  <span>¿Los materiales están incluidos en el precio?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+                </button>
+                <div class="faq-answer"><p>Sí, todos los materiales y herramientas necesarios para la construcción están incluidos. No necesitás traer nada al taller más que tus ganas.</p></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-item-btn">
+                  <span>¿Qué herramientas se utilizan?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+                </button>
+                <div class="faq-answer"><p>Usamos formónes, cepillos manuales, serruchos japoneses, limas de trastes y sargentos, entre otras herramientas de lutería tradicional y de precisión.</p></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-item-btn">
+                  <span>¿Cómo se cuida la madera del instrumento una vez terminado?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+                </button>
+                <div class="faq-answer"><p>Recomendamos mantener el instrumento en un ambiente con humedad controlada, usar aceites naturales para hidratar la madera periódicamente y guardarlo en su estuche cuando no se usa. Durante el curso explicamos en detalle las mejores prácticas de mantenimiento.</p></div>
+              </div>
+            </div>
+
+            <!-- Group: Inscripción -->
+            <div class="faq-group" id="faq-inscripcion">
+              <div class="faq-item">
+                <button class="faq-item-btn">
+                  <span>¿Cómo reservo mi lugar en el taller?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+                </button>
+                <div class="faq-answer"><p>Podés reservar tu lugar a través del formulario de contacto de la página o escribiéndonos directamente al email del taller. Respondemos en menos de 24 horas.</p></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-item-btn">
+                  <span>¿Cuál es el costo del curso?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+                </button>
+                <div class="faq-answer"><p>El valor varía según la madera elegida y el modelo de guitarra. Contactános para recibir un presupuesto detallado y personalizado.</p></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-item-btn">
+                  <span>¿Hay opciones de pago en cuotas?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+                </button>
+                <div class="faq-answer"><p>Sí, ofrecemos facilidades de pago. Consultanos por las opciones disponibles al momento de tu inscripción.</p></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-item-btn">
+                  <span>¿Cuándo empieza el próximo grupo?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+                </button>
+                <div class="faq-answer"><p>Los grupos nuevos comienzan cada trimestre. Escribinos para saber la fecha del próximo inicio y asegurar tu inscripción.</p></div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-item-btn">
+                  <span>¿Puedo visitar el taller antes de inscribirme?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+                </button>
+                <div class="faq-answer"><p>Claro. Organizamos jornadas de puertas abiertas donde podés conocer el espacio, charlar con los docentes y ver el proceso de construcción en vivo.</p></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="profesores" class="py-24 px-6 md:px-[100px]" style="background:#F5F2EB;">
+      <div class="max-w-[1100px] mx-auto">
+
+        <!-- Título -->
+        <div style="text-align:center; margin-bottom:24px;">
+          <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:clamp(2rem,3.5vw,3rem); line-height:1.2; color:#2D1610; margin:0;">
+            Quienes transforman la<br class="hidden md:inline" /> experiencia <br class="md:hidden" />en <em style="font-weight:600; font-style:italic; color:#C84B0A;">aprendizaje</em>
+          </h2>
+        </div>
+
+        <!-- Subtítulo -->
+        <div style="text-align:center; margin-bottom:64px;">
+          <p style="font-family:'Inter',sans-serif; font-size:14px; line-height:1.65; color:#4E4139; max-width:600px; margin:0 auto;">
+            Nuestros docentes comparten años de experiencia, dedicación y una forma única de entender la luthería.
+          </p>
+        </div>
+
+        <!-- Grid 3 columnas -->
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:40px; align-items:start;">
+
+          <!-- Marisol Gómez -->
+          <div style="display:flex; flex-direction:column; align-items:center; gap:16px;">
+            <div style="width:260px; height:300px; overflow:hidden;">
+              <img src="marisol.png" alt="Marisol Gómez" style="width:100%; height:100%; object-fit:cover; object-position:top; display:block;" />
+            </div>
+            <div style="text-align:center;">
+              <h3 style="font-family:'Playfair Display',serif; font-weight:700; font-size:1.2rem; color:#2D1610; margin:0 0 4px 0;">Marisol Gómez</h3>
+              <p style="font-family:'Inter',sans-serif; font-size:13px; color:#4E4139; margin:0;">Construcción artesanal</p>
+            </div>
+          </div>
+
+          <!-- Juan Fernández -->
+          <div style="display:flex; flex-direction:column; align-items:center; gap:16px;">
+            <div style="width:260px; height:300px; overflow:hidden;">
+              <img src="juan.png" alt="Juan Fernández" style="width:100%; height:100%; object-fit:cover; object-position:top; display:block;" />
+            </div>
+            <div style="text-align:center;">
+              <h3 style="font-family:'Playfair Display',serif; font-weight:700; font-size:1.2rem; color:#2D1610; margin:0 0 4px 0;">Juan Fernández</h3>
+              <p style="font-family:'Inter',sans-serif; font-size:13px; color:#4E4139; margin:0;">Calibración y Ajuste</p>
+            </div>
+          </div>
+
+          <!-- Julieta López -->
+          <div style="display:flex; flex-direction:column; align-items:center; gap:16px;">
+            <div style="width:260px; height:300px; overflow:hidden;">
+              <img src="julieta.png" alt="Julieta López" style="width:100%; height:100%; object-fit:cover; object-position:top; display:block;" />
+            </div>
+            <div style="text-align:center;">
+              <h3 style="font-family:'Playfair Display',serif; font-weight:700; font-size:1.2rem; color:#2D1610; margin:0 0 4px 0;">Julieta López</h3>
+              <p style="font-family:'Inter',sans-serif; font-size:13px; color:#4E4139; margin:0;">Acabados y Restauración</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección Valor del Curso / Inscripción -->
+    <section id="valor-curso" class="py-24 px-6 lg:px-[100px] bg-[#F5F2EB] relative overflow-hidden">
+      <div class="max-w-[1000px] mx-auto relative z-10">
+        
+        <!-- Contenedor de la Composición (Centrado, Imagen enorme con tarjeta flotante) -->
+        <div class="relative w-full flex flex-col lg:block pt-6 pr-6 pb-6 lg:pr-12 lg:pb-8">
+          
+          <!-- Imagen Grande con marco fino y esquinas personalizadas -->
+          <div style="border-radius: 0 48px 0 48px !important;" class="w-full aspect-[16/10] sm:aspect-[1.8/1] overflow-hidden border border-[#2D1610]/20 shadow-lg relative z-0">
+            <img src="fotograndetalle.png" alt="Detalle de construcción de guitarra" class="w-full h-full object-cover block" />
+          </div>
+
+          <!-- Tarjeta Superpuesta limpia (solo precio y detalles) -->
+          <div style="background:#4B1715; border-radius: 0 48px 0 48px !important; color:#F5F2EB;" 
+               class="w-[92%] sm:w-[85%] max-w-[380px] lg:w-[380px] p-8 lg:p-10 shadow-[0_24px_70px_rgba(45,22,16,0.22)] flex flex-col justify-between z-10
+                      /* Mobile: relative position, overlap slightly using margin-top */
+                      -mt-24 relative mx-auto
+                      /* Desktop: absolute position, overlaps bottom-right corner */
+                      lg:absolute lg:right-0 lg:bottom-[-30px] lg:mt-0 lg:mx-0">
+            
+            <!-- Contenido de la Tarjeta -->
+            <div class="flex flex-col flex-1">
+              
+              <!-- Precios y financiación -->
+              <div class="flex flex-col gap-0.5 text-left mb-4 mt-2">
+                <div class="flex items-baseline gap-1.5">
+                  <span class="font-display text-[38px] lg:text-[44px] font-bold leading-none">$420.000</span>
+                  <span class="text-[13px] font-semibold opacity-75">ARS</span>
+                </div>
+                <span class="text-[12px] lg:text-[13px] font-semibold text-[#C7C57D]">Hasta 3 cuotas sin interés de $140.000</span>
+              </div>
+
+              <!-- Beneficios incluidos -->
+              <div class="flex flex-col gap-3 text-left mb-6 font-sans text-[13px] lg:text-[14px] opacity-90 border-t border-white/15 pt-5">
+                <div class="flex items-start gap-2.5">
+                  <span class="text-[#C7C57D] font-bold mt-0.5">✓</span>
+                  <span>8 encuentros presenciales guiados</span>
+                </div>
+                <div class="flex items-start gap-2.5">
+                  <span class="text-[#C7C57D] font-bold mt-0.5">✓</span>
+                  <span>Materiales y maderas incluidos</span>
+                </div>
+                <div class="flex items-start gap-2.5">
+                  <span class="text-[#C7C57D] font-bold mt-0.5">✓</span>
+                  <span>Te llevás tu propia guitarra criolla</span>
+                </div>
+                <div class="flex items-start gap-2.5">
+                  <span class="text-[#C7C57D] font-bold mt-0.5">✓</span>
+                  <span>Incluye certificado</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Botón de Pago / Acción (White slide premium button) -->
+            <div class="flex flex-col gap-2 pt-4 border-t border-white/15 w-full">
+              <a href="#contacto" class="inline-flex btn-slide-white h-[48px] items-center justify-center gap-2.5 rounded-full w-full text-[12px] font-bold uppercase tracking-wider">
+                <span class="relative z-10">Quiero ser parte</span>
+                <svg class="relative z-10 h-[12px] w-[12px]" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <p class="font-sans text-[10.5px] opacity-60 text-center leading-normal">
+                Aceptamos Efectivo, transferencia y tarjetas.
+              </p>
+            </div>
+
+          </div> <!-- Closes Card -->
+
+        </div> <!-- Closes Composition -->
+
+      </div> <!-- Closes Wrapper -->
+    </section>
+
+    <!-- Sección Tu Firma -->
+    <section id="tu-firma" class="relative py-20 md:py-28 px-6 flex flex-col items-center justify-center text-center overflow-hidden" 
+             style="background: url('tufirma.png') no-repeat center center; background-size: cover; z-index: 1; min-height: 480px; box-sizing: border-box;">
+      
+      <div class="max-w-[800px] mx-auto flex flex-col items-center gap-6 md:gap-8">
+        
+        <!-- Título -->
+        <h2 class="font-display text-[#2D1610] leading-[1.2] font-normal" style="font-size: clamp(2.2rem, 5vw, 4rem); margin: 0;">
+          El próximo instrumento<br class="hidden sm:inline" /> puede llevar <span class="font-semibold italic text-[#C84B0A]">tu firma.</span>
+        </h2>
+
+        <!-- Subtítulo -->
+        <p class="font-sans text-[15px] md:text-[16px] text-[#4E4139] leading-relaxed max-w-[640px]" style="margin: 0;">
+          Convertí la pasión por la música en un oficio. Te acompañamos desde<br class="hidden sm:inline" /> el primer corte hasta el primer acorde.
+        </p>
+
+        <!-- Botón -->
+        <div class="mt-2">
+          <a href="#curso"
+            class="inline-flex btn-slide-orange h-[46px] items-center justify-center gap-3 rounded-full px-7 text-[12px] font-bold uppercase tracking-wider">
+            <span class="relative z-10">Quiero ser parte</span>
+            <svg class="relative z-10 h-[14px] w-[14px]" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Footer ── -->
+  <footer style="width:100%; background:#4B1715; color:#FFFFFF; box-sizing:border-box; position:relative; overflow:hidden; z-index:10;" class="py-12 md:py-20 px-6 md:px-[100px] footer-main">
+    <div class="max-w-[1240px] mx-auto flex flex-col gap-10 md:gap-16">
+      
+      <!-- Fila superior: Enlaces y Newsletter -->
+      <div class="flex flex-col md:flex-row justify-between items-start gap-12 md:gap-14 w-full footer-top-row">
+        <!-- Newsletter (Izquierda) -->
+        <div class="w-full md:max-w-[460px] flex flex-col gap-4 items-start text-left footer-newsletter">
+          <form onsubmit="event.preventDefault(); alert('¡Gracias por suscribirte!');" class="footer-newsletter-form" style="display:flex; flex-direction:column; gap:16px; width:100%;">
+            <div class="footer-newsletter-title" style="font-family:'Playfair Display', Georgia, serif; font-size:24px; font-weight:400; color:#FFFFFF; letter-spacing:0.01em;">
+              Suscribite a nuestro Newsletter
+            </div>
+            <div class="footer-newsletter-row" style="display:flex; flex-row; items-end; gap:20px; width:100%; align-items:flex-end;">
+              <div class="footer-email-container" style="display:flex; flex-direction:column; gap:0; flex:1;">
+                <label for="newsletter-email" class="footer-email-label" style="font-family:'Inter', sans-serif; font-size:12px; color:rgba(255,255,255,0.7); font-weight:500;">Email</label>
+                <input type="email" id="newsletter-email" class="footer-email-input" required style="border:none; border-bottom:1.5px solid rgba(255,255,255,0.35); background:transparent; padding:0 0 4px 0; font-family:'Inter',sans-serif; font-size:15px; color:#FFFFFF; outline:none; transition:border-color 0.3s; width:100%;" onfocus="this.style.borderColor='#C84B0A'" onblur="this.style.borderColor='rgba(255,255,255,0.35)'">
+              </div>
+              <button type="submit" class="btn-slide-white footer-newsletter-submit inline-flex h-[38px] items-center justify-center gap-2 rounded-full px-5 text-[11px] font-bold uppercase tracking-wider cursor-pointer shrink-0">
+                <span class="relative z-10 hidden md:inline">CONOCER MÁS</span>
+                <span class="relative z-10 inline md:hidden">ENVIAR</span>
+                <svg class="relative z-10 h-[12px] w-[12px]" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+            <div class="footer-newsletter-desc" style="font-family:'Inter', sans-serif; font-size:13px; line-height:1.45; color:rgba(255,255,255,0.7); max-width:320px;">
+              Enterate antes que nadie de nuevos cursos, talleres, eventos y novedades del taller.
+            </div>
+          </form>
+        </div>
+
+        <!-- Enlaces (Derecha - Dos columnas) -->
+        <div class="grid grid-cols-2 gap-4 md:gap-6 w-full md:w-auto md:min-w-[240px] justify-end footer-links-grid">
+          <div class="flex flex-col items-start gap-4 md:gap-5 footer-nav-col">
+            <a href="#curso" class="font-sans text-[13px] md:text-[14px] font-semibold text-white uppercase tracking-[0.18em] transition-opacity hover:opacity-70" style="text-decoration:none;">CURSO</a>
+            <a href="#sobre-nosotros" class="font-sans text-[13px] md:text-[14px] font-semibold text-white uppercase tracking-[0.18em] transition-opacity hover:opacity-70" style="text-decoration:none;">SOBRE NOSOTROS</a>
+            <a href="#contacto" class="font-sans text-[13px] md:text-[14px] font-semibold text-white uppercase tracking-[0.18em] transition-opacity hover:opacity-70" style="text-decoration:none;">CONTACTO</a>
+          </div>
+          <div class="flex flex-col items-start gap-4 md:gap-5 footer-socials-col">
+            <a href="#" class="font-sans text-[13px] md:text-[14px] font-semibold text-white uppercase tracking-[0.18em] transition-opacity hover:opacity-70" style="text-decoration:none;">INSTAGRAM</a>
+            <a href="#" class="font-sans text-[13px] md:text-[14px] font-semibold text-white uppercase tracking-[0.18em] transition-opacity hover:opacity-70" style="text-decoration:none;">FACEBOOK</a>
+            <a href="#" class="font-sans text-[13px] md:text-[14px] font-semibold text-white uppercase tracking-[0.18em] transition-opacity hover:opacity-70" style="text-decoration:none;">TIKTOK</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila inferior: Frase y Logo -->
+      <div class="flex flex-col md:flex-row justify-between items-center md:items-end gap-8 w-full mt-10 md:mt-20 footer-bottom-row">
+        <!-- Frase -->
+        <div class="footer-frase" style="font-family:'Playfair Display', Georgia, serif; font-size: clamp(1.6rem, 2.5vw, 2rem); font-weight:400; color:#FFFFFF; line-height:1.25; text-align:left; width:100%; max-width:500px;">
+          El sonido nace <br class="md:hidden">en los <span style="font-weight:600; font-style:italic;">detalles</span>
+        </div>
+        <!-- Logo Trastes -->
+        <div class="w-full md:w-auto flex justify-center md:justify-end items-end footer-logo-wrapper">
+          <img src="Group 28.png" alt="Trastes" class="w-[360px] md:w-[480px] h-auto object-contain" style="margin-bottom: -15px;" />
+        </div>
+      </div>
+
+      <!-- Línea Divisoria -->
+      <div class="border-t border-white/15 w-full" style="margin-top:10px;"></div>
+
+      <!-- Copyright y Políticas -->
+      <div class="flex flex-col md:flex-row justify-between items-center gap-2 w-full font-sans text-[11px] md:text-[12px] text-white/60" style="padding:10px 0 14px 0;">
+        <div class="flex gap-4 items-center flex-wrap justify-center">
+          <a href="#" class="hover:text-white transition-colors">Políticas de privacidad</a>
+          <span>•</span>
+          <a href="#" class="hover:text-white transition-colors">Terminos y condiciones</a>
+        </div>
+        <div class="text-center md:text-right">
+          © Trastes 2026 | Diseño
+        </div>
+      </div>
+
+    </div>
+  </footer>
+  </main>
+
+  <script>
+    (function() {
+      var toggleBtn = document.getElementById('mobile-menu-toggle');
+      var menu = document.getElementById('mobile-menu');
+      var closeBtn = document.getElementById('mobile-menu-close');
+      if (!toggleBtn || !menu) return;
+
+      window.toggleMobileMenu = function() {
+        var isOpen = menu.classList.contains('open');
+        if (isOpen) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      };
+
+      function openMenu() {
+        menu.classList.add('open');
+        menu.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('menu-open');
+        if (closeBtn) closeBtn.focus();
+      }
+
+      function closeMenu() {
+        menu.classList.remove('open');
+        menu.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('menu-open');
+        toggleBtn.focus();
+      }
+
+      toggleBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleMobileMenu();
+      });
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          closeMenu();
+        });
+      }
+
+      var links = menu.querySelectorAll('.mobile-menu-link');
+      links.forEach(function(link) {
+        link.addEventListener('click', function() {
+          closeMenu();
+        });
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && menu.classList.contains('open')) {
+          closeMenu();
+        }
+      });
+    })();
+
+    // ── Lógica de Tarjetas Acordeón (Experiencia) ──
+    window.setActiveStepCard = function(index) {
+      var cards = document.querySelectorAll('.step-card');
+      cards.forEach(function(card, idx) {
+        if (idx === index) {
+          card.classList.add('active-card');
+        } else {
+          card.classList.remove('active-card');
+        }
+      });
+    };
+
+    (function() {
+      var cards = document.querySelectorAll('.step-card');
+      cards.forEach(function(card, index) {
+        card.addEventListener('mouseenter', function() {
+          if (window.innerWidth > 768) {
+            setActiveStepCard(index);
+          }
+        });
+      });
+    })();
+
+
+
+    // ── Wood selector ──
+    (function () {
+      var woodControls = Array.from(document.querySelectorAll('.wood-control'));
+      var woodImg      = document.getElementById('wood-guitar');
+
+      var woodImages = {
+        palisandro: 'color4.png',
+        algarrobo:  'color3.png',
+        cipres:     'color2.png',
+        abeto:      'color1.png'
+      };
+
+      function selectWood(control) {
+        // Reset all
+        woodControls.forEach(function (c) {
+          var thumb = c.querySelector('.wood-thumb');
+          var label = c.querySelector('span');
+          if (thumb) { thumb.style.borderColor = 'transparent'; thumb.style.transform = 'scale(1)'; }
+          if (label) { label.style.opacity = '0.65'; label.style.fontWeight = '400'; }
+          c.classList.remove('active');
+        });
+
+        // Activate selected
+        var thumb = control.querySelector('.wood-thumb');
+        var label = control.querySelector('span');
+        if (thumb) { thumb.style.borderColor = '#C7C57D'; thumb.style.transform = 'scale(1.08)'; }
+        if (label) { label.style.opacity = '1'; label.style.fontWeight = '600'; }
+        control.classList.add('active');
+
+        // Swap guitar image
+        var wood = control.dataset.wood;
+        var src  = woodImages[wood] || 'cambiomadera.png';
+        woodImg.style.opacity = '0';
+        setTimeout(function () {
+          woodImg.src = src;
+          woodImg.style.opacity = '1';
+        }, 175);
+      }
+
+      woodControls.forEach(function (c) {
+        c.addEventListener('click', function () { selectWood(c); });
+      });
+
+      // Init with ábeto active
+      var initControl = document.querySelector('.wood-control[data-wood="abeto"]');
+      if (initControl) { selectWood(initControl); }
+    })();
+
+    var toolItems = Array.from(document.querySelectorAll('.tool-item'));
+    toolItems.forEach(function (item) {
+      // Hover behaviors for desktop
+      item.addEventListener('mouseenter', function () {
+        if (window.innerWidth > 768) {
+          toolItems.forEach(function (other) {
+            other.classList.remove('active');
+          });
+          item.classList.add('active');
+        }
+      });
+      item.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 768) {
+          item.classList.remove('active');
+        }
+      });
+
+      // Click behavior for mobile toggle
+      item.addEventListener('click', function (e) {
+        if (window.innerWidth <= 768) {
+          var isActive = item.classList.contains('active');
+          toolItems.forEach(function (other) {
+            other.classList.remove('active');
+          });
+          if (!isActive) {
+            item.classList.add('active');
+          }
+        }
+      });
+    });
+
+    var carousel = document.getElementById('work-carousel');
+    if (carousel) {
+      var cards = Array.from(carousel.querySelectorAll('.work-card'));
+      var activeIndex = 1;
+      function updateCarousel() {
+        cards.forEach(function (card, index) {
+          card.classList.toggle('active', index === activeIndex);
+          if (index === activeIndex) {
+            card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          }
+        });
+      }
+      updateCarousel();
+      setInterval(function () {
+        activeIndex = (activeIndex + 1) % cards.length;
+        updateCarousel();
+      }, 6000);
+    }
+
+    // ── FAQ: category tabs + accordion ──
+    (function () {
+      var tabs   = Array.from(document.querySelectorAll('.faq-tab'));
+      var groups = Array.from(document.querySelectorAll('.faq-group'));
+
+      function activateTab(tab) {
+        tabs.forEach(function (t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+        var cat = tab.getAttribute('data-category');
+        groups.forEach(function (g) {
+          g.classList.toggle('faq-active-group', g.id === 'faq-' + cat);
+        });
+        // Close all open accordion items in the new group
+        var activeGroup = document.getElementById('faq-' + cat);
+        if (activeGroup) {
+          activeGroup.querySelectorAll('.faq-item').forEach(function (item) {
+            item.classList.remove('active');
+          });
+        }
+      }
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () { activateTab(tab); });
+      });
+
+      // Accordion within each group
+      document.querySelectorAll('.faq-item').forEach(function (item) {
+        var btn = item.querySelector('.faq-item-btn');
+        btn.addEventListener('click', function () {
+          var isOpen = item.classList.contains('active');
+          // Close all sibling items
+          item.closest('.faq-group').querySelectorAll('.faq-item').forEach(function (sibling) {
+            sibling.classList.remove('active');
+          });
+          if (!isOpen) { item.classList.add('active'); }
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>

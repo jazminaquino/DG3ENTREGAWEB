@@ -1,0 +1,4922 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trastes | Taller de Luthier</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* ── Animación de Botones Deslizantes ── */
+    .btn-slide-orange {
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      border: 2px solid #C84B0A;
+      color: #C84B0A;
+      background: transparent;
+      transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s ease;
+    }
+
+    .btn-slide-orange::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #C84B0A;
+      z-index: -1;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .btn-slide-orange:hover {
+      color: #FFFFFF !important;
+      border-color: #C84B0A;
+      transform: scale(1.02);
+    }
+
+    .btn-slide-orange:hover::before {
+      transform: scaleX(1);
+    }
+
+    .btn-slide-white {
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      border: 1px solid #FFFFFF;
+      color: #FFFFFF;
+      background: transparent;
+      transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s ease;
+    }
+
+    .btn-slide-white::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #C84B0A;
+      z-index: -1;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .btn-slide-white:hover {
+      color: #FFFFFF !important;
+      border-color: #C84B0A;
+      transform: scale(1.02);
+    }
+
+    .btn-slide-white:hover::before {
+      transform: scaleX(1);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .font-display {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .component-bg {
+      background: linear-gradient(180deg, #F5F2EB 0%, #F7F1EB 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .pixel-button {
+      width: 207px;
+      height: 50px;
+      background: #C14D23;
+      border: none;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2px 0 20px;
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 21.333px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-family: Inter, sans-serif;
+    }
+
+    .button-text {
+      text-align: left;
+    }
+
+    .button-circle {
+      width: 47px;
+      height: 47px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .button-circle svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: #C14D23;
+      stroke-width: 2.5;
+    }
+
+    /* Responsive Hero Title Styling */
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: #2D1610;
+      text-align: center;
+    }
+
+    @media (min-width: 640px) {
+      .hero-title {
+        font-size: 4.0rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .hero-title {
+        font-size: 5.8rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero-title {
+        font-size: 80pt;
+      }
+    }
+
+    /* Ticker Animation and Styling */
+    @keyframes ticker-scroll {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .animate-ticker {
+      display: flex;
+      width: max-content;
+      animation: ticker-scroll 35s linear infinite;
+    }
+
+    .ticker-content {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      padding-right: 3rem;
+      white-space: nowrap;
+    }
+
+    .ticker-item {
+      color: #FFFFFF;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 1.25rem;
+    }
+
+    .ticker-dot {
+      color: #FFFFFF;
+      font-family: sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      opacity: 0.8;
+      font-size: 1rem;
+    }
+
+    /* ── Word-reveal on scroll ── */
+    .wr {
+      color: rgba(45, 22, 16, 0.18);
+      transition: color 0.7s ease;
+      display: inline;
+    }
+
+    .wr.lit {
+      color: #2D1610;
+    }
+
+    .wr.wr-orange {
+      color: rgba(200, 75, 10, 0.18);
+      font-style: italic;
+    }
+
+    .wr.wr-orange.lit {
+      color: #C84B0A;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif !important;
+      font-size: clamp(2rem, 3.5vw, 3rem) !important;
+      line-height: 1.2 !important;
+      color: #2D1610 !important;
+      font-weight: 400 !important;
+    }
+
+    /* ── Contenedor de Secciones Sticky Stacking ── */
+    .sections-carousel-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      z-index: 20;
+    }
+
+    .carousel-slide {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    /* Barra de progreso */
+    .carousel-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: rgba(200, 75, 10, 0.12);
+      z-index: 200;
+      overflow: hidden;
+    }
+
+    .madera-item:hover .madera-nombre {
+      color: #C84B0A !important;
+      font-weight: 700 !important;
+    }
+
+    .madera-item:hover .madera-info {
+      display: block !important;
+    }
+
+    /* Base: madera-info hidden by default (overrides inline display:none) */
+    .madera-info {
+      display: none;
+    }
+
+    /* Toggled open behavior (mobile tap) */
+    .madera-item.open .madera-nombre {
+      color: #C84B0A !important;
+      font-weight: 700 !important;
+    }
+
+    .madera-item.open .madera-info {
+      display: block !important;
+    }
+
+    .madera-nombre {
+      font-size: 20px !important;
+      line-height: 25px !important;
+      transition: color 0.25s ease, font-weight 0.25s ease;
+    }
+
+    .madera-rating {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: #4E4139;
+      margin-top: 8px;
+    }
+
+    .rating-label {
+      font-weight: 500;
+      color: #4E4139;
+    }
+
+    .rating-dots {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+
+    .rating-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .rating-dot.filled {
+      background-color: #C84B0A;
+    }
+
+    .rating-dot.empty {
+      background-color: rgba(200, 75, 10, 0.18);
+    }
+
+    .madera-info {
+      width: 100% !important;
+      max-width: 150px !important;
+      margin: -12px auto 0 auto !important;
+      /* Tighter gap between name and specs */
+    }
+
+    .carousel-progress-fill {
+      height: 100%;
+      background: #C84B0A;
+      width: 0%;
+      transition: none;
+    }
+
+    /* Dot navigation */
+    .carousel-dots {
+      position: absolute;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 100;
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(193, 77, 35, 0.25);
+      border: 1.5px solid rgba(193, 77, 35, 0.4);
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 0;
+      display: block;
+    }
+
+    .carousel-dot.active {
+      background: #C84B0A;
+      border-color: #C84B0A;
+      height: 28px;
+      border-radius: 4px;
+    }
+
+    /* ── Interactive Strings Section Styles ── */
+    .string-row {
+      position: relative;
+      width: 100%;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      overflow: visible;
+    }
+
+    /* Strings section title color override */
+    #strings-section-title {
+      color: #BEBC7E !important;
+    }
+
+    #strings-section-title .strings-title-main {
+      color: #FFFFFF !important;
+    }
+
+    .string-handle {
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      border-radius: 50%;
+      cursor: grab;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      z-index: 30;
+      position: absolute;
+    }
+
+    .string-handle:active {
+      cursor: grabbing;
+    }
+
+    #strings-interactive-section circle {
+      transition: r 0.15s ease, fill 0.15s ease;
+    }
+
+    #strings-interactive-section circle:hover {
+      r: 8px;
+      fill: #BEBC7E;
+    }
+
+    .string-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      color: #BEBC7E;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── Work Process Section Styles ── */
+    .work-section {
+      background: #F5F2EB;
+      padding: 130px 0 120px;
+      position: relative;
+      z-index: 1;
+      overflow: visible;
+    }
+
+    .work-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      margin-top: 56px;
+      padding: 20px 40px 10px;
+    }
+
+    /* Each card wrapper: positioning context for the paper overlay */
+    .work-card {
+      position: relative;
+      width: 320px;
+      height: 240px;
+      flex-shrink: 0;
+      cursor: pointer;
+      overflow: visible;
+    }
+
+    /* The dark base card */
+    .work-card-base {
+      position: absolute;
+      inset: 0;
+      background: #4B1714;
+      border-radius: 0 60px 0 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+      transform-origin: center center;
+      z-index: 1;
+    }
+
+    /* On hover (desktop only): tilt the dark card upward */
+    @media (min-width: 768px) {
+      .work-card:hover .work-card-base {
+        transform: rotate(-6deg) translateY(-12px);
+      }
+    }
+
+    .work-card-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin: 0;
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+
+    /* Info button bottom-right */
+    .work-card-info {
+      position: absolute;
+      right: 18px;
+      bottom: 16px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      color: #4B1714;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Fade out info button on hover (desktop only) */
+    @media (min-width: 768px) {
+      .work-card:hover .work-card-info {
+        opacity: 0;
+      }
+    }
+
+    /* White paper card — same size as base, opens downward */
+    .work-card-paper {
+      position: absolute;
+      inset: 0;
+      background: #FFFFFF;
+      border-radius: 0 60px 0 60px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 22px 20px 18px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 2;
+      pointer-events: none;
+      /* Initial hidden state: behind the card, not moved */
+      opacity: 0;
+      transform: rotate(0deg) translateY(0px);
+      transition:
+        opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+        transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* On hover (desktop only): paper fades in, slides downward and tilts */
+    @media (min-width: 768px) {
+      .work-card:hover .work-card-paper {
+        opacity: 1;
+        transform: rotate(-6deg) translateY(22px);
+      }
+    }
+
+    .work-paper-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #4B1714;
+      margin: 0;
+      text-align: center;
+    }
+
+    .work-paper-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: #4F453E;
+      margin: 0;
+      text-align: left;
+    }
+
+    .hover-scale-wood {
+      transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .hover-scale-wood:hover {
+      transform: scale(1.08);
+    }
+
+    /* ── Work close button: hidden on desktop ── */
+    .work-card-close {
+      display: none;
+    }
+
+    .workshop-close-btn {
+      position: absolute !important;
+      top: 12px !important;
+      right: 12px !important;
+      width: 28px !important;
+      height: 28px !important;
+      border-radius: 50% !important;
+      background: #BEBC7E !important;
+      /* Brand olive green */
+      border: none !important;
+      color: #ffffff !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      cursor: pointer !important;
+      z-index: 60 !important;
+      transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease !important;
+    }
+
+    .workshop-close-btn:hover {
+      background: #C84B0A !important;
+      /* Turns orange on hover */
+      transform: scale(1.05) !important;
+    }
+
+    .workshop-close-btn svg path {
+      stroke: #ffffff !important;
+    }
+
+    /* Responsive work section */
+    @media (max-width: 767px) {
+
+      /* Reduce padding-top of the section */
+      .work-section {
+        padding-top: 45px !important;
+        padding-bottom: 60px !important;
+      }
+
+      /* Title constrained to 2 lines with normal flow and exact break */
+      #como-trabajamos .section-title {
+        font-size: 1.5rem !important;
+        max-width: 320px !important;
+        line-height: 1.25 !important;
+        margin: 0 auto 10px !important;
+      }
+
+      .work-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 48px;
+        padding: 20px 20px 40px;
+      }
+
+      .work-card {
+        width: 300px;
+        height: 230px;
+      }
+
+      /* ── Close button: brand olive circle, orange on hover/active ── */
+      .work-card-close {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        position: absolute !important;
+        bottom: 16px !important;
+        right: 18px !important;
+        top: auto !important;
+        left: auto !important;
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 50% !important;
+        background: #BEBC7E !important;
+        /* Brand olive green */
+        border: none !important;
+        color: #ffffff !important;
+        cursor: pointer !important;
+        padding: 0 !important;
+        line-height: 1 !important;
+        pointer-events: none !important;
+        opacity: 0 !important;
+        transition: opacity 0.3s ease, background-color 0.2s ease, transform 0.2s ease !important;
+        z-index: 10 !important;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12) !important;
+      }
+
+      .work-card-close:hover {
+        background: #C84B0A !important;
+        /* Turns orange on hover */
+      }
+
+      .work-card-close svg path {
+        stroke: #ffffff !important;
+      }
+
+      /* Show close button only when card is open */
+      .work-card.open .work-card-close {
+        pointer-events: auto !important;
+        opacity: 1 !important;
+      }
+
+      /* On mobile: open state shows paper */
+      .work-card.open .work-card-paper {
+        opacity: 1 !important;
+        transform: rotate(-6deg) translateY(22px) !important;
+        pointer-events: auto !important;
+      }
+
+      .work-card.open .work-card-base {
+        transform: rotate(-6deg) translateY(-12px) !important;
+      }
+
+      /* ── Explora el Taller Mobile Overrides ── */
+      #explora-taller .section-title {
+        font-size: 1.5rem !important;
+        max-width: 320px !important;
+        line-height: 1.25 !important;
+        margin: 0 auto 20px !important;
+        padding: 0 10px !important;
+      }
+
+      .explora-inner-container {
+        min-width: 0 !important;
+        padding: 0 16px !important;
+      }
+
+      .explora-scroll-wrapper {
+        overflow-x: visible !important;
+        padding-bottom: 0 !important;
+      }
+
+      .workshop-marker-1 {
+        top: 30.5% !important;
+        left: 55% !important;
+      }
+
+      .workshop-marker-2 {
+        top: 55% !important;
+        left: 61% !important;
+      }
+
+      .workshop-marker-3 {
+        top: 31.8% !important;
+        left: 21% !important;
+      }
+
+      .workshop-marker-4 {
+        top: 77% !important;
+        left: 28% !important;
+      }
+
+      #workshop-inline-card {
+        position: fixed !important;
+        width: 90% !important;
+        max-width: 350px !important;
+        z-index: 100 !important;
+      }
+
+      #workshop-overlay {
+        position: fixed !important;
+        z-index: 90 !important;
+      }
+    }
+
+    /* ── Sección Testimonios ── */
+    .testimonio-slide {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.8s;
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .testimonio-slide.active {
+      opacity: 1;
+      visibility: visible;
+      position: relative;
+      z-index: 2;
+    }
+
+    .testimonio-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .testimonio-dot.active {
+      background: #C84B0A;
+      transform: scale(1.2);
+    }
+
+    /* Custom Radios for Contact Form */
+    .contact-radio {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid #2D1610;
+      border-radius: 50%;
+      outline: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      position: relative;
+      transition: all 0.2s ease;
+      vertical-align: middle;
+      background: transparent;
+    }
+
+    .contact-radio:checked {
+      border-color: #C84B0A;
+      background-color: #C84B0A;
+    }
+
+    .contact-radio:checked::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #FFFFFF;
+      border-radius: 50%;
+    }
+
+    /* Contact Form Submit Button (Nav button slide logic) */
+    .contacto-submit-btn {
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: transparent;
+      color: #C84B0A !important;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      padding: 0 28px;
+      height: 46px;
+      box-sizing: border-box;
+      border: 2px solid #C84B0A;
+      cursor: pointer;
+      outline: none;
+      transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s ease;
+    }
+
+    .contacto-submit-btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #C84B0A;
+      /* Color de relleno naranja en hover */
+      z-index: -1;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .contacto-submit-btn:hover {
+      color: #FFFFFF !important;
+      border-color: #C84B0A;
+      transform: scale(1.02);
+    }
+
+    .contacto-submit-btn:hover::before {
+      transform: scaleX(1);
+    }
+
+    .contacto-submit-btn:hover svg path {
+      stroke: #FFFFFF !important;
+    }
+
+    .testimonio-content-wrapper {
+      position: relative;
+      z-index: 2;
+      max-width: 920px;
+      margin: 0 auto;
+      padding-left: 0;
+      box-sizing: border-box;
+    }
+
+    .testimonial-quote-mark {
+      position: absolute;
+      top: -80px;
+      left: 120px;
+      font-size: 270px;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      color: #FFFFFF;
+      opacity: 0.32;
+      z-index: 1;
+      line-height: 1;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    #testimonios blockquote {
+      text-indent: 140px;
+    }
+
+    /* ── Slide image container ── */
+    .slide-img-container {
+      width: 577px;
+      height: 383px;
+      border-radius: 0 100px 0 100px;
+    }
+
+    /* Hamburger Animation Transitions */
+    #mobile-menu-toggle span {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hamburger-open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger-open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger-open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* ── Mobile Menu: always hidden by default ── */
+    .mobile-menu {
+      display: none !important;
+    }
+
+    #el-corazon {
+      background-image: url('DESTELLOS.png') !important;
+      background-repeat: no-repeat !important;
+      background-position: center !important;
+      background-size: cover !important;
+    }
+
+    @media (min-width: 1024px) {
+      #el-corazon {
+        margin-top: -30px !important;
+        padding-top: 100px !important;
+        padding-bottom: 100px !important;
+      }
+
+      .el-corazon-header {
+        padding-left: 140px !important;
+      }
+    }
+
+    /* ── Play button larger on desktop ── */
+    .wood-audio-btn {
+      width: 20px !important;
+      height: 20px !important;
+      margin-left: 12px !important;
+    }
+
+    .wood-audio-btn svg {
+      width: 20px !important;
+      height: 20px !important;
+    }
+
+
+    /* ── Curso (Viví la Experiencia) en Mobile y Tablet ── */
+    @media (max-width: 1023px) {
+      #curso {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        min-height: 100vh !important;
+        padding: 50px 0 !important;
+        box-sizing: border-box !important;
+      }
+
+      #curso>div:first-child {
+        padding: 0 25px !important;
+        margin-bottom: 40px !important;
+        text-align: center !important;
+      }
+
+      .curso-carousel-container {
+        position: static !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        margin: 0 auto !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+        padding: 10px 0 !important;
+        gap: 16px !important;
+      }
+
+      .curso-carousel-container::-webkit-scrollbar {
+        display: none !important;
+      }
+
+      .curso-card-3d {
+        display: flex !important;
+        position: relative !important;
+        transform: none !important;
+        opacity: 1 !important;
+        width: 290px !important;
+        height: 360px !important;
+        z-index: 10 !important;
+        box-shadow: 0 10px 25px rgba(45, 22, 16, 0.12) !important;
+        border-radius: 0 40px 0 40px !important;
+        padding: 20px !important;
+        box-sizing: border-box !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        text-align: left !important;
+        justify-content: space-between !important;
+        background: #FFFFFF !important;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease !important;
+      }
+
+      .curso-card-3d.active {
+        display: flex !important;
+        background: #BEBC7E !important;
+        box-shadow: 0 15px 35px rgba(45, 22, 16, 0.2) !important;
+      }
+
+      .curso-card-3d .card-dimmer {
+        display: none !important;
+      }
+
+      .curso-card-3d img.curso-foto-3d {
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        transform: none !important;
+        width: 100% !important;
+        height: 140px !important;
+        object-fit: contain !important;
+        margin-bottom: 12px !important;
+      }
+
+      .curso-card-3d .card-top-chips {
+        top: 16px !important;
+        right: 16px !important;
+      }
+
+      .curso-card-3d .curso-title-3d {
+        font-size: 19px !important;
+        text-align: left !important;
+        margin: 0 0 8px 0 !important;
+        line-height: 1.2 !important;
+      }
+
+      .curso-card-3d .curso-price-3d {
+        font-size: 22px !important;
+        text-align: left !important;
+        margin: 0 0 2px 0 !important;
+      }
+
+      .curso-card-3d .curso-subprice-3d {
+        font-size: 10px !important;
+        text-align: left !important;
+        margin: 0 0 10px 0 !important;
+      }
+
+      .curso-card-3d .curso-info-list-3d {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 6px !important;
+        font-size: 9px !important;
+        margin: 0 0 14px 0 !important;
+        width: 100% !important;
+        white-space: nowrap !important;
+        flex-wrap: nowrap !important;
+      }
+
+      .curso-card-3d .curso-info-item-3d {
+        display: flex !important;
+        align-items: center !important;
+        gap: 3px !important;
+      }
+
+      .curso-card-3d .curso-info-item-3d svg {
+        width: 10px !important;
+        height: 10px !important;
+      }
+
+      .curso-card-3d .curso-btn-wrapper-3d {
+        display: flex !important;
+        width: 100% !important;
+        margin-top: auto !important;
+      }
+
+      .curso-card-3d .btn-slide-orange-outline {
+        display: inline-flex !important;
+        width: 100% !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+      }
+
+      .curso-carousel-arrow {
+        display: flex !important;
+        position: absolute !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        width: 36px !important;
+        height: 36px !important;
+        background: rgba(255, 255, 255, 0.15) !important;
+        backdrop-filter: blur(4px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        border-radius: 50% !important;
+        color: #FFFFFF !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
+        z-index: 50 !important;
+        transition: background-color 0.2s ease, transform 0.2s ease !important;
+        padding: 0 !important;
+        outline: none !important;
+      }
+
+      .curso-carousel-arrow:active {
+        background: rgba(255, 255, 255, 0.3) !important;
+        transform: translateY(-50%) scale(0.92) !important;
+      }
+
+      .curso-carousel-arrow.prev {
+        left: -16px !important;
+      }
+
+      .curso-carousel-arrow.next {
+        right: -16px !important;
+      }
+    }
+
+    /* ── Mobile responsive: 25px side margins, all sizes adapted ── */
+    @media (max-width: 767px) {
+
+      /* ── Global: prevent any horizontal overflow ── */
+      html,
+      body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+      }
+
+      main,
+      main>* {
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+      }
+
+      /* ── Margin general de 25px a los lados ── */
+      .px-6,
+      .px-4,
+      .px-8,
+      .px-5,
+      .md\:px-\[100px\] {
+        padding-left: 25px !important;
+        padding-right: 25px !important;
+      }
+
+      #phrase-section,
+      #el-corazon,
+      .carousel-slide,
+      #strings-interactive-section>div,
+      #maderas-section,
+      #curso,
+      #testimonios>div,
+      #contacto,
+      footer>div:first-of-type {
+        padding-left: 25px !important;
+        padding-right: 25px !important;
+      }
+
+      /* ── Botones que ocupan todo el ancho de la pantalla ── */
+      .btn-slide-white:not(.hidden),
+      .btn-slide-orange:not(.hidden),
+      .btn-slide-orange-outline:not(.hidden),
+      .contacto-submit-btn:not(.hidden),
+      .pixel-button:not(.hidden) {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        box-sizing: border-box !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+
+      /* ── Hero wrapper ── */
+      .hero-title {
+        font-size: 1.85rem !important;
+        line-height: 1.1 !important;
+        white-space: normal !important;
+        text-align: center !important;
+      }
+
+      #hero-sticky-element section {
+        transform: translateY(-25px) !important;
+      }
+
+
+      /* ── Menú Móvil Fullscreen ── */
+      .mobile-menu {
+        display: none !important;
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        border: none !important;
+        background-color: #F5F0E8 !important;
+        z-index: 9999 !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: stretch !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+      }
+
+      .mobile-menu.open {
+        display: flex !important;
+      }
+
+      /* Inner wrapper for the menu content */
+      .mobile-menu-inner {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: flex-start !important;
+        width: 100% !important;
+        height: 100% !important;
+        padding: 80px 25px 60px !important;
+        box-sizing: border-box !important;
+        position: relative !important;
+      }
+
+      /* X close button — top right */
+      .mobile-menu-close {
+        position: absolute !important;
+        top: 36px !important;
+        right: 25px !important;
+        font-family: 'Playfair Display', Georgia, serif !important;
+        font-size: 32px !important;
+        font-weight: 400 !important;
+        color: #2D1610 !important;
+        background: transparent !important;
+        border: none !important;
+        cursor: pointer !important;
+        outline: none !important;
+        padding: 8px !important;
+        line-height: 1 !important;
+        letter-spacing: -0.02em !important;
+      }
+
+      /* Nav list */
+      .mobile-menu-list {
+        list-style: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0 !important;
+        width: 100% !important;
+      }
+
+      /* Each link row */
+      .mobile-menu-link {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-family: 'Playfair Display', Georgia, serif !important;
+        font-size: 28px !important;
+        font-weight: 400 !important;
+        color: #2D1610 !important;
+        text-decoration: none !important;
+        padding: 20px 0 !important;
+        border-bottom: 1px solid rgba(45, 22, 16, 0.12) !important;
+        transition: color 0.2s ease !important;
+        width: 100% !important;
+        letter-spacing: -0.01em !important;
+        line-height: 1.1 !important;
+      }
+
+      /* Arrow */
+      .mobile-menu-link .arrow {
+        width: 16px !important;
+        height: 16px !important;
+        flex-shrink: 0 !important;
+        margin-left: 12px !important;
+        transition: transform 0.2s ease, color 0.2s ease !important;
+      }
+
+      /* Active click states */
+      .mobile-menu-link:active,
+      .mobile-menu-link.orange-link:active {
+        color: #C84B0A !important;
+      }
+
+      .mobile-menu-link:active .arrow,
+      .mobile-menu-link.orange-link:active .arrow {
+        color: #C84B0A !important;
+      }
+
+      body.menu-open {
+        overflow: hidden !important;
+      }
+
+      /* ── Phrase Section ── */
+      #phrase-section {
+        background-image: url('textofondomobile.png') !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        padding-top: 100px !important;
+        padding-bottom: 100px !important;
+        padding-left: 25px !important;
+        padding-right: 25px !important;
+      }
+
+      #phrase-section>div {
+        font-size: 1.35rem !important;
+        line-height: 1.3 !important;
+        gap: 12px !important;
+      }
+
+      #phrase-section .wr {
+        color: #2D1610 !important;
+      }
+
+      #phrase-section .wr.wr-orange {
+        color: #C84B0A !important;
+      }
+
+      /* ── Section Title ── */
+      .section-title {
+        font-size: 1.65rem !important;
+      }
+
+      /* ── El Corazón del Taller mobile title spacing ── */
+      #el-corazon {
+        padding-top: 10px !important;
+        padding-bottom: 50px !important;
+      }
+
+      .el-corazon-header {
+        margin-bottom: 20px !important;
+        padding-left: 0 !important;
+      }
+
+      /* ── El Corazón del Taller mobile carousel overrides ── */
+      .taller-carousel-container {
+        height: 380px !important;
+      }
+
+      .taller-carousel-track {
+        gap: 35px !important;
+        padding: 0 25px !important;
+      }
+
+      /* Item 1 collage container */
+      .taller-carousel-track>div:nth-child(1) {
+        width: 320px !important;
+        height: 330px !important;
+      }
+
+      .corazon-img-back {
+        width: 200px !important;
+        height: 250px !important;
+      }
+
+      .corazon-img-front {
+        width: 170px !important;
+        height: 268px !important;
+        left: 150px !important;
+        top: 35px !important;
+      }
+
+      /* Item 2 text 1 */
+      .taller-carousel-track>div:nth-child(2) {
+        width: 330px !important;
+      }
+
+      .taller-carousel-track>div:nth-child(2) p {
+        font-size: 20px !important;
+        line-height: 1.55 !important;
+      }
+
+      /* Item 3 Collage Team image */
+      .taller-carousel-track>div:nth-child(3) {
+        width: 330px !important;
+        height: 260px !important;
+      }
+
+      /* Item 4 text 2 */
+      .taller-carousel-track>div:nth-child(4) {
+        width: 330px !important;
+      }
+
+      .taller-carousel-track>div:nth-child(4) p {
+        font-size: 20px !important;
+        line-height: 1.55 !important;
+        display: block !important;
+        overflow: visible !important;
+      }
+
+      /* Item 5 coloradaniña image */
+      .taller-carousel-track>div:nth-child(5) {
+        width: 220px !important;
+        height: 280px !important;
+        justify-content: center !important;
+        align-items: center !important;
+      }
+
+      .taller-carousel-track>div:nth-child(5) img {
+        width: 185px !important;
+        height: auto !important;
+      }
+
+      .taller-slider-bar-wrapper {
+        margin-top: 32px !important;
+      }
+
+      /* ── Sticky Stacking → Normal block scroll ── */
+      .sections-carousel-wrapper {
+        position: relative !important;
+        overflow: visible !important;
+        height: auto !important;
+      }
+
+      .carousel-slide {
+        position: relative !important;
+        top: auto !important;
+        height: auto !important;
+        min-height: auto !important;
+        padding: 40px 25px !important;
+        overflow: hidden !important;
+        display: block !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Slide inner flex container: single column, full width */
+      .carousel-slide>div {
+        width: 100% !important;
+        max-width: 100% !important;
+        gap: 20px !important;
+      }
+
+      /* Text containers inside slides: full width to margins */
+      .carousel-slide h2 {
+        font-size: 1.65rem !important;
+        line-height: 1.2 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
+      .carousel-slide p {
+        font-size: 0.92rem !important;
+        line-height: 1.65 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
+      /* Fix hardcoded width:521px inline on paragraph */
+      .carousel-slide p[style] {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
+      /* Text wrapper div */
+      .carousel-slide div.flex-col {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
+      /* Slide image */
+      .slide-img-container {
+        width: 100% !important;
+        height: 200px !important;
+        border-radius: 0 45px 0 45px !important;
+        margin-top: 0 !important;
+        flex-shrink: 0 !important;
+      }
+
+      .carousel-dots,
+      .carousel-progress {
+        display: none !important;
+      }
+
+      /* ── Interactive Strings ── */
+      #strings-interactive-section {
+        height: auto !important;
+        padding: 60px 0 !important;
+      }
+
+      #strings-section-title {
+        margin-bottom: 35px !important;
+      }
+
+      #strings-interactive-section>div {
+        padding: 0 25px !important;
+        gap: 24px !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
+      .string-row {
+        height: 58px !important;
+      }
+
+      .string-text {
+        font-size: 1.75rem !important;
+        white-space: nowrap !important;
+      }
+
+      /* ── Video Section Title ── */
+      div[style*="padding:80px 100px 60px"] {
+        padding: 32px 25px 14px !important;
+        box-sizing: border-box !important;
+      }
+
+      /* ── Maderas ── */
+      #maderas-section {
+        padding: 40px 25px !important;
+        box-sizing: border-box !important;
+      }
+
+      #maderas-section>div {
+        max-width: 100% !important;
+      }
+
+      #maderas-section h2 {
+        margin-bottom: 8px !important;
+      }
+
+      #maderas-section>div>p {
+        font-size: 12px !important;
+        line-height: 1.55 !important;
+        margin-bottom: 22px !important;
+      }
+
+      #maderas-section #maderas-grid {
+        grid-template-columns: 1fr !important;
+        gap: 48px !important;
+      }
+
+      #maderas-section .madera-item {
+        max-width: 320px !important;
+        margin: 0 auto !important;
+      }
+
+      #maderas-section .madera-item img {
+        max-width: 260px !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+      }
+
+      #maderas-section .madera-nombre {
+        font-size: 20px !important;
+      }
+
+      #maderas-section .madera-info {
+        max-width: 260px !important;
+        margin: 10px auto 0 !important;
+      }
+
+      /* ── Play button larger on mobile ── */
+      #maderas-section .wood-audio-btn {
+        width: 22px !important;
+        height: 22px !important;
+        margin-left: 10px !important;
+      }
+
+      #maderas-section .wood-audio-btn svg {
+        width: 22px !important;
+        height: 22px !important;
+      }
+
+
+
+      /* ── Testimonios ── */
+      #testimonios {
+        margin-top: 0 !important;
+        /* Elimina gap con curso */
+        padding: 70px 0 !important;
+      }
+
+      #testimonios>div {
+        padding: 0 25px !important;
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+      }
+
+      #testimonios>div>div:first-child {
+        margin-bottom: 40px !important;
+      }
+
+      #testimonios blockquote {
+        font-size: 1.1rem !important;
+        line-height: 1.45 !important;
+        text-indent: 75px !important;
+      }
+
+      #testimonios cite {
+        font-size: 1.05rem !important;
+      }
+
+      .testimonio-content-wrapper {
+        padding-left: 0 !important;
+      }
+
+      .testimonial-quote-mark {
+        font-size: 140px !important;
+        top: -45px !important;
+        left: 60px !important;
+        opacity: 0.25 !important;
+      }
+
+      /* ── Contacto ── */
+      #contacto {
+        background-image: url('mobileform.png') !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        padding: 48px 25px 60px !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+        overflow: hidden !important;
+      }
+
+      #contacto>div {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Left column: title + contact info */
+      #contacto>div>div:first-child {
+        min-height: auto !important;
+        gap: 0 !important;
+        justify-content: flex-start !important;
+        flex-direction: column !important;
+        display: flex !important;
+      }
+
+      #contacto>div>div:first-child>div:first-child h2 {
+        font-size: clamp(1.8rem, 7vw, 2.4rem) !important;
+        margin-bottom: 0 !important;
+      }
+
+      /* Contact data spacing — larger gap to match reference photo */
+      #contacto>div>div:first-child>div:last-child {
+        gap: 14px !important;
+        margin-top: 40px !important;
+        font-size: 14px !important;
+      }
+
+      #contacto>div>div:first-child>div:last-child>div {
+        gap: 16px !important;
+      }
+
+      #contacto>div>div:first-child>div:last-child span:first-child {
+        width: 46px !important;
+        font-size: 14px !important;
+      }
+
+      #contacto>div>div:first-child>div:last-child span:last-child {
+        font-size: 14px !important;
+      }
+
+      /* Right column: description + form — bigger top gap */
+      #contacto>div>div:last-child {
+        margin-top: 56px !important;
+      }
+
+      #contacto>div>div:last-child>div:first-child {
+        font-size: 15px !important;
+        line-height: 1.6 !important;
+        margin-bottom: 52px !important;
+      }
+
+      /* Form: 2-column grid */
+      #contacto form {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 28px 20px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Nombre Completo: full width */
+      #contacto form>div:nth-child(1) {
+        grid-column: span 2 !important;
+      }
+
+      /* Email: half width */
+      #contacto form>div:nth-child(2) {
+        grid-column: span 1 !important;
+        min-width: 0 !important;
+      }
+
+      /* Celular: half width */
+      #contacto form>div:nth-child(3) {
+        grid-column: span 1 !important;
+        min-width: 0 !important;
+      }
+
+      /* ¿Que te interesa?: full width */
+      #contacto form>div:nth-child(4) {
+        grid-column: span 2 !important;
+      }
+
+      /* Radio options 2-per-row */
+      #contacto form>div:nth-child(4)>div {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px 8px !important;
+      }
+
+      /* Mensaje: full width */
+      #contacto form>div:nth-child(5) {
+        grid-column: span 2 !important;
+      }
+
+      /* Button: full width, constrained */
+      #contacto form>div:nth-child(6) {
+        grid-column: span 2 !important;
+        margin-top: 8px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      #contacto .contacto-submit-btn {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+
+
+      /* ── Footer ── */
+      footer {
+        padding: 56px 0 24px 0 !important;
+        background: #4B1715 !important;
+      }
+
+      footer>div:first-of-type {
+        padding: 0 25px !important;
+        box-sizing: border-box !important;
+        gap: 40px !important;
+      }
+
+      footer .footer-top-row {
+        flex-direction: column-reverse !important;
+        gap: 40px !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+        width: 100% !important;
+      }
+
+      footer .footer-newsletter {
+        width: 100% !important;
+        max-width: 100% !important;
+        text-align: left !important;
+        align-items: flex-start !important;
+      }
+
+      footer .footer-newsletter-form {
+        width: 100% !important;
+        gap: 20px !important;
+      }
+
+      footer .footer-newsletter-title {
+        font-size: 22px !important;
+        line-height: 1.35 !important;
+        text-align: left !important;
+      }
+
+      footer .footer-newsletter-row {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 16px !important;
+        width: 100% !important;
+      }
+
+      footer .footer-email-container {
+        width: 100% !important;
+        flex: none !important;
+        gap: 8px !important;
+      }
+
+      footer .footer-email-label {
+        font-size: 13px !important;
+        color: rgba(255, 255, 255, 0.7) !important;
+        text-align: left !important;
+      }
+
+      footer .footer-email-input {
+        border: none !important;
+        border-bottom: 1.5px solid rgba(255, 255, 255, 0.35) !important;
+        border-radius: 0 !important;
+        padding: 0 0 6px 0 !important;
+        background: transparent !important;
+        color: #FFFFFF !important;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 15px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        height: auto !important;
+        outline: none !important;
+        transition: border-color 0.3s !important;
+      }
+
+      footer .footer-email-input:focus {
+        border-color: #C84B0A !important;
+        background: transparent !important;
+      }
+
+      footer .footer-newsletter-submit {
+        width: 100% !important;
+        height: 48px !important;
+        border-radius: 999px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        margin-top: 0 !important;
+      }
+
+      footer .footer-newsletter-desc {
+        font-size: 13px !important;
+        line-height: 1.6 !important;
+        color: rgba(255, 255, 255, 0.7) !important;
+        max-width: 100% !important;
+        text-align: left !important;
+      }
+
+      footer .footer-links-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 40px !important;
+        align-items: flex-start !important;
+      }
+
+      footer .footer-nav-col,
+      footer .footer-socials-col {
+        width: 100% !important;
+        gap: 16px !important;
+        align-items: flex-start !important;
+      }
+
+      footer .footer-nav-col a,
+      footer .footer-socials-col a {
+        font-size: 13px !important;
+        padding: 6px 0 !important;
+        display: inline-flex !important;
+        width: 100% !important;
+        text-align: left !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+      }
+
+      footer .footer-bottom-row {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 56px !important;
+        width: 100% !important;
+        margin-top: 0 !important;
+      }
+
+      footer .footer-frase {
+        text-align: left !important;
+        width: 100% !important;
+        font-size: 24px !important;
+        line-height: 1.3 !important;
+      }
+
+      footer .footer-logo-wrapper {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        margin-bottom: 24px !important;
+      }
+
+      footer .footer-logo-wrapper img {
+        width: 280px !important;
+        max-width: 100% !important;
+        margin-bottom: 0 !important;
+      }
+
+      footer div.flex-col.md\:flex-row.justify-between.items-center.text-white\/60 {
+        flex-direction: column !important;
+        gap: 16px !important;
+        text-align: center !important;
+      }
+    }
+
+    /* Evitar que la sección de maderas cambie de tamaño al hacer hover (desktop/tablet) */
+    @media (min-width: 768px) {
+      #maderas-section .madera-item {
+        position: relative !important;
+      }
+
+      #maderas-section .madera-info {
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        z-index: 10 !important;
+        margin-top: 12px !important;
+        background: transparent !important;
+      }
+    }
+
+    /* ── Nuevo Carrusel de Cursos 3D ── */
+    .curso-carousel-container {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      height: 500px;
+      /* Reducido para entrar en un solo scroll */
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible;
+    }
+
+    .curso-card-3d {
+      position: absolute;
+      width: 360px;
+      /* Ancho ajustado */
+      height: 430px;
+      /* Altura ajustada */
+      background: #FFFFFF;
+      /* Fondo blanco por defecto */
+      border-radius: 0 80px 0 80px;
+      /* Esquina superior derecha y esquina inferior izquierda redondeadas */
+      box-shadow: 0 15px 40px rgba(45, 22, 16, 0.12);
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.6s, z-index 0.6s, opacity 0.6s, box-shadow 0.6s;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      padding: 190px 28px 24px;
+      /* Empuja el contenido abajo para empezar debajo de la foto absoluta y reduce espacio inferior */
+      box-sizing: border-box;
+      color: #2D1610;
+      overflow: visible;
+      z-index: 10;
+    }
+
+    /* Active Green Card */
+    .curso-card-3d.active {
+      background: #BEBC7E;
+      /* Verde cuando está activa */
+      box-shadow: 0 30px 70px rgba(45, 22, 16, 0.22);
+    }
+
+    /* Positions on desktop */
+    @media (min-width: 1024px) {
+      .curso-card-3d.pos-left {
+        transform: translateX(-40%) scale(0.88) rotate(-7deg);
+        /* Inclinación de -7 grados */
+        z-index: 15;
+        opacity: 0.7;
+        /* Opacidad más baja para destacar la activa */
+      }
+
+      .curso-card-3d.pos-center {
+        transform: translateX(0) scale(1.05) rotate(0deg);
+        z-index: 30;
+        opacity: 1;
+      }
+
+      .curso-card-3d.pos-right {
+        transform: translateX(40%) scale(0.88) rotate(7deg);
+        /* Inclinación de 7 grados */
+        z-index: 15;
+        opacity: 0.7;
+        /* Opacidad más baja para destacar la activa */
+      }
+    }
+
+    /* Low opacity dark overlay for inactive cards (muy sutil) */
+    .curso-card-3d .card-dimmer {
+      position: absolute;
+      inset: 0;
+      background: rgba(45, 22, 16, 0.04);
+      border-radius: 0 80px 0 80px;
+      z-index: 20;
+      opacity: 1;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+    }
+
+    .curso-card-3d.active .card-dimmer {
+      opacity: 0;
+    }
+
+    /* Foto de Curso Absoluta y Flotante */
+    .curso-card-3d img.curso-foto-3d {
+      position: absolute;
+      top: -30px;
+      /* Sobresale de la tarjeta, ajustada más abajo */
+      left: 50%;
+      transform: translateX(-50%);
+      height: 215px;
+      /* Tamaño de foto agrandado */
+      width: auto;
+      object-fit: contain;
+      z-index: 5;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .curso-card-3d:hover img.curso-foto-3d {
+      transform: translateX(-50%) scale(1.05);
+    }
+
+    /* Chips container at top-right */
+    .card-top-chips {
+      position: absolute;
+      top: 24px;
+      right: 36px;
+      /* Ajustado al margen del contenido */
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      z-index: 10;
+    }
+
+    .card-top-chip-orange {
+      background: #C84B0A;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .card-top-chip-outline {
+      border: 1px solid #FFFFFF;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 12px;
+    }
+
+    .curso-card-3d:not(.active) .card-top-chip-outline {
+      border-color: #2D1610;
+      color: #2D1610;
+    }
+
+    /* Titles & Prices */
+    .curso-card-3d .curso-title-3d {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 26px;
+      /* Achicado de 32px */
+      font-weight: 700;
+      color: #2D1610 !important;
+      margin: 0 0 16px;
+      /* Espaciado entre el título y el precio */
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      transition: color 0.6s ease;
+      text-align: left;
+      /* Alineado a la izquierda */
+    }
+
+    .curso-card-3d.active .curso-title-3d {
+      color: #FFFFFF !important;
+    }
+
+    .curso-card-3d .curso-price-3d {
+      font-family: 'Inter', sans-serif;
+      font-size: 28px;
+      /* Achicado de 32px */
+      font-weight: 800;
+      color: #8E8A54 !important;
+      /* Sage green color for inactive card price */
+      margin: 0;
+      line-height: 1;
+      transition: color 0.6s ease;
+      text-align: left;
+      /* Alineado a la izquierda */
+    }
+
+    .curso-card-3d.active .curso-price-3d {
+      color: #2D1610 !important;
+      /* Dark brown for active card price */
+    }
+
+    .curso-card-3d .curso-subprice-3d {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: rgba(45, 22, 16, 0.6) !important;
+      margin: 4px 0 14px;
+      /* Ajustado el margen inferior */
+      transition: color 0.6s ease;
+      text-align: left;
+      /* Alineado a la izquierda */
+    }
+
+    .curso-card-3d.active .curso-subprice-3d {
+      color: rgba(255, 255, 255, 0.8) !important;
+    }
+
+    /* Bottom Info list */
+    .curso-card-3d .curso-info-list-3d {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      /* Alineado a la izquierda */
+      gap: 8px !important;
+      /* Ajustado el espaciado para evitar saltos */
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: rgba(45, 22, 16, 0.7) !important;
+      margin-top: 0;
+      margin-bottom: 16px;
+      /* Ajustado */
+      transition: color 0.6s ease;
+      flex-wrap: nowrap !important;
+      /* Forzar una sola línea siempre */
+      white-space: nowrap !important;
+    }
+
+    .curso-card-3d.active .curso-info-list-3d {
+      color: rgba(255, 255, 255, 0.85) !important;
+    }
+
+    .curso-card-3d .curso-info-item-3d {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .curso-card-3d .curso-btn-wrapper-3d {
+      display: flex;
+      justify-content: flex-start;
+      /* Botón alineado a la izquierda */
+      width: 100%;
+    }
+
+    /* Generic Slide Button (Outline Orange) */
+    .btn-slide-orange-outline {
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: transparent;
+      color: #C84B0A !important;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      padding: 0 24px;
+      height: 38px;
+      box-sizing: border-box;
+      border: 1.5px solid #C84B0A;
+      cursor: pointer;
+      outline: none;
+      text-decoration: none;
+      transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .btn-slide-orange-outline::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #C84B0A;
+      /* Relleno naranja en hover */
+      z-index: -1;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .btn-slide-orange-outline:hover {
+      color: #FFFFFF !important;
+      border-color: #C84B0A;
+      transform: scale(1.02);
+    }
+
+    .btn-slide-orange-outline:hover::before {
+      transform: scaleX(1);
+    }
+
+    .btn-slide-orange-outline:hover svg path {
+      stroke: #FFFFFF !important;
+    }
+
+    /* Comportamiento especial para la tarjeta verde ACTIVA (el botón es pleno por defecto, y en hover "se borra") */
+    .curso-card-3d.active .btn-slide-orange-outline {
+      background: #C84B0A;
+      color: #FFFFFF !important;
+      border-color: #C84B0A;
+    }
+
+    .curso-card-3d.active .btn-slide-orange-outline svg path {
+      stroke: #FFFFFF !important;
+    }
+
+    .curso-card-3d.active .btn-slide-orange-outline::before {
+      display: none !important;
+      /* Desactivar la transición de barrido en hover ya que es pleno */
+    }
+
+    .curso-card-3d.active .btn-slide-orange-outline:hover {
+      background: transparent;
+      color: #C84B0A !important;
+      border-color: #C84B0A;
+    }
+
+    .curso-card-3d.active .btn-slide-orange-outline:hover svg path {
+      stroke: #C84B0A !important;
+    }
+
+    /* ── Nav Link Underline Hover/Active ── */
+    header nav a {
+      position: relative;
+      text-decoration: none;
+      transition: color 250ms ease;
+    }
+
+    header nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background-color: #C84B0A;
+      transition: width 250ms ease;
+    }
+
+    header nav a:hover::after,
+    header nav a.active::after {
+      width: 100%;
+    }
+
+    /* Hero Layout */
+    #hero-scroll-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+    }
+
+    #hero-sticky-element {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background-image: url('nuevafoto.png');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+
+    /* ── Hero GIF Guitarra ── */
+    #hero-guitar-gif-wrap {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -42%);
+      z-index: 2;
+      pointer-events: none;
+      width: min(780px, 90vw);
+    }
+
+    #hero-guitar-gif-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      mask-image: radial-gradient(circle at 50% 60%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 80%);
+      -webkit-mask-image: radial-gradient(circle at 50% 60%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 80%);
+    }
+
+    @media (max-width: 767px) {
+      #hero-scroll-container {
+        height: auto;
+      }
+
+      #hero-sticky-element {
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+        background-image: url('FONDO MOBILE HERO ROJO.png'), url('nuevafoto.png');
+        background-size: cover, cover;
+        background-position: center center, center center;
+        background-repeat: no-repeat, no-repeat;
+      }
+
+      /* Force sticky element inner content div to behave nicely */
+      #hero-sticky-element > div {
+        min-height: 100vh;
+        height: auto !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+
+      /* Center everything vertically and horizontally in the hero section */
+      #hero-sticky-element section {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        flex: 1 1 auto !important;
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+      }
+
+      /* Hide spacer on mobile */
+      #hero-sticky-element section > .flex-1 {
+        display: none !important;
+      }
+
+      /* Title Container */
+      #hero-sticky-element section > div.relative.w-full {
+        order: 1 !important;
+        margin-top: 1.5rem !important; /* Move title slightly lower than top header */
+        margin-bottom: -1rem !important; /* Pull title down into/closer to GIF */
+      }
+
+      .hero-title {
+        font-size: 2.25rem !important; /* Shrunk title font size on mobile */
+        line-height: 1.1 !important;
+      }
+
+      /* GIF Wrapper */
+      #hero-guitar-gif-wrap {
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        transform: none !important;
+        order: 2 !important;
+        width: min(350px, 90vw) !important;
+        margin: 0 auto !important; /* Zero top margin so title overlaps slightly */
+      }
+
+      #hero-guitar-gif-wrap img {
+        /* Less blur on mobile: wider opaque center, fade starts at 35% */
+        mask-image: radial-gradient(circle at 50% 60%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 82%) !important;
+        -webkit-mask-image: radial-gradient(circle at 50% 60%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 82%) !important;
+      }
+
+      /* Copy + Button Container */
+      #hero-sticky-element section > div.pb-2 {
+        order: 3 !important;
+        margin-top: 0.5rem !important; /* Pull container up */
+      }
+    }
+
+    /* ── Plano del Taller Interactivo ── */
+    .workshop-marker {
+      position: absolute;
+      width: 58px;
+      height: 58px;
+      background-color: #B5B991;
+      /* Color verde oliva suave de los círculos */
+      color: #ffffff;
+      border: 2.5px solid #ffffff;
+      border-radius: 50%;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      /* Beautiful info italic i */
+      font-size: 32px;
+      /* Números aún más grandes */
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      padding-bottom: 2px;
+      /* Centering for 'i' */
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+      transform: translate(-50%, -50%);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      z-index: 30;
+      outline: none;
+    }
+
+    .workshop-marker:hover {
+      background-color: #C84B0A;
+      transform: translate(-50%, -50%) scale(1.15);
+      box-shadow: 0 6px 20px rgba(200, 75, 10, 0.4);
+    }
+
+    @keyframes marker-pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(181, 185, 145, 0.6);
+      }
+
+      70% {
+        box-shadow: 0 0 0 10px rgba(181, 185, 145, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(181, 185, 145, 0);
+      }
+    }
+
+    .workshop-marker {
+      animation: marker-pulse 2.5s infinite;
+    }
+
+    .taller-carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .el-corazon-header {
+        padding-left: 40px !important;
+      }
+
+      .string-handle {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="relative min-h-screen bg-[#F5F2EB] text-[#2D1610] antialiased">
+  <main>
+    <div id="hero-scroll-container">
+      <div id="hero-sticky-element">
+        <div
+          class="relative mx-auto max-w-[1440px] px-5 sm:px-6 lg:px-[100px] h-full flex flex-col justify-between pt-3 pb-6 box-border">
+          <header
+            class="mx-auto flex max-w-[1400px] w-full flex-row items-center justify-between rounded-full bg-white/10 px-6 py-2 h-[54px] md:h-[60px] text-sm font-semibold text-white shadow-[0_10px_30px_rgba(0,0,0,0.15)] border border-white/25 backdrop-blur-md md:px-8 md:py-0 relative z-50">
+            <a href="#" class="flex items-center">
+              <img src="trastesnegro.png" alt="Trastes" class="h-8 md:h-10 w-auto object-contain"
+                style="filter: brightness(0) invert(1);" />
+            </a>
+            <nav class="hidden md:flex flex-wrap justify-center gap-8 font-sans text-[14px] tracking-normal text-white">
+              <a href="#curso" class="transition hover:text-[#E65F1E]">Curso</a>
+              <a href="#sobre-nosotros" class="transition hover:text-[#E65F1E]">Sobre nosotros</a>
+              <a href="#manifiesto" class="transition hover:text-[#E65F1E]">Manifiesto</a>
+              <a href="#contacto" class="transition hover:text-[#E65F1E]">Contacto</a>
+              <a href="uikit.html" class="transition hover:text-[#E65F1E]">UI KIT</a>
+            </nav>
+            <a href="#contacto"
+              class="hidden md:inline-flex btn-slide-white h-[46px] items-center justify-center gap-3 rounded-full px-7 text-[12px] font-bold uppercase tracking-wider">
+              <span class="relative z-10">HABLEMOS</span>
+              <svg class="relative z-10 h-[14px] w-[14px]" viewBox="0 0 27 27" fill="none"
+                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+
+            <!-- Botón Hamburguesa para Mobile -->
+            <button id="mobile-menu-toggle"
+              class="flex md:hidden flex-col justify-between w-6 h-4 bg-transparent border-none cursor-pointer focus:outline-none z-50"
+              aria-label="Toggle Menu">
+              <span class="w-full h-[2px] bg-white rounded transition-all duration-300"></span>
+              <span class="w-full h-[2px] bg-white rounded transition-all duration-300"></span>
+              <span class="w-full h-[2px] bg-white rounded transition-all duration-300"></span>
+            </button>
+
+            <!-- Menú Mobile Fullscreen -->
+            <nav id="mobile-menu" class="mobile-menu" aria-hidden="true" aria-label="Mobile navigation">
+              <div class="mobile-menu-inner">
+                <button id="mobile-menu-close" aria-label="Cerrar menú" class="mobile-menu-close">X</button>
+                <ul class="mobile-menu-list">
+                  <li>
+                    <a href="#curso" class="mobile-menu-link">
+                      <span>Curso</span>
+                      <svg class="arrow" viewBox="0 0 27 27" fill="none" stroke="currentColor" stroke-width="3"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875" />
+                      </svg>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#sobre-nosotros" class="mobile-menu-link">
+                      <span>Sobre nosotros</span>
+                      <svg class="arrow" viewBox="0 0 27 27" fill="none" stroke="currentColor" stroke-width="3"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875" />
+                      </svg>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#manifiesto" class="mobile-menu-link">
+                      <span>Manifiesto</span>
+                      <svg class="arrow" viewBox="0 0 27 27" fill="none" stroke="currentColor" stroke-width="3"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875" />
+                      </svg>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#contacto" class="mobile-menu-link">
+                      <span>Contacto</span>
+                      <svg class="arrow" viewBox="0 0 27 27" fill="none" stroke="currentColor" stroke-width="3"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875" />
+                      </svg>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="uikit.html" class="mobile-menu-link orange-link">
+                      <span>UI KIT</span>
+                      <svg class="arrow" viewBox="0 0 27 27" fill="none" stroke="currentColor" stroke-width="3"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875" />
+                      </svg>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+
+          </header>
+
+          <section
+            class="relative mx-auto flex-1 flex flex-col items-start justify-between w-full min-h-0 pt-6 pb-6 text-center"
+            style="position:relative;">
+
+            <!-- GIF Guitarra: centrado en la seccion, superpuesto al titulo -->
+            <div id="hero-guitar-gif-wrap" aria-hidden="true">
+              <img id="hero-guitar-gif" src="guitar.gif" alt="" />
+            </div>
+
+            <!-- Título principal: arriba, z-index alto, sobre el gif -->
+            <div class="relative w-full flex flex-col items-center justify-center mt-2" style="z-index:10;">
+              <h1 class="select-none hero-title" style="margin: 0;">
+                <span style="color:#FFFFFF;">Del primer corte al</span><br />
+                <span class="font-bold italic"
+                  style="color: #BEBC7E !important; font-size: inherit; display: inline; margin: 0; line-height: inherit;">primer
+                  acorde</span>
+              </h1>
+            </div>
+
+            <!-- Spacer para empujar el copy al fondo -->
+            <div class="flex-1"></div>
+
+            <!-- Subtítulo + Botón: abajo -->
+            <div class="w-full flex flex-col items-center gap-4 pb-2" style="z-index:10; position:relative;">
+              <div class="w-full max-w-[540px] mx-auto px-4">
+                <p class="text-white"
+                  style="font-size: 15px; line-height: 1.6; font-family: 'Inter', sans-serif; margin: 0;">
+                  Conoce el oficio de la Lutheria desde cerca, descubrí su uso, técnica y<br
+                    class="hidden sm:inline" />se parte de este oficio único que te conecta con la música..
+                </p>
+              </div>
+              <div class="w-full flex justify-center" style="z-index:10;">
+                <a href="#curso"
+                  class="inline-flex btn-slide-white h-[46px] w-full md:w-auto items-center justify-center gap-3 rounded-full px-7 text-[12px] font-bold uppercase tracking-wider">
+                  <span class="relative z-10">CONOCER MÁS</span>
+                  <svg class="relative z-10 h-[14px] w-[14px]" viewBox="0 0 27 27" fill="none"
+                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875" stroke="currentColor"
+                      stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+          </section>
+        </div><!-- /hero content -->
+      </div><!-- /hero bg wrapper (sticky) -->
+    </div><!-- /hero scroll container -->
+
+
+
+    <!-- Sección de Frase Destacada -->
+    <section id="phrase-section"
+      class="pt-44 pb-28 md:pt-60 md:pb-36 px-6 md:px-[100px] text-[#2D1610] relative z-20 flex justify-center items-center w-full"
+      style="background-image: url('textoinicialfondo.png'); background-size: cover; background-position: center center; background-repeat: no-repeat;">
+
+      <!-- Desktop version: using scroll word-reveal -->
+      <div
+        class="hidden md:flex w-full flex-col gap-4 md:gap-[28px] font-display font-bold tracking-tight text-center text-xl sm:text-2xl md:text-[2rem] lg:text-[2.4rem] xl:text-[2.85rem]">
+
+        <!-- Línea 1 -->
+        <span class="flex flex-wrap items-center justify-center gap-2 md:gap-[27px] leading-none">
+          <span class="flex flex-wrap justify-center gap-[0.25em] leading-none">
+            <span class="wr">Cada</span>
+            <span class="wr">instrumento</span>
+            <span class="wr">tiene</span>
+            <span class="wr">una</span>
+            <span class="wr wr-orange">voz</span>
+            <span class="wr wr-orange">propia</span>
+          </span>
+        </span>
+
+        <!-- Línea 2 -->
+        <span class="flex flex-wrap items-center justify-center gap-2 md:gap-[27px] leading-none">
+          <span class="flex flex-wrap justify-center gap-[0.25em] leading-none">
+            <span class="wr">creemos</span>
+            <span class="wr">en</span>
+            <span class="wr">el</span>
+            <span class="wr">valor</span>
+            <span class="wr">del</span>
+            <span class="wr">trabajo</span>
+            <span class="wr">artesanal</span>
+          </span>
+        </span>
+
+        <!-- Línea 3 -->
+        <span class="flex flex-wrap items-center justify-center gap-2 md:gap-[27px] leading-none">
+          <span class="flex flex-wrap justify-center gap-[0.25em] leading-none">
+            <span class="wr">en</span>
+            <span class="wr">los</span>
+            <span class="wr">detalles</span>
+            <span class="wr">de</span>
+            <span class="wr">cada</span>
+            <span class="wr">pieza</span>
+            <span class="wr">y</span>
+            <span class="wr">en</span>
+            <span class="wr">el</span>
+            <span class="wr">tiempo</span>
+          </span>
+        </span>
+
+        <!-- Línea 4 -->
+        <span class="flex flex-wrap justify-center gap-[0.25em] leading-none">
+          <span class="wr">dedicado</span>
+          <span class="wr wr-orange">a</span>
+          <span class="wr wr-orange">comprender</span>
+          <span class="wr wr-orange">su</span>
+          <span class="wr wr-orange">esencia.</span>
+        </span>
+
+      </div>
+
+      <!-- Mobile version: static with exact line breaks & colors -->
+      <div
+        class="flex md:hidden w-full flex-col justify-center items-center font-display font-bold text-center text-[20px] sm:text-[23px] leading-[1.4] text-[#2D1610] max-w-[340px] mx-auto">
+        <p class="m-0"
+          style="color: #2D1610; font-family:'Playfair Display', Georgia, serif; font-size: 21.5px; line-height: 1.45;">
+          Cada instrumento tiene una <span style="font-style: italic; font-weight: 600; color: #C84B0A;">voz</span><br>
+          <span style="font-style: italic; font-weight: 600; color: #C84B0A;">propia,</span> creemos en el valor del<br>
+          trabajo artesanal, en los detalles<br>
+          de cada pieza y en el tiempo dedicado a <span
+            style="font-style: italic; font-weight: 600; color: #C84B0A;">comprender</span><br>
+          <span style="font-style: italic; font-weight: 600; color: #C84B0A;">su esencia.</span>
+        </p>
+      </div>
+
+    </section>
+
+    <!-- ── Sección El corazón del taller ── -->
+    <section id="el-corazon" class="w-full flex flex-col"
+      style="background:#F5F2EB url('DESTELLOS.png') no-repeat center center; background-size: cover; overflow:hidden; padding-top: 10px; padding-bottom: 50px;">
+
+      <!-- Título de la sección (Alineado a la izquierda, más separado) -->
+      <div class="el-corazon-header" style="width:100%; box-sizing:border-box; margin-bottom:25px; padding-left:80px;">
+        <h2 class="el-corazon-title"
+          style="font-family:'Playfair Display', Georgia, serif; font-size: clamp(2rem, 3.8vw, 3.25rem); font-weight:400; color:#2D1610; margin:0; line-height:1.2; text-align:left;">
+          El <span style="font-weight: 600; font-style: italic; color: #C84B0A;">corazón</span> del taller
+        </h2>
+      </div>
+
+      <!-- Carousel Container -->
+      <div class="taller-carousel-container" style="position:relative; width:100%; height:430px;">
+        <div class="taller-carousel-track" id="tallerCarouselTrack"
+          style="display:flex; flex-direction:row; gap:130px; align-items:center; overflow-x:auto; padding: 0 100px; box-sizing:border-box; scrollbar-width:none; -ms-overflow-style:none; height:100%;">
+
+          <!-- Item 1: Collage de Tarjetas Grises (Grande y más girado) -->
+          <div
+            style="display:flex; flex-direction:row; align-items:center; flex-shrink:0; position:relative; width:480px; height:425px;">
+            <img class="corazon-img-back" src="materiales.png" alt="Materiales"
+              style="width:300px;height:370px;object-fit:cover;border-radius:8px;transform:rotate(-5deg);position:absolute;left:0;top:15px;" />
+            <!-- Carta inclinada adelante con la imagen chicahome.png -->
+            <img class="corazon-img-front" src="chicahome.png" alt="Chica Home"
+              style="width:250px; height:395px; object-fit:cover; border-radius:8px; position:absolute; left:220px; top:25px; z-index:2; transform:rotate(5deg);" />
+          </div>
+
+          <!-- Item 2: Texto 1 (Más Grande) -->
+          <div style="width:480px; flex-shrink:0;">
+            <p
+              style="font-family:'Playfair Display', Georgia, serif; font-size:26px; line-height:1.65; color:#2D1610; margin:0;">
+              Somos un emprendimiento nacido de la amistad y la pasión por la música. Desde hace más de 10 años nos
+              dedicamos a los instrumentos de cuerda, creando un espacio donde el oficio y el aprendizaje se encuentran.
+            </p>
+          </div>
+
+          <!-- Item 3: Imagen central Collage Team (Más Grande) -->
+          <div
+            style="flex-shrink:0; display:flex; align-items:center; justify-content:center; width:440px; height:340px; position:relative;">
+            <img src="collageteam.png" alt="El equipo del taller"
+              style="width:100%; height:100%; object-fit:contain;" />
+          </div>
+
+          <!-- Item 4: Texto 2 (Más Grande) -->
+          <div style="width:480px; flex-shrink:0;">
+            <p
+              style="font-family:'Playfair Display', Georgia, serif; font-size:26px; line-height:1.65; color:#2D1610; margin:0;">
+              Compartimos un mismo <br class="block md:hidden">compromiso: crear piezas con <br
+                class="block md:hidden">identidad propia y transmitir <br class="block md:hidden">el valor del trabajo
+              artesanal a <br class="block md:hidden">cada persona que pasa por <br class="block md:hidden">nuestro
+              taller.
+            </p>
+          </div>
+
+          <!-- Item 5: Foto coloradaniña -->
+          <div
+            style="display:flex; align-items:center; justify-content:center; flex-shrink:0; position:relative; width:340px; height:430px;">
+            <img src="coloradaniña.png" alt="Colorado niña"
+              style="width:290px; height:auto; display:block; border-radius:8px; transform:rotate(4deg);" />
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Slider Bar Control -->
+      <div class="taller-slider-bar-wrapper" style="display:flex; justify-content:center; margin-top:56px; width:100%;">
+        <div id="tallerSliderTrack"
+          style="width:180px; height:3px; background:rgba(45,22,16,0.12); border-radius:999px; position:relative; cursor:pointer;">
+          <div id="tallerSliderThumb"
+            style="width:48px; height:5px; background:#C84B0A; border-radius:999px; position:absolute; top:-1px; left:0; cursor:grab; transition:transform 0.1s ease;">
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <script>
+      (function () {
+        const track = document.getElementById('tallerCarouselTrack');
+        const thumb = document.getElementById('tallerSliderThumb');
+        const sliderTrack = document.getElementById('tallerSliderTrack');
+
+        if (!track || !thumb || !sliderTrack) return;
+
+        let isDragging = false;
+        let startX = 0;
+        let startLeft = 0;
+
+        function updateThumb() {
+          const maxScroll = track.scrollWidth - track.clientWidth;
+          if (maxScroll <= 0) return;
+          const pct = track.scrollLeft / maxScroll;
+          const maxThumbLeft = sliderTrack.clientWidth - thumb.clientWidth;
+          thumb.style.left = (pct * maxThumbLeft) + 'px';
+        }
+
+        // Update thumb on track scroll
+        track.addEventListener('scroll', updateThumb);
+
+        // Resize listener
+        window.addEventListener('resize', updateThumb);
+
+        // Dragging logic
+        thumb.addEventListener('mousedown', function (e) {
+          isDragging = true;
+          startX = e.clientX;
+          startLeft = parseFloat(thumb.style.left) || 0;
+          thumb.style.cursor = 'grabbing';
+          document.body.style.userSelect = 'none';
+        });
+
+        document.addEventListener('mousemove', function (e) {
+          if (!isDragging) return;
+          const deltaX = e.clientX - startX;
+          const maxThumbLeft = sliderTrack.clientWidth - thumb.clientWidth;
+          let newLeft = startLeft + deltaX;
+          newLeft = Math.max(0, Math.min(newLeft, maxThumbLeft));
+          thumb.style.left = newLeft + 'px';
+
+          const pct = newLeft / maxThumbLeft;
+          const maxScroll = track.scrollWidth - track.clientWidth;
+          track.scrollLeft = pct * maxScroll;
+        });
+
+        document.addEventListener('mouseup', function () {
+          if (isDragging) {
+            isDragging = false;
+            thumb.style.cursor = 'grab';
+            document.body.style.userSelect = '';
+          }
+        });
+
+        // Touch support
+        thumb.addEventListener('touchstart', function (e) {
+          isDragging = true;
+          startX = e.touches[0].clientX;
+          startLeft = parseFloat(thumb.style.left) || 0;
+        });
+
+        document.addEventListener('touchmove', function (e) {
+          if (!isDragging) return;
+          const deltaX = e.touches[0].clientX - startX;
+          const maxThumbLeft = sliderTrack.clientWidth - thumb.clientWidth;
+          let newLeft = startLeft + deltaX;
+          newLeft = Math.max(0, Math.min(newLeft, maxThumbLeft));
+          thumb.style.left = newLeft + 'px';
+
+          const pct = newLeft / maxThumbLeft;
+          const maxScroll = track.scrollWidth - track.clientWidth;
+          track.scrollLeft = pct * maxScroll;
+        });
+
+        document.addEventListener('touchend', function () {
+          isDragging = false;
+        });
+
+        // Click on slider track
+        sliderTrack.addEventListener('click', function (e) {
+          if (e.target === thumb) return;
+          const rect = sliderTrack.getBoundingClientRect();
+          const clickX = e.clientX - rect.left - (thumb.clientWidth / 2);
+          const maxThumbLeft = sliderTrack.clientWidth - thumb.clientWidth;
+          const newLeft = Math.max(0, Math.min(clickX, maxThumbLeft));
+          thumb.style.left = newLeft + 'px';
+
+          const pct = newLeft / maxThumbLeft;
+          const maxScroll = track.scrollWidth - track.clientWidth;
+          track.scrollTo({
+            left: pct * maxScroll,
+            behavior: 'smooth'
+          });
+        });
+
+        // Initial thumb state
+        setTimeout(updateThumb, 300);
+      })();
+    </script>
+
+    <!-- ── Sección Interactiva de Cuerdas (Strings) ── -->
+    <section id="strings-interactive-section"
+      style="background:#441714; padding: 80px 0 90px; display:flex; flex-direction:column; align-items:center; overflow:visible; position:relative;"
+      class="select-none">
+
+      <!-- Título de la sección -->
+      <p id="strings-section-title" class="section-title"
+        style="letter-spacing:-0.01em; margin:0 0 70px; text-align:center; line-height:1.2; padding:0 20px;">
+        <span class="strings-title-main" style="font-weight:400;">Cada cuerda tiene </span><span
+          style="font-weight:600; font-style:italic;">una voz</span>
+      </p>
+
+      <!-- Cuerdas -->
+      <div
+        style="width:100%; max-width:1200px; margin:0 auto; padding:0 80px; display:flex; flex-direction:column; gap:28px; box-sizing:border-box;">
+
+        <!-- Row 1: texto IZQUIERDA → ●━━━━━━━━━━━━━━━━● -->
+        <div class="string-row" id="row-1" style="height:50px;">
+          <svg class="absolute pointer-events-none" id="string-svg-1"
+            style="width:100%; height:100%; overflow:visible;">
+            <path id="path-1-left" stroke="white" stroke-width="3" fill="none" d="" />
+            <circle id="dot-1-left" r="5.5" fill="white" />
+            <circle id="dot-1-right" r="5.5" fill="white" />
+          </svg>
+          <span class="string-text absolute font-bold text-2xl md:text-[2rem] leading-none" id="text-1"
+            style="left:0; white-space:nowrap;">Donde cada</span>
+          <div class="string-handle" id="handle-1-left" style="left:92%;"></div>
+        </div>
+
+        <!-- Row 2: texto IZQUIERDA → ●━━━━━━━━━━━━━━━━● -->
+        <div class="string-row" id="row-2" style="height:50px;">
+          <svg class="absolute pointer-events-none" id="string-svg-2"
+            style="width:100%; height:100%; overflow:visible;">
+            <path id="path-2" stroke="white" stroke-width="2.2" fill="none" d="" />
+            <circle id="dot-2-left" r="5.5" fill="white" />
+            <circle id="dot-2-right" r="5.5" fill="white" />
+          </svg>
+          <span class="string-text absolute italic text-2xl md:text-[2rem] leading-none" id="text-2"
+            style="left:0; white-space:nowrap;">cuerda</span>
+          <div class="string-handle" id="handle-2-right" style="left:92%;"></div>
+        </div>
+
+        <!-- Row 3: ●━━━━━━━━━━━━━━━━● texto DERECHA -->
+        <div class="string-row" id="row-3" style="height:50px;">
+          <svg class="absolute pointer-events-none" id="string-svg-3"
+            style="width:100%; height:100%; overflow:visible;">
+            <path id="path-3" stroke="white" stroke-width="1.5" fill="none" d="" />
+            <circle id="dot-3-left" r="5.5" fill="white" />
+          </svg>
+          <span class="string-text absolute text-2xl md:text-[2rem] leading-none" id="text-3"
+            style="right:0; left:auto; white-space:nowrap;">encuentra</span>
+          <div class="string-handle" id="handle-3-left" style="left:8%;"></div>
+        </div>
+
+        <!-- Row 4: ●━━━━━━━━━━━━━━━━● texto DERECHA -->
+        <div class="string-row" id="row-4" style="height:50px;">
+          <svg class="absolute pointer-events-none" id="string-svg-4"
+            style="width:100%; height:100%; overflow:visible;">
+            <path id="path-4" stroke="white" stroke-width="1" fill="none" d="" />
+            <circle id="dot-4-left" r="5.5" fill="white" />
+          </svg>
+          <span class="string-text absolute italic text-2xl md:text-[2rem] leading-none" id="text-4"
+            style="right:0; left:auto; white-space:nowrap;">su equilibrio</span>
+          <div class="string-handle" id="handle-4-left" style="left:8%;"></div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ── Wrapper para fondo compartido 3fondo.png ── -->
+    <div
+      style="background-image: url('3fondo.png'); background-size: cover; background-position: center center; background-repeat: no-repeat; position: relative; z-index: 1;">
+
+      <!-- ── Sección Cómo Trabajamos en el Taller ── -->
+      <section id="como-trabajamos" class="work-section" style="background: transparent !important;">
+        <div style="max-width:1200px; margin:0 auto; padding:0 40px; box-sizing:border-box;">
+          <h2 class="section-title"
+            style="text-align:center; margin:0 auto; max-width:760px; font-family:'Playfair Display',serif;">
+            ¿Cómo trabajamos<br class="md:hidden"> en el <span
+              style="color:#C84B0A; font-style:italic; font-weight:600;">taller?</span>
+          </h2>
+          <div class="work-row">
+
+            <!-- Card 1: Diseñamos -->
+            <div class="work-card">
+              <div class="work-card-base">
+                <h3 class="work-card-title">Diseñamos</h3>
+                <span class="work-card-info">i</span>
+              </div>
+              <div class="work-card-paper">
+                <button class="work-card-close" aria-label="Cerrar">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    style="display: block;">
+                    <path d="M1.5 1.5L12.5 12.5M12.5 1.5L1.5 12.5" stroke="#C84B0A" stroke-width="2.5"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </button>
+                <h4 class="work-paper-title">Diseñamos</h4>
+                <p class="work-paper-text">Cada instrumento comienza con un diseño cuidado, donde buscamos equilibrio
+                  entre forma y sonido para crear piezas únicas.</p>
+              </div>
+            </div>
+
+            <!-- Card 2: Construimos -->
+            <div class="work-card">
+              <div class="work-card-base">
+                <h3 class="work-card-title">Construimos</h3>
+                <span class="work-card-info">i</span>
+              </div>
+              <div class="work-card-paper">
+                <button class="work-card-close" aria-label="Cerrar">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    style="display: block;">
+                    <path d="M1.5 1.5L12.5 12.5M12.5 1.5L1.5 12.5" stroke="#C84B0A" stroke-width="2.5"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </button>
+                <h4 class="work-paper-title">Construimos</h4>
+                <p class="work-paper-text">Trabajamos cada componente de nuestros instrumentos de forma artesanal
+                  respetando las diferentes características de cada madera.</p>
+              </div>
+            </div>
+
+            <!-- Card 3: Calibramos -->
+            <div class="work-card">
+              <div class="work-card-base">
+                <h3 class="work-card-title">Calibramos</h3>
+                <span class="work-card-info">i</span>
+              </div>
+              <div class="work-card-paper">
+                <button class="work-card-close" aria-label="Cerrar">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    style="display: block;">
+                    <path d="M1.5 1.5L12.5 12.5M12.5 1.5L1.5 12.5" stroke="#C84B0A" stroke-width="2.5"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </button>
+                <h4 class="work-paper-title">Calibramos</h4>
+                <p class="work-paper-text">Ajustamos tensiones, puentes y detalles finos hasta que el instrumento
+                  responde con claridad, afinando su voz con delicadeza.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Sección Explorá el Taller (Interactivo) ── -->
+      <section id="explora-taller"
+        style="background: transparent !important; padding: 40px 0 80px; position:relative; z-index:20; overflow:hidden;">
+        <!-- Contenedor con scroll horizontal para móviles (evita achicar la foto demasiado) -->
+        <div class="explora-scroll-wrapper"
+          style="width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom: 20px;">
+          <div class="explora-inner-container"
+            style="min-width:720px; width:100%; margin:0 auto; box-sizing:border-box; padding:0 20px;">
+
+            <!-- Título (menos espacio abajo: margin-bottom 28px) -->
+            <h2 class="section-title"
+              style="text-align:center; margin-bottom:28px; font-family:'Playfair Display',serif;">
+              Explorá el taller donde cada proyecto<br class="hidden md:inline">
+              <em style="font-weight:600; font-style:italic; color:#C84B0A;">encuentra su lugar.</em>
+            </h2>
+
+            <!-- Contenedor del plano interactivo (imagen más chica: max-width 650px) -->
+            <div
+              style="position:relative; width:100%; max-width:650px; margin:0 auto; border-radius:12px; overflow:visible; box-shadow:0 24px 80px rgba(45,22,16,0.12);">
+
+              <!-- Imagen de fondo (el plano, responsivo: horizontal en desktop, vertical en mobile) -->
+              <picture>
+                <source srcset="salones_vertical.png" media="(max-width: 767px)">
+                <img src="salones.png" alt="Plano interactivo del taller"
+                  style="width:100%; display:block; height:auto; object-fit:contain; border-radius:12px;" />
+              </picture>
+
+              <!-- Capa negra de baja opacidad por detrás de la card para resaltar -->
+              <div id="workshop-overlay" onclick="closeWorkshopCard()"
+                style="display:none; position:absolute; inset:0; background:rgba(0,0,0,0.55); border-radius:12px; z-index:45; opacity:0; transition:opacity 0.2s ease; cursor:pointer;">
+              </div>
+
+              <!-- Círculos interactivos -->
+              <!-- Círculo 1 -->
+              <button onclick="openWorkshopCard(1)" class="workshop-marker workshop-marker-1"
+                style="top: 45%; left: 30.5%;" aria-label="Almacén de materiales">i</button>
+
+              <!-- Círculo 2 -->
+              <button onclick="openWorkshopCard(2)" class="workshop-marker workshop-marker-2"
+                style="top: 39%; left: 55%;" aria-label="Área de taller">i</button>
+
+              <!-- Círculo 3 -->
+              <button onclick="openWorkshopCard(3)" class="workshop-marker workshop-marker-3"
+                style="top: 79%; left: 31.8%;" aria-label="Sala de descanso">i</button>
+
+              <!-- Círculo 4 -->
+              <button onclick="openWorkshopCard(4)" class="workshop-marker workshop-marker-4"
+                style="top: 72%; left: 77%;" aria-label="Sala de máquinas">i</button>
+
+              <!-- Card emergente al lado de los círculos (color bordo, con resplandor dorado de sombra y sin bajada de texto) -->
+              <div id="workshop-inline-card"
+                style="display:none; position:absolute; width:410px; background:#441714; box-shadow:0 30px 100px rgba(190,188,126,0.55), 0 0 40px rgba(190,188,126,0.3), 0 10px 30px rgba(0,0,0,0.35); border-radius: 0 24px 0 24px; overflow:hidden; border: none; z-index: 50; opacity:0; transform:scale(0.92); transition: opacity 0.2s ease, transform 0.2s ease;">
+
+                <!-- Botón cerrar (X) -->
+                <button onclick="closeWorkshopCard()" class="workshop-close-btn" aria-label="Cerrar card">
+                  <svg width="10" height="10" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                </button>
+
+                <!-- Imagen (más alta: height 230px) -->
+                <div style="width:100%; height:230px; overflow:hidden; background:#2D1610;">
+                  <img id="workshop-card-img" src="eltaller (4).png" alt="Espacio del taller"
+                    style="width:100%; height:100%; object-fit:cover;" />
+                </div>
+
+                <!-- Contenido (solo título alineado a la izquierda) -->
+                <div style="padding: 20px 24px; box-sizing:border-box; text-align: left;">
+                  <h3 id="workshop-card-title"
+                    style="font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:600; color:#FFFFFF; margin:0; line-height:1.25; letter-spacing:0.02em;">
+                    Almacén de materiales
+                  </h3>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Script del Plano Interactivo -->
+      <script>
+        (function () {
+          var workshopData = {
+            1: {
+              img: 'eltaller (4).png',
+              title: 'Almacén de materiales',
+              left: '36.5%',
+              top: '20%'
+            },
+            2: {
+              img: 'eltaller (3).png',
+              title: 'Área de taller',
+              left: '12%',
+              top: '8%'
+            },
+            3: {
+              img: 'eltaller (2).png',
+              title: 'Sala de descanso',
+              left: '12%',
+              top: '24%'
+            },
+            4: {
+              img: 'eltaller (1).png',
+              title: 'Sala de máquinas',
+              left: '32%',
+              top: '18%'
+            }
+          };
+
+          window.openWorkshopCard = function (id) {
+            var data = workshopData[id];
+            if (!data) return;
+
+            document.getElementById('workshop-card-img').src = data.img;
+            document.getElementById('workshop-card-title').textContent = data.title;
+
+            var overlay = document.getElementById('workshop-overlay');
+            var card = document.getElementById('workshop-inline-card');
+
+            if (window.innerWidth <= 767) {
+              card.style.left = '50%';
+              card.style.top = '50%';
+              card.style.transform = 'translate(-50%, -50%) scale(0.92)';
+            } else {
+              card.style.left = data.left;
+              card.style.top = data.top;
+              card.style.transform = 'scale(0.92)';
+            }
+
+            overlay.style.display = 'block';
+            card.style.display = 'block';
+            // Force layout reflow
+            overlay.offsetHeight;
+            card.offsetHeight;
+
+            overlay.style.opacity = '1';
+            card.style.opacity = '1';
+
+            if (window.innerWidth <= 767) {
+              card.style.transform = 'translate(-50%, -50%) scale(1)';
+            } else {
+              card.style.transform = 'scale(1)';
+            }
+          };
+
+          window.closeWorkshopCard = function () {
+            var overlay = document.getElementById('workshop-overlay');
+            var card = document.getElementById('workshop-inline-card');
+
+            overlay.style.opacity = '0';
+            card.style.opacity = '0';
+
+            if (window.innerWidth <= 767) {
+              card.style.transform = 'translate(-50%, -50%) scale(0.92)';
+            } else {
+              card.style.transform = 'scale(0.92)';
+            }
+
+            setTimeout(function () {
+              overlay.style.display = 'none';
+              card.style.display = 'none';
+            }, 200);
+          };
+        })();
+      </script>
+
+
+
+      <!-- ── Sección Maderas ── -->
+      <section id="maderas-section"
+        style="background: transparent !important; padding:80px 0; position:relative; z-index:1;"
+        class="px-6 md:px-[100px]">
+        <div style="max-width:1200px; margin:0 auto; display:flex; flex-direction:column; align-items:center;">
+
+          <!-- Título centrado -->
+          <h2 class="section-title" style="text-align:center; margin-bottom:12px;">
+            Maderas que dan vida al <em style="font-weight:600; font-style:italic; color:#C84B0A;">sonido.</em>
+          </h2>
+
+          <!-- Bajada (Subtítulo) -->
+          <p
+            style="font-family:'Inter',sans-serif; font-size:18px; line-height:24px; text-align:center; color:#4E4139; max-width:850px; margin:0 0 32px 0;">
+            Cada especie aporta una personalidad diferente al instrumento. Su densidad, veta y resonancia influyen
+            directamente en el carácter del sonido.
+          </p>
+
+          <!-- Grid de 4 Maderas (achicar gap) -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-[20px] w-full" id="maderas-grid"
+            style="padding-bottom: 140px;">
+
+            <!-- Madera 1: Palisandro -->
+            <div class="madera-item" data-madera="palisandro"
+              style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; cursor:pointer;">
+              <div
+                style="position:relative; width:100%; aspect-ratio:1; display:flex; align-items:center; justify-content:center; overflow:hidden; padding: 24px; box-sizing: border-box;">
+                <!-- Tap indicator for mobile -->
+                <div onclick="toggleMaderaMobile(event, this)"
+                  class="md:hidden absolute bottom-4 right-4 z-10 flex items-center justify-center w-8 h-8 rounded-full bg-[#C84B0A]/85 text-white shadow-md border border-white/20 select-none animate-pulse"
+                  style="cursor: pointer;">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 11V3a1 1 0 0 0-2 0v8a1 1 0 0 0 2 0Z" />
+                    <path d="M11 11V7a1 1 0 0 1 2 0v4" />
+                    <path d="M13 11V8a1 1 0 0 1 2 0v3" />
+                    <path d="M15 11v-2a1 1 0 0 1 2 0v5a7 7 0 1 1-14 0V9a1 1 0 0 1 2 0v2" />
+                  </svg>
+                </div>
+                <img src="madera1.png" alt="Palisandro" style="width:100%; height:100%; object-fit:contain;"
+                  class="hover-scale-wood" />
+              </div>
+              <h3 class="madera-nombre"
+                style="font-family:'Playfair Display',serif; font-weight:400; font-size:15px; color:#2D1610; margin:0; letter-spacing:0.03em; transition:color 0.25s ease, font-weight 0.25s ease;">
+                <span>Palisandro</span>
+                <button onclick="playWoodSound('palisandro', event)" class="wood-audio-btn"
+                  style="background:none; border:none; padding:0; cursor:pointer; color:#C84B0A; display:inline-block; vertical-align:middle; width:12px; height:12px; margin-left:14px; outline:none; transition:transform 0.2s ease; line-height:1;"
+                  onmouseenter="this.style.transform='scale(1.3)'" onmouseleave="this.style.transform='scale(1)'"
+                  aria-label="Escuchar sonido">
+                  <svg id="audio-icon-palisandro" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"
+                    style="display:block;">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </button>
+              </h3>
+              <div class="madera-info" style="text-align:left; width:100%; margin-top:10px;">
+                <div class="madera-rating"><span class="rating-label">Graves</span><span class="rating-dots"
+                    data-filled="4" data-total="5"></span></div>
+                <div class="madera-rating"><span class="rating-label">Agudos</span><span class="rating-dots"
+                    data-filled="2" data-total="5"></span></div>
+                <div class="madera-rating"><span class="rating-label">Proyección</span><span class="rating-dots"
+                    data-filled="3" data-total="5"></span></div>
+                <div class="madera-rating"><span class="rating-label">Resonancia</span><span class="rating-dots"
+                    data-filled="5" data-total="5"></span></div>
+              </div>
+            </div>
+
+            <!-- Madera 2: Algarrobo -->
+            <div class="madera-item" data-madera="algarrobo"
+              style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; cursor:pointer;">
+              <div
+                style="position:relative; width:100%; aspect-ratio:1; display:flex; align-items:center; justify-content:center; overflow:hidden; padding: 24px; box-sizing: border-box;">
+                <!-- Tap indicator for mobile -->
+                <div onclick="toggleMaderaMobile(event, this)"
+                  class="md:hidden absolute bottom-4 right-4 z-10 flex items-center justify-center w-8 h-8 rounded-full bg-[#C84B0A]/85 text-white shadow-md border border-white/20 select-none animate-pulse"
+                  style="cursor: pointer;">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 11V3a1 1 0 0 0-2 0v8a1 1 0 0 0 2 0Z" />
+                    <path d="M11 11V7a1 1 0 0 1 2 0v4" />
+                    <path d="M13 11V8a1 1 0 0 1 2 0v3" />
+                    <path d="M15 11v-2a1 1 0 0 1 2 0v5a7 7 0 1 1-14 0V9a1 1 0 0 1 2 0v2" />
+                  </svg>
+                </div>
+                <img src="madera2.png" alt="Algarrobo" style="width:100%; height:100%; object-fit:contain;"
+                  class="hover-scale-wood" />
+              </div>
+              <h3 class="madera-nombre"
+                style="font-family:'Playfair Display',serif; font-weight:400; font-size:15px; color:#2D1610; margin:0; letter-spacing:0.03em; transition:color 0.25s ease, font-weight 0.25s ease;">
+                <span>Algarrobo</span>
+                <button onclick="playWoodSound('algarrobo', event)" class="wood-audio-btn"
+                  style="background:none; border:none; padding:0; cursor:pointer; color:#C84B0A; display:inline-block; vertical-align:middle; width:12px; height:12px; margin-left:14px; outline:none; transition:transform 0.2s ease; line-height:1;"
+                  onmouseenter="this.style.transform='scale(1.3)'" onmouseleave="this.style.transform='scale(1)'"
+                  aria-label="Escuchar sonido">
+                  <svg id="audio-icon-algarrobo" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"
+                    style="display:block;">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </button>
+              </h3>
+              <div class="madera-info" style="text-align:left; width:100%; margin-top:10px;">
+                <div class="madera-rating"><span class="rating-label">Graves</span><span class="rating-dots"
+                    data-filled="5" data-total="5"></span></div>
+                <div class="madera-rating"><span class="rating-label">Agudos</span><span class="rating-dots"
+                    data-filled="3" data-total="5"></span></div>
+                <div class="madera-rating"><span class="rating-label">Proyección</span><span class="rating-dots"
+                    data-filled="4" data-total="5"></span></div>
+                <div class="madera-rating"><span class="rating-label">Resonancia</span><span class="rating-dots"
+                    data-filled="4" data-total="5"></span></div>
+              </div>
+            </div>
+
+            <!-- Madera 3: Ciprés -->
+            <div class="madera-item" data-madera="cipres"
+              style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; cursor:pointer;">
+              <div
+                style="position:relative; width:100%; aspect-ratio:1; display:flex; align-items:center; justify-content:center; overflow:hidden; padding: 24px; box-sizing: border-box;">
+                <!-- Tap indicator for mobile -->
+                <div onclick="toggleMaderaMobile(event, this)"
+                  class="md:hidden absolute bottom-4 right-4 z-10 flex items-center justify-center w-8 h-8 rounded-full bg-[#C84B0A]/85 text-white shadow-md border border-white/20 select-none animate-pulse"
+                  style="cursor: pointer;">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 11V3a1 1 0 0 0-2 0v8a1 1 0 0 0 2 0Z" />
+                    <path d="M11 11V7a1 1 0 0 1 2 0v4" />
+                    <path d="M13 11V8a1 1 0 0 1 2 0v3" />
+                    <path d="M15 11v-2a1 1 0 0 1 2 0v5a7 7 0 1 1-14 0V9a1 1 0 0 1 2 0v2" />
+                  </svg>
+                </div>
+                <img src="madera3.png" alt="Ciprés" style="width:100%; height:100%; object-fit:contain;"
+                  class="hover-scale-wood" />
+              </div>
+              <h3 class="madera-nombre"
+                style="font-family:'Playfair Display',serif; font-weight:400; font-size:15px; color:#2D1610; margin:0; letter-spacing:0.03em; transition:color 0.25s ease, font-weight 0.25s ease;">
+                <span>Ciprés</span>
+                <button onclick="playWoodSound('cipres', event)" class="wood-audio-btn"
+                  style="background:none; border:none; padding:0; cursor:pointer; color:#C84B0A; display:inline-block; vertical-align:middle; width:12px; height:12px; margin-left:14px; outline:none; transition:transform 0.2s ease; line-height:1;"
+                  onmouseenter="this.style.transform='scale(1.3)'" onmouseleave="this.style.transform='scale(1)'"
+                  aria-label="Escuchar sonido">
+                  <svg id="audio-icon-cipres" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"
+                    style="display:block;">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </button>
+              </h3>
+              <div class="madera-info" style="text-align:left; width:100%; margin-top:10px;">
+                <div class="madera-rating"><span class="rating-label">Graves</span><span class="rating-dots"
+                    data-filled="4" data-total="5"></span></div>
+                <div class="madera-rating"><span class="rating-label">Agudos</span><span class="rating-dots"
+                    data-filled="4" data-total="5"></span></div>
+                <div class="madera-rating"><span class="rating-label">Proyección</span><span class="rating-dots"
+                    data-filled="3" data-total="5"></span></div>
+                <div class="madera-rating"><span class="rating-label">Resonancia</span><span class="rating-dots"
+                    data-filled="5" data-total="5"></span></div>
+              </div>
+            </div>
+
+            <!-- Madera 4: Ábeto -->
+            <div class="madera-item" data-madera="abeto"
+              style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; cursor:pointer;">
+              <div
+                style="position:relative; width:100%; aspect-ratio:1; display:flex; align-items:center; justify-content:center; overflow:hidden; padding: 24px; box-sizing: border-box;">
+                <!-- Tap indicator for mobile -->
+                <div onclick="toggleMaderaMobile(event, this)"
+                  class="md:hidden absolute bottom-4 right-4 z-10 flex items-center justify-center w-8 h-8 rounded-full bg-[#C84B0A]/85 text-white shadow-md border border-white/20 select-none animate-pulse"
+                  style="cursor: pointer;">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 11V3a1 1 0 0 0-2 0v8a1 1 0 0 0 2 0Z" />
+                    <path d="M11 11V7a1 1 0 0 1 2 0v4" />
+                    <path d="M13 11V8a1 1 0 0 1 2 0v3" />
+                    <path d="M15 11v-2a1 1 0 0 1 2 0v5a7 7 0 1 1-14 0V9a1 1 0 0 1 2 0v2" />
+                  </svg>
+                </div>
+                <img src="madera4.png" alt="Ábeto" style="width:100%; height:100%; object-fit:contain;"
+                  class="hover-scale-wood" />
+              </div>
+              <h3 class="madera-nombre"
+                style="font-family:'Playfair Display',serif; font-weight:400; font-size:15px; color:#2D1610; margin:0; letter-spacing:0.03em; transition:color 0.25s ease, font-weight 0.25s ease;">
+                <span>Ábeto</span>
+                <button onclick="playWoodSound('abeto', event)" class="wood-audio-btn"
+                  style="background:none; border:none; padding:0; cursor:pointer; color:#C84B0A; display:inline-block; vertical-align:middle; width:12px; height:12px; margin-left:14px; outline:none; transition:transform 0.2s ease; line-height:1;"
+                  onmouseenter="this.style.transform='scale(1.3)'" onmouseleave="this.style.transform='scale(1)'"
+                  aria-label="Escuchar sonido">
+                  <svg id="audio-icon-abeto" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"
+                    style="display:block;">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </button>
+              </h3>
+              <div class="madera-info" style="text-align:left; width:100%; margin-top:10px;">
+                <div class="madera-rating"><span class="rating-label">Graves</span><span class="rating-dots"
+                    data-filled="3" data-total="5"></span></div>
+                <div class="madera-rating"><span class="rating-label">Agudos</span><span class="rating-dots"
+                    data-filled="5" data-total="5"></span></div>
+                <div class="madera-rating"><span class="rating-label">Proyección</span><span class="rating-dots"
+                    data-filled="5" data-total="5"></span></div>
+                <div class="madera-rating"><span class="rating-label">Resonancia</span><span class="rating-dots"
+                    data-filled="4" data-total="5"></span></div>
+              </div>
+            </div>
+
+          </div>
+
+      </section>
+    </div>
+
+
+    <section id="curso"
+      style="background:#4B1715; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:50px 0; position:relative; z-index:1; box-sizing:border-box; overflow:hidden;">
+
+      <!-- Título -->
+      <div style="text-align:center; margin-bottom:56px; padding:0 40px;">
+        <h2 class="section-title" style="margin:0; color:#FFFFFF !important; line-height:1.2;">
+          Viví la <em style="font-weight:600; font-style:italic; color:#BEBC7E !important;">experiencia</em><br
+            class="block lg:hidden"> del taller
+        </h2>
+      </div>
+
+      <!-- Carrusel de Cursos 3D -->
+      <div class="w-full flex justify-center px-4 md:px-[100px] box-border relative"
+        style="overflow:visible; position:relative;">
+        <div class="curso-carousel-container">
+          <!-- Arrows for Mobile Carousel -->
+          <button class="curso-carousel-arrow prev" onclick="navigateCurso(-1); event.stopPropagation();"
+            aria-label="Tarjeta anterior">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button class="curso-carousel-arrow next" onclick="navigateCurso(1); event.stopPropagation();"
+            aria-label="Tarjeta siguiente">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+
+          <!-- Card 1: Calibración (Left) -->
+          <article class="curso-card-3d pos-left" id="curso-card-1" onclick="selectCurso3D(1)">
+            <div class="card-dimmer"></div>
+
+            <div class="card-top-chips">
+              <span class="card-top-chip-outline">Nivel Intermedio</span>
+            </div>
+
+            <img src="p1.png" alt="Calibrá como un Luthier" class="curso-foto-3d" />
+
+            <h3 class="curso-title-3d">Calibrá como<br>un Luthier</h3>
+
+            <div class="curso-price-3d">$520.000</div>
+            <div class="curso-subprice-3d">3 cuotas sin interés disponibles</div>
+
+            <div class="curso-info-list-3d">
+              <div class="curso-info-item-3d">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  style="width:12px; height:12px; display:inline-block; vertical-align:middle; margin-right:4px;">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span>Presencial</span>
+              </div>
+              <span>|</span>
+              <div class="curso-info-item-3d">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  style="width:12px; height:12px; display:inline-block; vertical-align:middle; margin-right:4px;">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+                <span>8 meses</span>
+              </div>
+              <span>|</span>
+              <div class="curso-info-item-3d">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  style="width:12px; height:12px; display:inline-block; vertical-align:middle; margin-right:4px;">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+                <span>Cupos reducidos</span>
+              </div>
+            </div>
+
+            <div class="curso-btn-wrapper-3d">
+              <a href="#" class="btn-slide-orange-outline">
+                <span class="relative z-10">VER CURSO</span>
+                <svg class="relative z-10 h-[12px] w-[12px]" viewBox="0 0 27 27" fill="none"
+                  xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875" stroke="#C84B0A" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 0: Guitarra Criolla (Center - Active) -->
+          <article class="curso-card-3d pos-center active" id="curso-card-0" onclick="selectCurso3D(0)">
+            <div class="card-dimmer"></div>
+
+            <div class="card-top-chips">
+              <span class="card-top-chip-orange">
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  style="display:inline-block; vertical-align:middle; margin-right:4px; width:12px; height:12px;">
+                  <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg>Más elegido
+              </span>
+              <span class="card-top-chip-outline">Nivel Inicial</span>
+            </div>
+
+            <img src="chicacurso.png" alt="Creá tu propia guitarra criolla" class="curso-foto-3d" />
+
+            <h3 class="curso-title-3d">Creá tu propia<br>guitarra criolla</h3>
+
+            <div class="curso-price-3d">$420.000</div>
+            <div class="curso-subprice-3d">3 cuotas sin interés disponibles</div>
+
+            <div class="curso-info-list-3d">
+              <div class="curso-info-item-3d">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  style="width:12px; height:12px; display:inline-block; vertical-align:middle; margin-right:4px;">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span>Presencial</span>
+              </div>
+              <span>|</span>
+              <div class="curso-info-item-3d">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  style="width:12px; height:12px; display:inline-block; vertical-align:middle; margin-right:4px;">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+                <span>6 meses</span>
+              </div>
+              <span>|</span>
+              <div class="curso-info-item-3d">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  style="width:12px; height:12px; display:inline-block; vertical-align:middle; margin-right:4px;">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+                <span>Cupos reducidos</span>
+              </div>
+            </div>
+
+            <div class="curso-btn-wrapper-3d">
+              <a href="guitarra-criolla.html" class="btn-slide-orange-outline">
+                <span class="relative z-10">VER CURSO</span>
+                <svg class="relative z-10 h-[12px] w-[12px]" viewBox="0 0 27 27" fill="none"
+                  xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875" stroke="#C84B0A" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 2: Personalización (Right) -->
+          <article class="curso-card-3d pos-right" id="curso-card-2" onclick="selectCurso3D(2)">
+            <div class="card-dimmer"></div>
+
+            <div class="card-top-chips">
+              <span class="card-top-chip-outline">Nivel Avanzado</span>
+            </div>
+
+            <img src="chicocurso.png" alt="Personalizá tu instrumento" class="curso-foto-3d" />
+
+            <h3 class="curso-title-3d">Personalizá tu<br>instrumento</h3>
+
+            <div class="curso-price-3d">$480.000</div>
+            <div class="curso-subprice-3d">3 cuotas sin interés disponibles</div>
+
+            <div class="curso-info-list-3d">
+              <div class="curso-info-item-3d">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  style="width:12px; height:12px; display:inline-block; vertical-align:middle; margin-right:4px;">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span>Presencial</span>
+              </div>
+              <span>|</span>
+              <div class="curso-info-item-3d">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  style="width:12px; height:12px; display:inline-block; vertical-align:middle; margin-right:4px;">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+                <span>3 meses</span>
+              </div>
+              <span>|</span>
+              <div class="curso-info-item-3d">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  style="width:12px; height:12px; display:inline-block; vertical-align:middle; margin-right:4px;">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+                <span>Cupos reducidos</span>
+              </div>
+            </div>
+
+            <div class="curso-btn-wrapper-3d">
+              <a href="#" class="btn-slide-orange-outline">
+                <span class="relative z-10">VER CURSO</span>
+                <svg class="relative z-10 h-[12px] w-[12px]" viewBox="0 0 27 27" fill="none"
+                  xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875" stroke="#C84B0A" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+    </section><!-- /curso -->
+
+    <!-- ── Sección Testimonios ── -->
+    <section id="testimonios"
+      style="background:#BEBC7E; min-height:95vh; display:flex; align-items:center; justify-content:center; position:relative; z-index:1; overflow:hidden; padding:90px 0; margin-top:0;">
+      <div
+        style="max-width:1100px; width:100%; margin:0 auto; padding:0 100px; box-sizing:border-box; text-align:left; position:relative;">
+
+        <!-- Título Fijo (no cambia) -->
+        <div style="text-align:center; margin-bottom:80px;">
+          <h2
+            style="font-family:'Playfair Display',Georgia,serif; font-size:clamp(1.5rem, 2.5vw, 1.85rem); font-weight:400; color:#2D1610; letter-spacing:0.01em; margin:0; line-height:1.2;">
+            El taller, contado por <em style="font-weight:600; font-style:italic;">sus protagonistas.</em>
+          </h2>
+        </div>
+
+        <!-- Slides Wrapper -->
+        <div style="position:relative; min-height:300px; width:100%;">
+
+          <!-- Slide 1 (Active) -->
+          <div class="testimonio-slide active" data-index="0">
+            <div class="testimonio-content-wrapper">
+              <!-- Large Quotes behind text -->
+              <span class="testimonial-quote-mark">“</span>
+
+              <!-- Review Text -->
+              <blockquote
+                style="position:relative; z-index:2; margin:0; font-family:'Playfair Display',Georgia,serif; font-weight:700; font-size:clamp(1.4rem, 2.5vw, 2.2rem); line-height:1.4; color:#2D1610;">
+                "El curso superó mis expectativas. Aprendimos cada etapa del proceso con mucha dedicación y siempre
+                acompañados por los profesores. Escuchar el primer acorde de una guitarra construida con mis propias
+                manos fue un momento inolvidable."
+              </blockquote>
+
+              <!-- Author Block (Flex aligned bottom-right matching user photo) -->
+              <div
+                style="margin-top:36px; display:flex; align-items:center; justify-content:flex-end; gap:14px; position:relative; z-index:2;">
+                <img src="rubia.png" alt="Luciana Martinez"
+                  style="width:68px; height:68px; object-fit:cover; border-radius: 0 20px 0 20px; box-shadow:0 8px 25px rgba(45,22,16,0.15);" />
+                <div style="text-align:left;">
+                  <cite
+                    style="font-family:'Playfair Display',Georgia,serif; font-weight:700; font-size:1.25rem; color:#2D1610; display:block; font-style:normal; line-height:1.2; margin-bottom:2px;">
+                    Luciana Martinez
+                  </cite>
+                  <span
+                    style="font-family:'Inter',sans-serif; font-size:0.85rem; color:rgba(45,22,16,0.78); font-weight:500;">
+                    Alumno 2025
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="testimonio-slide" data-index="1">
+            <div class="testimonio-content-wrapper">
+              <!-- Large Quotes behind text -->
+              <span class="testimonial-quote-mark">“</span>
+
+              <!-- Review Text -->
+              <blockquote
+                style="position:relative; z-index:2; margin:0; font-family:'Playfair Display',Georgia,serif; font-weight:700; font-size:clamp(1.4rem, 2.5vw, 2.2rem); line-height:1.4; color:#2D1610;">
+                "Es un taller único. Los profesores te transmiten no solo la técnica sino la pasión por la luthería.
+                Salí del curso con conocimientos sólidos y un instrumento de calidad profesional creado por mí."
+              </blockquote>
+
+              <!-- Author Block -->
+              <div
+                style="margin-top:36px; display:flex; align-items:center; justify-content:flex-end; gap:14px; position:relative; z-index:2;">
+                <img src="martin.png" alt="Sebastián Gómez"
+                  style="width:68px; height:68px; object-fit:cover; border-radius: 0 20px 0 20px; box-shadow:0 8px 25px rgba(45,22,16,0.15);" />
+                <div style="text-align:left;">
+                  <cite
+                    style="font-family:'Playfair Display',Georgia,serif; font-weight:700; font-size:1.25rem; color:#2D1610; display:block; font-style:normal; line-height:1.2; margin-bottom:2px;">
+                    Sebastián Gómez
+                  </cite>
+                  <span
+                    style="font-family:'Inter',sans-serif; font-size:0.85rem; color:rgba(45,22,16,0.78); font-weight:500;">
+                    Alumno 2024
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="testimonio-slide" data-index="2">
+            <div class="testimonio-content-wrapper">
+              <!-- Large Quotes behind text -->
+              <span class="testimonial-quote-mark">“</span>
+
+              <!-- Review Text -->
+              <blockquote
+                style="position:relative; z-index:2; margin:0; font-family:'Playfair Display',Georgia,serif; font-weight:700; font-size:clamp(1.4rem, 2.5vw, 2.2rem); line-height:1.4; color:#2D1610;">
+                "La atención a los detalles y la paciencia para enseñar son increíbles. Recomiendo este taller a
+                cualquier amante de la música que quiera conectar con su instrumento desde su origen."
+              </blockquote>
+
+              <!-- Author Block -->
+              <div
+                style="margin-top:36px; display:flex; align-items:center; justify-content:flex-end; gap:14px; position:relative; z-index:2;">
+                <img src="mariana.png" alt="María Luz Peralta"
+                  style="width:68px; height:68px; object-fit:cover; border-radius: 0 20px 0 20px; box-shadow:0 8px 25px rgba(45,22,16,0.15);" />
+                <div style="text-align:left;">
+                  <cite
+                    style="font-family:'Playfair Display',Georgia,serif; font-weight:700; font-size:1.25rem; color:#2D1610; display:block; font-style:normal; line-height:1.2; margin-bottom:2px;">
+                    María Luz Peralta
+                  </cite>
+                  <span
+                    style="font-family:'Inter',sans-serif; font-size:0.85rem; color:rgba(45,22,16,0.78); font-weight:500;">
+                    Alumno 2025
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="testimonio-slide" data-index="3">
+            <div class="testimonio-content-wrapper">
+              <!-- Large Quotes behind text -->
+              <span class="testimonial-quote-mark">“</span>
+
+              <!-- Review Text -->
+              <blockquote
+                style="position:relative; z-index:2; margin:0; font-family:'Playfair Display',Georgia,serif; font-weight:700; font-size:clamp(1.4rem, 2.5vw, 2.2rem); line-height:1.4; color:#2D1610;">
+                "Calibrar mi propia guitarra bajo la supervisión de un maestro luthier cambió por completo mi forma de
+                tocar. Excelente ambiente de aprendizaje, herramientas profesionales y gran calidez humana."
+              </blockquote>
+
+              <!-- Author Block -->
+              <div
+                style="margin-top:36px; display:flex; align-items:center; justify-content:flex-end; gap:14px; position:relative; z-index:2;">
+                <img src="profe.png" alt="Alejandro Ruiz"
+                  style="width:68px; height:68px; object-fit:cover; border-radius: 0 20px 0 20px; box-shadow:0 8px 25px rgba(45,22,16,0.15);" />
+                <div style="text-align:left;">
+                  <cite
+                    style="font-family:'Playfair Display',Georgia,serif; font-weight:700; font-size:1.25rem; color:#2D1610; display:block; font-style:normal; line-height:1.2; margin-bottom:2px;">
+                    Alejandro Ruiz
+                  </cite>
+                  <span
+                    style="font-family:'Inter',sans-serif; font-size:0.85rem; color:rgba(45,22,16,0.78); font-weight:500;">
+                    Alumno 2023
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 5 -->
+          <div class="testimonio-slide" data-index="4">
+            <div class="testimonio-content-wrapper">
+              <!-- Large Quotes behind text -->
+              <span class="testimonial-quote-mark">“</span>
+
+              <!-- Review Text -->
+              <blockquote
+                style="position:relative; z-index:2; margin:0; font-family:'Playfair Display',Georgia,serif; font-weight:700; font-size:clamp(1.4rem, 2.5vw, 2.2rem); line-height:1.4; color:#2D1610;">
+                "Un viaje hermoso. Trabajar la madera, ver cómo toma forma y finalmente escuchar su sonido es algo
+                mágico. Gracias a todo el taller por guiarme en esta experiencia tan gratificante."
+              </blockquote>
+
+              <!-- Author Block -->
+              <div
+                style="margin-top:36px; display:flex; align-items:center; justify-content:flex-end; gap:14px; position:relative; z-index:2;">
+                <img src="juliana.png" alt="Valeria Rossi"
+                  style="width:68px; height:68px; object-fit:cover; border-radius: 0 20px 0 20px; box-shadow:0 8px 25px rgba(45,22,16,0.15);" />
+                <div style="text-align:left;">
+                  <cite
+                    style="font-family:'Playfair Display',Georgia,serif; font-weight:700; font-size:1.25rem; color:#2D1610; display:block; font-style:normal; line-height:1.2; margin-bottom:2px;">
+                    Valeria Rossi
+                  </cite>
+                  <span
+                    style="font-family:'Inter',sans-serif; font-size:0.85rem; color:rgba(45,22,16,0.78); font-weight:500;">
+                    Alumna 2024
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /wrapper -->
+
+        <!-- Navigation Dots -->
+        <div style="display:flex; justify-content:center; gap:12px; margin-top:48px; position:relative; z-index:10;">
+          <button class="testimonio-dot active" onclick="gotoTestimonio(0)" aria-label="Resena 1"></button>
+          <button class="testimonio-dot" onclick="gotoTestimonio(1)" aria-label="Resena 2"></button>
+          <button class="testimonio-dot" onclick="gotoTestimonio(2)" aria-label="Resena 3"></button>
+          <button class="testimonio-dot" onclick="gotoTestimonio(3)" aria-label="Resena 4"></button>
+          <button class="testimonio-dot" onclick="gotoTestimonio(4)" aria-label="Resena 5"></button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Sección Contacto y Formulario ── -->
+    <section id="contacto"
+      style="background:#F5F2EB url('formulariofondo.png') no-repeat center bottom; background-size:cover; padding:60px 0 70px; position:relative; z-index:1;">
+      <div
+        style="max-width:1240px; margin:0 auto; padding:0 40px; box-sizing:border-box; display:grid; grid-template-columns: 1.15fr 1fr; gap:80px; align-items:stretch;">
+
+        <!-- Columna Izquierda: Copla y Datos -->
+        <div style="display:flex; flex-direction:column; justify-content:flex-end; gap:48px; min-height:400px;">
+          <!-- Headline -->
+          <div>
+            <h2
+              style="font-family:'Playfair Display', Georgia, serif; font-size: clamp(2rem, 3.8vw, 3.25rem); font-weight:400; color:#2D1610; line-height:1.15; margin:0; letter-spacing:-0.01em;">
+              Cada instrumento<br>tiene una historia,<br>
+              <span style="font-weight:600; font-style:italic; color:#C84B0A; display:block; margin-top:8px;">empecemos
+                la tuya.</span>
+            </h2>
+          </div>
+
+          <!-- Datos de Contacto -->
+          <div
+            style="display:flex; flex-direction:column; gap:20px; font-family:'Playfair Display', Georgia, serif; font-size:16px; color:#2D1610;">
+            <div style="display:flex; align-items:center; gap:24px;">
+              <span style="width:60px; color:#2D1610; font-weight:400;">Email</span>
+              <span
+                style="font-family:'Inter',sans-serif; font-weight:700; font-size:16px; color:#2D1610;">trastes@gmail.com</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:24px;">
+              <span style="width:60px; color:#2D1610; font-weight:400;">Taller</span>
+              <span style="font-family:'Inter',sans-serif; font-weight:700; font-size:16px; color:#2D1610;">Uruguay 888,
+                San Nicolas, CABA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Formulario -->
+        <div style="display:flex; flex-direction:column; justify-content:flex-start;">
+          <!-- Descripción -->
+          <div
+            style="font-family:'Playfair Display', Georgia, serif; font-size:18px; line-height:1.4; color:#2D1610; margin:0 0 44px 0;">
+            Un espacio para aprender, crear y construir con las manos.<br>
+            Escribinos y comenzá esta experiencia.
+          </div>
+
+          <!-- Form -->
+          <form onsubmit="event.preventDefault(); alert('¡Gracias por tu mensaje! Nos contactaremos pronto.');"
+            style="display:grid; grid-template-columns:1fr 1fr; gap:38px 28px; width:100%;">
+            <!-- Nombre Completo -->
+            <div style="grid-column: span 2; display:flex; flex-direction:column; gap:0;">
+              <label for="form-nombre"
+                style="font-family:'Inter',sans-serif; font-size:14px; color:#2D1610; font-weight:500;">Nombre
+                Completo</label>
+              <input type="text" id="form-nombre" required
+                style="border:none; border-bottom:1.5px solid #2D1610; background:transparent; padding:0 0 4px 0; font-family:'Inter',sans-serif; font-size:15px; color:#2D1610; outline:none; transition:border-color 0.3s;"
+                onfocus="this.style.borderColor='#C84B0A'" onblur="this.style.borderColor='#2D1610'">
+            </div>
+
+            <!-- Email -->
+            <div style="display:flex; flex-direction:column; gap:0;">
+              <label for="form-email"
+                style="font-family:'Inter',sans-serif; font-size:14px; color:#2D1610; font-weight:500;">Email</label>
+              <input type="email" id="form-email" required
+                style="border:none; border-bottom:1.5px solid #2D1610; background:transparent; padding:0 0 4px 0; font-family:'Inter',sans-serif; font-size:15px; color:#2D1610; outline:none; transition:border-color 0.3s;"
+                onfocus="this.style.borderColor='#C84B0A'" onblur="this.style.borderColor='#2D1610'">
+            </div>
+
+            <!-- Celular -->
+            <div style="display:flex; flex-direction:column; gap:0;">
+              <label for="form-celular"
+                style="font-family:'Inter',sans-serif; font-size:14px; color:#2D1610; font-weight:500;">Celular</label>
+              <input type="tel" id="form-celular" required
+                style="border:none; border-bottom:1.5px solid #2D1610; background:transparent; padding:0 0 4px 0; font-family:'Inter',sans-serif; font-size:15px; color:#2D1610; outline:none; transition:border-color 0.3s;"
+                onfocus="this.style.borderColor='#C84B0A'" onblur="this.style.borderColor='#2D1610'">
+            </div>
+
+            <!-- ¿Que te interesa? Custom Radios -->
+            <div style="grid-column: span 2; display:flex; flex-direction:column; gap:12px; margin: 8px 0;">
+              <span style="font-family:'Inter',sans-serif; font-size:14px; color:#2D1610; font-weight:500;">¿Que te
+                interesa?</span>
+              <div
+                style="display:flex; flex-wrap:wrap; gap:16px 24px; font-family:'Inter',sans-serif; font-size:14px; color:#2D1610;">
+                <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer;">
+                  <input type="radio" name="interes" value="Cursos" class="contact-radio" required>
+                  <span>Cursos</span>
+                </label>
+                <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer;">
+                  <input type="radio" name="interes" value="Calibración y mantenimiento" class="contact-radio">
+                  <span>Calibración y mantenimiento</span>
+                </label>
+                <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer;">
+                  <input type="radio" name="interes" value="Reparación y restauración" class="contact-radio">
+                  <span>Reparación y restauración</span>
+                </label>
+                <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer;">
+                  <input type="radio" name="interes" value="Personalización" class="contact-radio">
+                  <span>Personalización</span>
+                </label>
+                <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer;">
+                  <input type="radio" name="interes" value="Otro" class="contact-radio">
+                  <span>Otro</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Mensaje -->
+            <div style="grid-column: span 2; display:flex; flex-direction:column; gap:0;">
+              <label for="form-mensaje"
+                style="font-family:'Inter',sans-serif; font-size:14px; color:#2D1610; font-weight:500;">Mensaje</label>
+              <input type="text" id="form-mensaje" required
+                style="border:none; border-bottom:1.5px solid #2D1610; background:transparent; padding:0 0 4px 0; font-family:'Inter',sans-serif; font-size:15px; color:#2D1610; outline:none; transition:border-color 0.3s;"
+                onfocus="this.style.borderColor='#C84B0A'" onblur="this.style.borderColor='#2D1610'">
+            </div>
+
+            <!-- Button -->
+            <div style="grid-column: span 2; margin-top: 16px;">
+              <button type="submit" class="contacto-submit-btn">
+                <span class="relative z-10">ENVIAR</span>
+                <svg class="relative z-10 h-[14px] w-[14px]" viewBox="0 0 27 27" fill="none"
+                  xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875" stroke="#C84B0A" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer
+    style="width:100%; background:#4B1715; color:#FFFFFF; box-sizing:border-box; position:relative; overflow:hidden; z-index:10;"
+    class="py-12 md:py-20 px-6 md:px-[100px] footer-main">
+    <div class="max-w-[1240px] mx-auto flex flex-col gap-10 md:gap-16">
+
+      <!-- Fila superior: Enlaces y Newsletter -->
+      <div class="flex flex-col md:flex-row justify-between items-start gap-12 md:gap-14 w-full footer-top-row">
+        <!-- Newsletter (Izquierda) -->
+        <div class="w-full md:max-w-[460px] flex flex-col gap-4 items-start text-left footer-newsletter">
+          <form onsubmit="event.preventDefault(); alert('¡Gracias por suscribirte!');" class="footer-newsletter-form"
+            style="display:flex; flex-direction:column; gap:16px; width:100%;">
+            <div class="footer-newsletter-title"
+              style="font-family:'Playfair Display', Georgia, serif; font-size:24px; font-weight:400; color:#FFFFFF; letter-spacing:0.01em;">
+              Suscribite a nuestro Newsletter
+            </div>
+            <div class="footer-newsletter-row"
+              style="display:flex; flex-row; items-end; gap:20px; width:100%; align-items:flex-end;">
+              <div class="footer-email-container" style="display:flex; flex-direction:column; gap:0; flex:1;">
+                <label for="newsletter-email" class="footer-email-label"
+                  style="font-family:'Inter', sans-serif; font-size:12px; color:rgba(255,255,255,0.7); font-weight:500;">Email</label>
+                <input type="email" id="newsletter-email" class="footer-email-input" required
+                  style="border:none; border-bottom:1.5px solid rgba(255,255,255,0.35); background:transparent; padding:0 0 4px 0; font-family:'Inter',sans-serif; font-size:15px; color:#FFFFFF; outline:none; transition:border-color 0.3s; width:100%;"
+                  onfocus="this.style.borderColor='#C84B0A'" onblur="this.style.borderColor='rgba(255,255,255,0.35)'">
+              </div>
+              <button type="submit"
+                class="btn-slide-white footer-newsletter-submit inline-flex h-[38px] items-center justify-center gap-2 rounded-full px-5 text-[11px] font-bold uppercase tracking-wider cursor-pointer shrink-0">
+                <span class="relative z-10 hidden md:inline">CONOCER MÁS</span>
+                <span class="relative z-10 inline md:hidden">ENVIAR</span>
+                <svg class="relative z-10 h-[12px] w-[12px]" viewBox="0 0 27 27" fill="none"
+                  xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M7.875 19.125L19.125 7.875M19.125 19.125V7.875H7.875" stroke="currentColor" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </div>
+            <div class="footer-newsletter-desc"
+              style="font-family:'Inter', sans-serif; font-size:13px; line-height:1.45; color:rgba(255,255,255,0.7); max-width:320px;">
+              Enterate antes que nadie de nuevos cursos, talleres, eventos y novedades del taller.
+            </div>
+          </form>
+        </div>
+
+        <!-- Enlaces (Derecha - Dos columnas) -->
+        <div class="grid grid-cols-2 gap-4 md:gap-6 w-full md:w-auto md:min-w-[240px] justify-end footer-links-grid">
+          <div class="flex flex-col items-start gap-4 md:gap-5 footer-nav-col">
+            <a href="#curso"
+              class="font-sans text-[13px] md:text-[14px] font-semibold text-white uppercase tracking-[0.18em] transition-opacity hover:opacity-70"
+              style="text-decoration:none;">CURSO</a>
+            <a href="#sobre-nosotros"
+              class="font-sans text-[13px] md:text-[14px] font-semibold text-white uppercase tracking-[0.18em] transition-opacity hover:opacity-70"
+              style="text-decoration:none;">SOBRE NOSOTROS</a>
+            <a href="#contacto"
+              class="font-sans text-[13px] md:text-[14px] font-semibold text-white uppercase tracking-[0.18em] transition-opacity hover:opacity-70"
+              style="text-decoration:none;">CONTACTO</a>
+          </div>
+          <div class="flex flex-col items-start gap-4 md:gap-5 footer-socials-col">
+            <a href="#"
+              class="font-sans text-[13px] md:text-[14px] font-semibold text-white uppercase tracking-[0.18em] transition-opacity hover:opacity-70"
+              style="text-decoration:none;">INSTAGRAM</a>
+            <a href="#"
+              class="font-sans text-[13px] md:text-[14px] font-semibold text-white uppercase tracking-[0.18em] transition-opacity hover:opacity-70"
+              style="text-decoration:none;">FACEBOOK</a>
+            <a href="#"
+              class="font-sans text-[13px] md:text-[14px] font-semibold text-white uppercase tracking-[0.18em] transition-opacity hover:opacity-70"
+              style="text-decoration:none;">TIKTOK</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila inferior: Frase y Logo -->
+      <div
+        class="flex flex-col md:flex-row justify-between items-center md:items-end gap-8 w-full mt-10 md:mt-20 footer-bottom-row">
+        <!-- Frase -->
+        <div class="footer-frase"
+          style="font-family:'Playfair Display', Georgia, serif; font-size: clamp(1.6rem, 2.5vw, 2rem); font-weight:400; color:#FFFFFF; line-height:1.25; text-align:left; width:100%; max-width:500px;">
+          El sonido nace <br class="md:hidden">en los <span style="font-weight:600; font-style:italic;">detalles</span>
+        </div>
+        <!-- Logo Trastes -->
+        <div class="w-full md:w-auto flex justify-center md:justify-end items-end footer-logo-wrapper">
+          <img src="Group 28.png" alt="Trastes" class="w-[360px] md:w-[480px] h-auto object-contain"
+            style="margin-bottom: -15px;" />
+        </div>
+      </div>
+
+      <!-- Línea Divisoria -->
+      <div class="border-t border-white/15 w-full" style="margin-top:10px;"></div>
+
+      <!-- Copyright y Políticas -->
+      <div
+        class="flex flex-col md:flex-row justify-between items-center gap-2 w-full font-sans text-[11px] md:text-[12px] text-white/60"
+        style="padding:10px 0 14px 0;">
+        <div class="flex gap-4 items-center flex-wrap justify-center">
+          <a href="#" class="hover:text-white transition-colors">Políticas de privacidad</a>
+          <span>•</span>
+          <a href="#" class="hover:text-white transition-colors">Terminos y condiciones</a>
+        </div>
+        <div class="text-center md:text-right">
+          © Trastes 2026 | Diseño
+        </div>
+      </div>
+
+    </div>
+  </footer>
+  <script>
+    (function () {
+      var activeWorkCard = null;
+      var workCards = document.querySelectorAll('.work-card');
+      function toggleWorkCard(card) {
+        if (activeWorkCard && activeWorkCard !== card) {
+          activeWorkCard.classList.remove('open');
+          activeWorkCard.setAttribute('aria-expanded', 'false');
+        }
+        var isOpen = card.classList.toggle('open');
+        card.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        activeWorkCard = isOpen ? card : null;
+      }
+      workCards.forEach(function (card) {
+        card.addEventListener('click', function () {
+          toggleWorkCard(card);
+        });
+        card.addEventListener('keydown', function (event) {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            toggleWorkCard(card);
+          }
+        });
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      // Generar puntos de calificación dinámicamente al cargar la página
+      document.querySelectorAll('.rating-dots').forEach(function (dotsEl) {
+        var filled = parseInt(dotsEl.getAttribute('data-filled'), 10) || 0;
+        var total = parseInt(dotsEl.getAttribute('data-total'), 10) || 5;
+        var html = '';
+        for (var i = 0; i < total; i++) {
+          if (i < filled) {
+            html += '<span class="rating-dot filled"></span>';
+          } else {
+            html += '<span class="rating-dot empty"></span>';
+          }
+        }
+        dotsEl.innerHTML = html;
+      });
+
+      var activeMadera = null;
+      window.toggleMaderaMobile = function (event, indicator) {
+        if (event) event.stopPropagation();
+        var item = indicator.closest('.madera-item');
+        if (!item) return;
+
+        var isMobile = window.innerWidth <= 767;
+        if (!isMobile) return; // Desktop uses CSS hover
+
+        if (activeMadera && activeMadera !== item) {
+          activeMadera.classList.remove('open');
+        }
+
+        var isOpen = item.classList.toggle('open');
+        activeMadera = isOpen ? item : null;
+      };
+    })();
+  </script>
+
+  <!-- Script del Reproductor de Sonidos de Madera -->
+  <script>
+    (function () {
+      var currentAudio = null;
+      var currentWoodId = null;
+
+      var audioSources = {
+        palisandro: 'sonido_palisandro.mp3',
+        algarrobo: 'sonido_algarrobo.mp3',
+        cipres: 'sonido_cipres.mp3',
+        abeto: 'sonido_abeto.mp3'
+      };
+
+      window.playWoodSound = function (woodId, event) {
+        if (event) event.stopPropagation();
+
+        // Resetear todos los íconos a "Play"
+        Object.keys(audioSources).forEach(function (key) {
+          var icon = document.getElementById('audio-icon-' + key);
+          if (icon) {
+            icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+          }
+        });
+
+        if (currentWoodId === woodId) {
+          if (currentAudio && !currentAudio.paused) {
+            currentAudio.pause();
+            return;
+          }
+        }
+
+        if (currentAudio) {
+          currentAudio.pause();
+        }
+
+        var src = audioSources[woodId];
+        currentAudio = new Audio(src);
+        currentWoodId = woodId;
+
+        currentAudio.play().then(function () {
+          var icon = document.getElementById('audio-icon-' + woodId);
+          if (icon) {
+            icon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>'; // Ícono de pausa
+          }
+        }).catch(function (err) {
+          console.log('El archivo de sonido no existe o el navegador bloqueó autoplay. Ejecutando sintetizador Web Audio...', err);
+          // Si no existe el archivo .mp3, sintetizamos una nota representativa de guitarra
+          playSynthFallback(woodId);
+        });
+
+        currentAudio.addEventListener('ended', function () {
+          var icon = document.getElementById('audio-icon-' + woodId);
+          if (icon) {
+            icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+          }
+          currentWoodId = null;
+          currentAudio = null;
+        });
+      };
+
+      function playSynthFallback(woodId) {
+        try {
+          var AudioContext = window.AudioContext || window.webkitAudioContext;
+          var ctx = new AudioContext();
+
+          // Frecuencias correspondientes a tonos de guitarra:
+          // Palisandro: bajo cálido y profundo (La2 - 110Hz)
+          // Algarrobo: medio percusivo (Mi3 - 165Hz)
+          // Ciprés: brillante y flamenco (La3 - 220Hz)
+          // Abeto: cristalino y alta proyección (Mi4 - 330Hz)
+          var freqs = {
+            palisandro: 110,
+            algarrobo: 165,
+            cipres: 220,
+            abeto: 330
+          };
+
+          var freq = freqs[woodId] || 220;
+
+          var osc = ctx.createOscillator();
+          var gain = ctx.createGain();
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+
+          // Simulación de pulsación de cuerda acústica
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, ctx.currentTime);
+
+          // Armónicos
+          var osc2 = ctx.createOscillator();
+          var gain2 = ctx.createGain();
+          osc2.type = 'sine';
+          osc2.frequency.setValueAtTime(freq * 2, ctx.currentTime);
+          osc2.connect(gain2);
+          gain2.connect(ctx.destination);
+
+          gain.gain.setValueAtTime(0.5, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.8);
+
+          gain2.gain.setValueAtTime(0.15, ctx.currentTime);
+          gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+
+          osc.start();
+          osc2.start();
+
+          var icon = document.getElementById('audio-icon-' + woodId);
+          if (icon) {
+            icon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+            setTimeout(function () {
+              icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+            }, 1800);
+          }
+
+          osc.stop(ctx.currentTime + 1.8);
+          osc2.stop(ctx.currentTime + 1.8);
+        } catch (e) {
+          console.error('Soporte de Web Audio API no disponible', e);
+        }
+      }
+    })();
+  </script>
+
+
+
+  <!-- Carousel JS removed: relying entirely on native CSS sticky stacking scroll physics -->
+
+  <!-- ── Word-reveal JS ── -->
+  <script>
+    (function () {
+      var section = document.getElementById('phrase-section');
+      if (!section) return;
+
+      var words = Array.from(section.querySelectorAll('.wr'));
+      var imgs = Array.from(section.querySelectorAll('[data-img-reveal]'));
+      var total = words.length;
+
+      function update() {
+        var rect = section.getBoundingClientRect();
+        var vh = window.innerHeight;
+
+        /* progress: 0 cuando la sección entra por abajo, 1 cuando ya salió por arriba */
+        /* Queremos revelar del 0% al 100% mientras la sección atraviesa el viewport */
+        var start = vh * 0.70;   /* empieza a revelar cuando el contenido de la sección entra más en pantalla */
+        var end = vh * -0.25;  /* termina más tarde para hacer la animación más progresiva y lenta */
+
+        /* rect.top: distancia del top de la sección al top del viewport */
+        var progress = (start - rect.top) / (start - end);
+        progress = Math.max(0, Math.min(1, progress));
+
+        var litCount = Math.round(progress * total);
+
+        words.forEach(function (w, i) {
+          w.classList.toggle('lit', i < litCount);
+        });
+
+        /* Imágenes: aparecen a partir del 40% del progreso */
+        imgs.forEach(function (img, i) {
+          var threshold = 0.35 + i * 0.1;
+          img.style.opacity = progress >= threshold ? '1' : '0.18';
+        });
+      }
+
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    })();
+  </script>
+
+  <!-- ── Interactive Strings JS ── -->
+  <script>
+    (function () {
+      var section = document.getElementById('strings-interactive-section');
+      if (!section) return;
+
+      var isMobile = window.innerWidth < 768;
+      var rows = [
+        // Row 1: texto IZQUIERDA → cuerda desde text-right hasta extremo derecho
+        {
+          id: 'row-1',
+          handles: [
+            { el: document.getElementById('handle-1-left'), xPct: 92, bounds: { min: 'text-right', max: 100 } }
+          ],
+          text: document.getElementById('text-1'),
+          svg: document.getElementById('string-svg-1'),
+          paths: [
+            {
+              el: document.getElementById('path-1-left'),
+              start: 'text-right',
+              end: 'row-right',
+              gap: 20,
+              dotStart: document.getElementById('dot-1-left'),
+              dotEnd: document.getElementById('dot-1-right')
+            }
+          ],
+          pitches: [82.4] // E2 — grave
+        },
+        // Row 2: texto IZQUIERDA → cuerda desde text-right hasta extremo derecho
+        {
+          id: 'row-2',
+          handles: [
+            { el: document.getElementById('handle-2-right'), xPct: 92, bounds: { min: 'text-right', max: 100 } }
+          ],
+          text: document.getElementById('text-2'),
+          svg: document.getElementById('string-svg-2'),
+          paths: [
+            {
+              el: document.getElementById('path-2'),
+              start: 'text-right',
+              end: 'row-right',
+              gap: 20,
+              dotStart: document.getElementById('dot-2-left'),
+              dotEnd: document.getElementById('dot-2-right')
+            }
+          ],
+          pitches: [146.8] // D3
+        },
+        // Row 3: cuerda desde extremo izquierdo hasta text-left → texto DERECHA
+        {
+          id: 'row-3',
+          handles: [
+            { el: document.getElementById('handle-3-left'), xPct: 8, bounds: { min: 0, max: 'text-left' } }
+          ],
+          text: document.getElementById('text-3'),
+          svg: document.getElementById('string-svg-3'),
+          paths: [
+            {
+              el: document.getElementById('path-3'),
+              start: 'row-left',
+              end: 'text-left',
+              gap: 20,
+              dotStart: document.getElementById('dot-3-left'),
+              dotEnd: null
+            }
+          ],
+          pitches: [196.0] // G3
+        },
+        // Row 4: cuerda desde extremo izquierdo hasta text-left → texto DERECHA
+        {
+          id: 'row-4',
+          handles: [
+            { el: document.getElementById('handle-4-left'), xPct: 8, bounds: { min: 0, max: 'text-left' } }
+          ],
+          text: document.getElementById('text-4'),
+          svg: document.getElementById('string-svg-4'),
+          paths: [
+            {
+              el: document.getElementById('path-4'),
+              start: 'row-left',
+              end: 'text-left',
+              gap: 20,
+              dotStart: document.getElementById('dot-4-left'),
+              dotEnd: null
+            }
+          ],
+          pitches: [246.9] // B3 — agudo
+        }
+      ];
+
+      // Initialize handle positions style from config
+      rows.forEach(function (r) {
+        r.handles.forEach(function (h) {
+          h.el.style.left = h.xPct + '%';
+        });
+      });
+
+      // Sound synthesis context
+      var audioCtx = null;
+      function playNote(freq) {
+        try {
+          if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          }
+          if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+          var osc = audioCtx.createOscillator();
+          var gain = audioCtx.createGain();
+
+          // Warm string-like wave
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+          // Warm pluck envelope
+          gain.gain.setValueAtTime(0, audioCtx.currentTime);
+          gain.gain.linearRampToValueAtTime(0.18, audioCtx.currentTime + 0.015);
+          gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.2);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 1.2);
+        } catch (e) {
+          console.warn(e);
+        }
+      }
+
+      // Initialize wobble animation states
+      rows.forEach(function (r) {
+        r.paths.forEach(function (p) {
+          p.wobble = {
+            active: false,
+            amplitude: 0,
+            frequency: 24,
+            decay: 0.90,
+            phase: 0,
+            raf: null
+          };
+        });
+      });
+
+      function triggerWobble(pathObj, startAmp) {
+        var w = pathObj.wobble;
+        w.amplitude = startAmp;
+        w.phase = 0;
+        if (w.active) return;
+        w.active = true;
+
+        (function tick() {
+          w.phase += 0.45;
+          w.amplitude *= w.decay;
+
+          if (w.amplitude < 0.08) {
+            w.active = false;
+            w.amplitude = 0;
+            drawPaths();
+          } else {
+            drawPaths();
+            w.raf = requestAnimationFrame(tick);
+          }
+        })();
+      }
+
+      function getHandleX(row, idx) {
+        var rEl = document.getElementById(row.id);
+        var h = row.handles[idx];
+        return (h.xPct / 100) * rEl.clientWidth;
+      }
+
+      function setHandleX(row, idx, xPx) {
+        var rEl = document.getElementById(row.id);
+        var pct = Math.max(0, Math.min(100, (xPx / rEl.clientWidth) * 100));
+        row.handles[idx].xPct = pct;
+        row.handles[idx].el.style.left = pct + '%';
+      }
+
+      function drawPaths() {
+        rows.forEach(function (r) {
+          var rEl = document.getElementById(r.id);
+          var width = rEl.clientWidth;
+          var height = rEl.clientHeight;
+          var centerY = height / 2;
+
+          // Get text bounding box
+          var textLeft = 0;
+          var textRight = width;
+          if (r.text) {
+            var textRect = r.text.getBoundingClientRect();
+            var rRect = rEl.getBoundingClientRect();
+            textLeft = textRect.left - rRect.left;
+            textRight = textRect.right - rRect.left;
+          }
+
+          r.paths.forEach(function (pathObj, pathIdx) {
+            var gap = pathObj.gap || 0;
+            var startX = 0;
+            var endX = width;
+
+            // Resolve start X
+            if (pathObj.start === 'row-left') {
+              startX = 0;
+            } else if (pathObj.start === 'text-right') {
+              startX = textRight + gap;
+            } else if (pathObj.start.indexOf('handle-') === 0) {
+              var hIdx = parseInt(pathObj.start.split('-')[1]);
+              startX = getHandleX(r, hIdx);
+            }
+
+            // Resolve end X
+            if (pathObj.end === 'text-left') {
+              endX = textLeft - gap;
+            } else if (pathObj.end.indexOf('handle-') === 0) {
+              var hIdx2 = parseInt(pathObj.end.split('-')[1]);
+              endX = getHandleX(r, hIdx2);
+            } else if (pathObj.end === 'row-right') {
+              endX = width;
+            }
+
+            // Draw path (straight or wobbled)
+            var w = pathObj.wobble;
+            var d = '';
+            if (w.active && w.amplitude > 0.08) {
+              var midX = (startX + endX) / 2;
+              var wobbleY = centerY + w.amplitude * Math.sin(w.phase);
+              d = 'M ' + startX + ' ' + centerY + ' Q ' + midX + ' ' + wobbleY + ' ' + endX + ' ' + centerY;
+            } else {
+              d = 'M ' + startX + ' ' + centerY + ' L ' + endX + ' ' + centerY;
+            }
+            pathObj.el.setAttribute('d', d);
+
+            // Position attached dot circles
+            if (pathObj.dotStart) {
+              pathObj.dotStart.setAttribute('cx', startX);
+              pathObj.dotStart.setAttribute('cy', centerY);
+            }
+            if (pathObj.dotEnd) {
+              pathObj.dotEnd.setAttribute('cx', endX);
+              pathObj.dotEnd.setAttribute('cy', centerY);
+            }
+          });
+        });
+      }
+
+      // Drag handlers binding
+      rows.forEach(function (r) {
+        var rEl = document.getElementById(r.id);
+        r.handles.forEach(function (h, hIdx) {
+          h.el.addEventListener('pointerdown', function (e) {
+            e.preventDefault();
+            h.el.setPointerCapture(e.pointerId);
+
+            var initialX = e.clientX;
+            var startXPct = h.xPct;
+            var rRect = rEl.getBoundingClientRect();
+            var w = rEl.clientWidth;
+
+            function onPointerMove(moveEvent) {
+              var dx = moveEvent.clientX - initialX;
+              var newXPx = (startXPct / 100) * w + dx;
+
+              // Drag constraint limits
+              var minX = 0;
+              var maxX = w;
+
+              if (h.bounds.min === 'text-right' && r.text) {
+                var textRect = r.text.getBoundingClientRect();
+                minX = textRect.right - rRect.left + 12;
+              } else if (typeof h.bounds.min === 'number') {
+                minX = (h.bounds.min / 100) * w;
+              } else if (h.bounds.min.indexOf('handle-') === 0) {
+                var minHIdx = parseInt(h.bounds.min.split('-')[1]);
+                minX = getHandleX(r, minHIdx) + 24;
+              }
+
+              if (h.bounds.max === 'text-left' && r.text) {
+                var textRect = r.text.getBoundingClientRect();
+                maxX = textRect.left - rRect.left - 12;
+              } else if (typeof h.bounds.max === 'number') {
+                maxX = (h.bounds.max / 100) * w;
+              } else if (h.bounds.max.indexOf('handle-') === 0) {
+                var maxHIdx = parseInt(h.bounds.max.split('-')[1]);
+                maxX = getHandleX(r, maxHIdx) - 24;
+              }
+
+              newXPx = Math.max(minX, Math.min(maxX, newXPx));
+              setHandleX(r, hIdx, newXPx);
+              drawPaths();
+            }
+
+            function onPointerUp(upEvent) {
+              h.el.releasePointerCapture(upEvent.pointerId);
+              window.removeEventListener('pointermove', onPointerMove);
+              window.removeEventListener('pointerup', onPointerUp);
+
+              // Sound pluck play
+              var pitch = r.pitches[hIdx] || r.pitches[0];
+              playNote(pitch);
+
+              // Oscillate associated strings
+              r.paths.forEach(function (p) {
+                if (p.start === 'handle-' + hIdx || p.end === 'handle-' + hIdx) {
+                  triggerWobble(p, 16);
+                }
+              });
+            }
+
+            window.addEventListener('pointermove', onPointerMove);
+            window.addEventListener('pointerup', onPointerUp);
+          });
+        });
+      });
+
+      // Pluck swipe hover event
+      rows.forEach(function (r) {
+        var rEl = document.getElementById(r.id);
+
+        rEl.addEventListener('mouseenter', function () {
+          if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          }
+          // On desktop: play sound on hover enter (no touch needed)
+          if (!isMobile) {
+            var pitch = r.pitches[0];
+            playNote(pitch);
+            r.paths.forEach(function (p) {
+              triggerWobble(p, 8);
+            });
+          }
+        });
+
+        // Swipe trigger on crossing line
+        var lastY = null;
+        rEl.addEventListener('mousemove', function (e) {
+          var rect = rEl.getBoundingClientRect();
+          var relativeY = e.clientY - rect.top;
+          var relativeX = e.clientX - rect.left;
+          var centerY = rect.height / 2;
+
+          if (lastY !== null) {
+            // Check if crossed the horizontal centerline
+            if ((lastY < centerY && relativeY >= centerY) || (lastY > centerY && relativeY <= centerY)) {
+              r.paths.forEach(function (p, pIdx) {
+                var w = p.wobble;
+                if (!w.active) {
+                  var startX = 0, endX = rect.width;
+                  if (p.start === 'text-right' && r.text) startX = r.text.getBoundingClientRect().right - rect.left;
+                  else if (p.start.indexOf('handle-') === 0) startX = getHandleX(r, parseInt(p.start.split('-')[1]));
+
+                  if (p.end === 'text-left' && r.text) endX = r.text.getBoundingClientRect().left - rect.left;
+                  else if (p.end.indexOf('handle-') === 0) endX = getHandleX(r, parseInt(p.end.split('-')[1]));
+                  else if (p.end === 'row-right') endX = rect.width;
+
+                  if (relativeX >= startX && relativeX <= endX) {
+                    triggerWobble(p, 8);
+                    var pitch = r.pitches[pIdx] || r.pitches[0];
+                    playNote(pitch);
+                  }
+                }
+              });
+            }
+          }
+          lastY = relativeY;
+        });
+
+        rEl.addEventListener('mouseleave', function () {
+          lastY = null;
+        });
+      });
+
+      window.addEventListener('resize', drawPaths);
+      setTimeout(drawPaths, 300);
+    })();
+  </script>
+
+  <!-- ── Flip Card JS ── -->
+  <script>
+    function flipCard(id) {
+      document.getElementById(id).classList.toggle('flipped');
+    }
+  </script>
+
+  <!-- ── Cómo Trabajamos Section JS ── -->
+  <script>
+    (function () {
+      var cards = document.querySelectorAll('.work-card');
+      var openCard = null;
+
+      cards.forEach(function (card) {
+        // Mobile: tap on the base card to open it
+        card.addEventListener('click', function (e) {
+          // If click came from the close button, it will be handled by the close button listener
+          if (e.target.closest('.work-card-close')) return;
+
+          var isMobile = window.innerWidth <= 767;
+          if (!isMobile) return; // Desktop uses CSS hover
+
+          // If the card is already open, do not close it on card body tap.
+          // Closing is handled exclusively by the close button (the cross).
+          if (card.classList.contains('open')) return;
+
+          // Close previously open card
+          if (openCard && openCard !== card) {
+            openCard.classList.remove('open');
+            openCard.setAttribute('aria-expanded', 'false');
+          }
+
+          // Open this card
+          card.classList.add('open');
+          card.setAttribute('aria-expanded', 'true');
+          openCard = card;
+        });
+
+        // Handle close button (the cross) click on mobile
+        var closeBtn = card.querySelector('.work-card-close');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            card.classList.remove('open');
+            card.setAttribute('aria-expanded', 'false');
+            if (openCard === card) {
+              openCard = null;
+            }
+          });
+        }
+
+        // Desktop: also track active state (for hover effects handled by CSS)
+        card.addEventListener('mouseenter', function () {
+          if (window.innerWidth > 767) {
+            card.classList.add('active');
+          }
+        });
+        card.addEventListener('mouseleave', function () {
+          if (window.innerWidth > 767) {
+            card.classList.remove('active');
+          }
+        });
+
+        // Keyboard navigation
+        card.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            card.click();
+          }
+        });
+      });
+    })();
+  </script>
+
+  <!-- ── Curso Grid Interactivity JS ── -->
+  <script>
+    (function () {
+      // Configuration mapping: clicked card goes to center, other cards move to sides
+      window.selectCurso3D = function (idx) {
+        var card = document.getElementById('curso-card-' + idx);
+        if (!card || card.classList.contains('pos-center')) return;
+
+        var config = {};
+        if (idx === 0) {
+          config = { 0: 'pos-center', 1: 'pos-left', 2: 'pos-right' };
+        } else if (idx === 1) {
+          config = { 1: 'pos-center', 2: 'pos-right', 0: 'pos-left' };
+        } else if (idx === 2) {
+          config = { 2: 'pos-center', 0: 'pos-right', 1: 'pos-left' };
+        }
+
+        [0, 1, 2].forEach(function (i) {
+          var c = document.getElementById('curso-card-' + i);
+          if (c) {
+            c.classList.remove('pos-left', 'pos-center', 'pos-right', 'active');
+
+            var newPos = config[i];
+            c.classList.add(newPos);
+
+            if (newPos === 'pos-center') {
+              c.classList.add('active');
+              c.setAttribute('aria-expanded', 'true');
+            } else {
+              c.setAttribute('aria-expanded', 'false');
+            }
+          }
+        });
+
+        // Scroll active card into view on mobile
+        if (window.innerWidth <= 1023) {
+          card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      };
+
+      window.navigateCurso = function (direction) {
+        var sequence = [1, 0, 2];
+        var activeId = 0;
+        for (var i = 0; i < sequence.length; i++) {
+          var card = document.getElementById('curso-card-' + sequence[i]);
+          if (card && card.classList.contains('active')) {
+            activeId = sequence[i];
+            break;
+          }
+        }
+        var currentIdx = sequence.indexOf(activeId);
+        if (currentIdx === -1) currentIdx = 1;
+        var nextIdx = (currentIdx + direction + sequence.length) % sequence.length;
+
+        // Temporarily disable click validation to allow transitions
+        var card = document.getElementById('curso-card-' + sequence[nextIdx]);
+        if (card) {
+          // Trigger the state transition
+          var config = {};
+          var idx = sequence[nextIdx];
+          if (idx === 0) {
+            config = { 0: 'pos-center', 1: 'pos-left', 2: 'pos-right' };
+          } else if (idx === 1) {
+            config = { 1: 'pos-center', 2: 'pos-right', 0: 'pos-left' };
+          } else if (idx === 2) {
+            config = { 2: 'pos-center', 0: 'pos-right', 1: 'pos-left' };
+          }
+          [0, 1, 2].forEach(function (i) {
+            var c = document.getElementById('curso-card-' + i);
+            if (c) {
+              c.classList.remove('pos-left', 'pos-center', 'pos-right', 'active');
+              var newPos = config[i];
+              c.classList.add(newPos);
+              if (newPos === 'pos-center') {
+                c.classList.add('active');
+                c.setAttribute('aria-expanded', 'true');
+              } else {
+                c.setAttribute('aria-expanded', 'false');
+              }
+            }
+          });
+
+          // Scroll active card into view on mobile
+          if (window.innerWidth <= 1023) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
+        }
+      };
+
+      // Initialize center scroll on mobile
+      setTimeout(function () {
+        if (window.innerWidth <= 1023) {
+          var activeCard = document.querySelector('.curso-card-3d.active');
+          if (activeCard) {
+            activeCard.scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'center' });
+          }
+        }
+      }, 500);
+    })();
+  </script>
+
+  <!-- ── Testimonios Carousel JS ── -->
+  <script>
+    (function () {
+      var currentIdx = 0;
+      var totalSlides = 5;
+      var autoCycleInterval;
+
+      window.gotoTestimonio = function (idx) {
+        if (idx < 0 || idx >= totalSlides) return;
+        currentIdx = idx;
+
+        // Update slides active state
+        var slides = document.querySelectorAll('.testimonio-slide');
+        slides.forEach(function (slide, i) {
+          if (i === idx) {
+            slide.classList.add('active');
+          } else {
+            slide.classList.remove('active');
+          }
+        });
+
+        // Update dots active state
+        var dots = document.querySelectorAll('.testimonio-dot');
+        dots.forEach(function (dot, i) {
+          if (i === idx) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+
+        // Reset auto cycle timer on user interaction
+        startAutoCycle();
+      };
+
+      function startAutoCycle() {
+        clearInterval(autoCycleInterval);
+        autoCycleInterval = setInterval(function () {
+          var nextIdx = (currentIdx + 1) % totalSlides;
+          gotoTestimonio(nextIdx);
+        }, 6000); // 6 seconds slide duration
+      }
+
+      // Start auto cycle initially
+      startAutoCycle();
+    })();
+  </script>
+
+  <!-- ── Mobile Menu JS ── -->
+  <script>
+    (function () {
+      var toggleBtn = document.getElementById('mobile-menu-toggle');
+      var menu = document.getElementById('mobile-menu');
+      var closeBtn = document.getElementById('mobile-menu-close');
+      if (!toggleBtn || !menu) return;
+
+      window.toggleMobileMenu = function () {
+        var isOpen = menu.classList.contains('open');
+        if (isOpen) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      };
+
+      function openMenu() {
+        menu.classList.add('open');
+        menu.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('menu-open');
+
+        // Focus close button or first link for accessibility
+        if (closeBtn) closeBtn.focus();
+      }
+
+      function closeMenu() {
+        menu.classList.remove('open');
+        menu.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('menu-open');
+
+        // Return focus to toggle button
+        toggleBtn.focus();
+      }
+
+      toggleBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        toggleMobileMenu();
+      });
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          closeMenu();
+        });
+      }
+
+      // Close on clicking any link
+      var links = menu.querySelectorAll('.mobile-menu-link');
+      links.forEach(function (link) {
+        link.addEventListener('click', function () {
+          closeMenu();
+        });
+      });
+
+      // Close on pressing Escape key
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && menu.classList.contains('open')) {
+          closeMenu();
+        }
+      });
+    })();
+  </script>
+
+</body>
+
+</html>
